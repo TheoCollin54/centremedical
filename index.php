@@ -21,7 +21,9 @@
 
             <button class="btn" type="submit" class="login-btn">Se connecter</button>
         </form>
-        <button class="btn" onclick="window.location.href='Page_d_inscription'">S'inscrire</button>
+        <button class="btn" onclick="window.location.href='Page_d_inscription.php'">S'inscrire</button>
+        <br>
+        <a href="P0/mdp_oublie.php"> Mot de passe oublié </a>
     </div>
 </body>
 </html>
