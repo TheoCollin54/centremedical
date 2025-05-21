@@ -56,3 +56,110 @@ h1 {
     font-size: 1rem;
     margin-bottom: 0;
 }
+.acceso-hospitalario .logo-section {
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+  
+  .acceso-hospitalario .medical-logo {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+  
+  .acceso-hospitalario .medical-logo::before {
+    content: "⚕️";
+    filter: drop-shadow(0 4px 8px rgba(37, 99, 235, 0.3));
+  }
+  
+  .acceso-hospitalario h1 {
+    color: var(--primary-blue);
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+  
+  .acceso-hospitalario .subtitle {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin-bottom: 0;
+  }
+  
+  .acceso-hospitalario .form-group {
+    margin-bottom: 1.5rem;
+  }
+  
+  .acceso-hospitalario label {
+    display: block;
+    color: var(--text-primary);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+  }
+  
+  .acceso-hospitalario input[type="email"],
+  .acceso-hospitalario input[type="password"],
+  .acceso-hospitalario input[type="text"] {
+    width: 100%;
+    padding: 1rem 1.25rem;
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: #fafbfc;
+  }
+  
+  .acceso-hospitalario input:focus {
+    outline: none;
+    border-color: var(--input-focus);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    background: white;
+  }
+  
+  .acceso-hospitalario .btn-login {
+    width: 100%;
+    background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+    color: white;
+    border: none;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+  }
+  
+  .acceso-hospitalario .btn-login:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+  }
+  
+  .acceso-hospitalario .forgot-password {
+    text-align: center;
+    margin-top: 1.5rem;
+  }
+  
+  .acceso-hospitalario .forgot-password a {
+    color: var(--accent-teal);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+  
+  .acceso-hospitalario .security-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+    padding: 0.75rem;
+    background: #f0f9ff;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+  }
+  
+  .acceso-hospitalario .security-badge::before {
+    content: "🔒";
+    margin-right: 0.5rem;
+  }
