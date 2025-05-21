@@ -1,0 +1,17 @@
+.body {
+  primary-blue: #2563eb;
+  secondary-blue: #3b82f6;
+  accent-teal: #14b8a6;
+  background-white: #ffffff;
+  background-light: #f8fafc;
+  text-primary: #1e293b;
+  text-secondary: #64748b;
+  border-color: #e2e8f0;
+  shadow-soft: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  color : var(text-primary);
+  line-height: 1.6;
+
+}
