@@ -1,17 +1,45 @@
 .body {
-  primary-blue: #2563eb;
-  secondary-blue: #3b82f6;
-  accent-teal: #14b8a6;
-  background-white: #ffffff;
-  background-light: #f8fafc;
-  text-primary: #1e293b;
-  text-secondary: #64748b;
-  border-color: #e2e8f0;
-  shadow-soft: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-
+  --primary-blue: #2563eb;
+  --secondary-blue: #3b82f6;
+  --accent-teal: #14b8a6;
+  --success-green: #10b981;
+  --error-red: #ef4444;
+  --background-gradient: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #bae6fd 100%);
+  --card-background: #ffffff;
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --border-color: #e2e8f0;
+  --input-focus: #3b82f6;
+  --shadow-main: 0 20px 50px rgba(37, 99, 235, 0.15);
+  
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-  color : var(text-primary);
-  line-height: 1.6;
+  background: var(--background-gradient);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
 
+}
+
+.container {
+    background: var(--card-background);
+    border-radius: 20px;
+    padding: 3rem;
+    width: 100;
+    max-width: 450px;
+    box-shadow: var(--shadow-main);
+    border: 1px solid var(--border-color);
+    position: relative;
+}
+
+.container::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    right: -20px;
+    bottom: -20px;
+    background: linear-gradient(90deg, var(--primary-blue), var(--secondary-blue));
+    border-radius: 20px, 20px, 0 0;
 }
