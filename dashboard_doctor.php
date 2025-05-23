@@ -32,17 +32,45 @@
     }
 
     $sql_doctor = "SELECT doctor FROM users WHERE users_id = :user_id";
-    $stmt_doctor = $pdo->prepare($sql_doctoy);
-    $stmt_doctor->exxecute(['user_id]' = > $user_id]);
+    $stmt_doctor = $pdo->prepare($sql_doctor);
+    $stmt_doctor->execute(['user_id' => $user_id]);
     $doctor = $stmt_doctor->fetch(PDO::FETCH_ASSOC);
 
-    if ($doctor && $doctor['username'] === 'admin') {
-        header("Location: dashboard_doctor.php");
+    if ($doctor && $doctor['doctor'] != 1) {
+        header("Location: dashboard.php");
         exit();
     }
 
-    $sql = "SELECT doctor_name, title, date, place FROM rdv WHERE patient_id = :user_id";
+    $sql = "SELECT u.username AS patient_name, r.title, r.date, r.place
+        FROM rdv2 r
+        JOIN users u ON r.patient_id = u.users_id
+        WHERE r.doctor_id = :user_id";
     $stmt = $pdo->prepare($sql);
     $stmt->execute(['user_id' => $user_id]);
     $rendezvous = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mes rendez-vous</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <main>
+        <?php if (empty($rendezvous)): ?>
+        <p>Vous n'avez aucun rendez-vous.</p>
+        <?php else: ?>
+            <ul>
+                <?php foreach ($rendezvous as $rdv): ?>
+                    <li>
+                        Patient : <?= htmlspecialchars($rdv['patient_name']) ?> <br> Intitulé : <?= htmlspecialchars($rdv['title']) ?> <br> Date : <?= htmlspecialchars($rdv['date']) ?> <br> Lieu : <?= htmlspecialchars($rdv['place']) ?>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        <?php endif; ?>
+    </main>
+</body>
+</html>
