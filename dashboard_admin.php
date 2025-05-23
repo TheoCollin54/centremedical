@@ -52,6 +52,24 @@
         header("Location: dashboard_doctor.php");
         exit();
     }
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $users_id = $_POST['users_id'];
+        $username = $_POST['username'];
+        $email = $_POST['email'];
+        $doctor = $_POST['doctor'];
+
+        // Sécurisation basique
+        $users_id = intval($users_id);
+        $doctor = intval($doctor);
+
+        // Mise à jour en base de données
+        $stmt = $pdo->prepare('UPDATE users SET username = ?, email = ?, doctor = ? WHERE users_id = ?');
+        $stmt->execute([$username, $email, $doctor, $users_id]);
+
+        $stmt = $pdo->query('SELECT * FROM users');
+        $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 ?>
 
 <!DOCTYPE html>
@@ -76,7 +94,10 @@
                 </tr>
                 <tr>
                     <th>Docteur</th>
-                    <td><input type="tinyint" name="doctor" value="<?= htmlspecialchars($user['doctor']) ?>" placeholder="1 = médecin, 0 = patient"></td>
+                    <td><select name="doctor">
+                        <option value=0 <?= $user['doctor'] == 0 ? 'selected' : '' ?>>Patient</option>
+                        <option value=1 <?= $user['doctor'] == 1 ? 'selected' : '' ?>>Docteur</option>
+                    </td>
                 </tr>
                 <tr>
                     <td colspan="2"><button type="submit">Mettre à jour</button></td>
