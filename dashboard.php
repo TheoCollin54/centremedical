@@ -21,7 +21,6 @@
         die("Erreur de connexion : " . $e->getMessage());
     }
 
-    // Récupère les informations de l'utilisateur
     $sql_user = "SELECT username FROM users WHERE users_id = :user_id";
     $stmt_user = $pdo->prepare($sql_user);
     $stmt_user->execute(['user_id' => $user_id]);
@@ -32,7 +31,17 @@
         exit();
     }
 
-    $sql = "SELECT doctor_name, title, date, place FROM rdv WHERE patient_id = :user_id";
+    $sql_doctor = "SELECT doctor FROM users WHERE users_id = :user_id";
+    $stmt_doctor = $pdo->prepare($sql_doctor);
+    $stmt_doctor->execute(['user_id' => $user_id]);
+    $doctor = $stmt_doctor->fetch(PDO::FETCH_ASSOC);
+
+    if ($doctor && $doctor['doctor'] === 1) {
+        header("Location: dashboard_doctor.php");
+        exit();
+    }
+
+    $sql = "SELECT doctor_id, title, date, place FROM rdv2 WHERE patient_id = :user_id";
     $stmt = $pdo->prepare($sql);
     $stmt->execute(['user_id' => $user_id]);
     $rendezvous = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -62,7 +71,7 @@
             <ul>
                 <?php foreach ($rendezvous as $rdv): ?>
                     <li>
-                        Docteur : <?= htmlspecialchars($rdv['doctor_name']) ?> <br> Intitulé : <?= htmlspecialchars($rdv['title']) ?> <br> Date : <?= htmlspecialchars($rdv['date']) ?> <br> Lieu : <?= htmlspecialchars($rdv['place']) ?>
+                        Docteur : <?= htmlspecialchars($rdv['doctor_id']) ?> <br> Intitulé : <?= htmlspecialchars($rdv['title']) ?> <br> Date : <?= htmlspecialchars($rdv['date']) ?> <br> Lieu : <?= htmlspecialchars($rdv['place']) ?>
                     </li>
                 <?php endforeach; ?>
             </ul>
