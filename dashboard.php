@@ -41,7 +41,10 @@
         exit();
     }
 
-    $sql = "SELECT doctor_id, title, date, place FROM rdv2 WHERE patient_id = :user_id";
+    $sql = "SELECT u.username AS doctor_name, r.title, r.date, r.place
+        FROM rdv2 r
+        JOIN users u ON r.doctor_id = u.users_id
+        WHERE r.patient_id = :user_id";
     $stmt = $pdo->prepare($sql);
     $stmt->execute(['user_id' => $user_id]);
     $rendezvous = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -71,7 +74,7 @@
             <ul>
                 <?php foreach ($rendezvous as $rdv): ?>
                     <li>
-                        Docteur : <?= htmlspecialchars($rdv['doctor_id']) ?> <br> Intitulé : <?= htmlspecialchars($rdv['title']) ?> <br> Date : <?= htmlspecialchars($rdv['date']) ?> <br> Lieu : <?= htmlspecialchars($rdv['place']) ?>
+                        Docteur : <?= htmlspecialchars($rdv['doctor_name']) ?> <br> Intitulé : <?= htmlspecialchars($rdv['title']) ?> <br> Date : <?= htmlspecialchars($rdv['date']) ?> <br> Lieu : <?= htmlspecialchars($rdv['place']) ?>
                     </li>
                 <?php endforeach; ?>
             </ul>
