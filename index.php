@@ -7,13 +7,10 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <h1>Header</h1>
-    </header>
     <div class="container">
         <h1>Connexion</h1>
         <form  action="login.php" method="POST">
-            <label for="email"><strong>Nom d'utilisateur :</strong></label><br>
+            <label for="username"><strong>Nom d'utilisateur :</strong></label><br>
             <input type="username" id="username" name="username" required><br><br>
 
             <label for="password"><strong>Mot de passe:</strong></label><br>
@@ -21,9 +18,10 @@
 
             <button class="btn" type="submit" class="login-btn">Se connecter</button>
         </form>
-        <button class="btn" onclick="window.location.href='Page_d_inscription.php'">S'inscrire</button>
+        <p>Vous n'avez pas de compte ? Inscrivez-vous !</p>
+        <button class="btn" onclick="window.location.href='page_d_inscription.php'">S'inscrire</button>
         <br>
-        <a href="P0/mdp_oublie.php"> Mot de passe oublié </a>
+        <a href="mdp_oublie.php"> Mot de passe oublié </a>
     </div>
 </body>
 </html>
