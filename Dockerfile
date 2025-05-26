@@ -12,3 +12,8 @@ RUN docker-php-ext-install mysqli pdo pdo_mysql
 
 # Ouvre le port 80
 EXPOSE 80
+
+# Installe Composer (optionnel, utile si tu l'utilises)
+RUN apt-get update && apt-get install -y unzip git zip curl && \
+    curl -sS https://getcomposer.org/installer | php && \
+    mv composer.phar /usr/local/bin/composer
