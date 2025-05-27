@@ -63,6 +63,7 @@
             <ul>
             <li><a href="dashboard.php">Mes rendez-vous</a></li>
             <li>Informations de santé</li>
+            <li><a href="logout.php">Se déconnecter</a></li>
             </ul>
         </nav>
     </aside>

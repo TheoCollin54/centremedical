@@ -14,22 +14,21 @@ try {
 // Vérification si le formulaire est soumis
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Récupération et sécurisation des données
-    $username = htmlspecialchars(trim($_POST['username']));
-    $email = htmlspecialchars(trim($_POST['email']));
-    $password = trim($_POST['password']);
-
-    // Hash du mot de passe
-    $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+    $patient_id = htmlspecialchars(trim($_POST['users_id']));
+    $doctor_id = htmlspecialchars(trim($_POST['doctor_id']));
+    $title = htmlspecialchars(trim($_POST['title']));
+    $date = trim($_POST['date']);
+    $place = trim($_POST['place']);
 
     // Insertion en base de données
     try {
-        $stmt = $pdo->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
-        $stmt->execute([$username, $email, $passwordHash]);
-        echo "Inscription réussie !";
-        header("Location: index.php");
+        $stmt = $pdo->prepare("INSERT INTO rdv2 (patient_id, doctor_id, title, date, place) VALUES (?, ?, ?, ?, ?)");
+        $stmt->execute([$patient_id, $doctor_id, $title, $date, $place]);
+        echo "Ajout réussie !";
+        header("Location: dashboard_doctor.php");
     } catch (PDOException $e) {
         if ($e->errorInfo[1] == 1062) {
-            echo "Erreur : Ce nom d'utilisateur ou cet email est déjà utilisé.";
+            echo "Erreur";
         } else {
             echo "Erreur lors de l'inscription : " . $e->getMessage();
         }

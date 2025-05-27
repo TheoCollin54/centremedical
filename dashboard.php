@@ -62,8 +62,9 @@
     <aside> <!-- Sidebar -->
         <nav>
             <ul>
-            <li>Mes rendez-vous</a></li>
-            <li><a href="infos_sante.php">Informations de santé</a></li>
+                <li>Mes rendez-vous</a></li>
+                <li><a href="infos_sante.php">Informations de santé</a></li>
+                <li><a href="logout.php">Se déconnecter</a></li>
             </ul>
         </nav>
     </aside>

@@ -81,30 +81,39 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <?php foreach ($users as $user): ?>
-        <form method="POST">
-            <input type="hidden" name="users_id" value="<?= htmlspecialchars($user['users_id']) ?>">
-            <table>
-                <tr>
-                    <th>Username</th>
-                    <td><input type="text" name="username" value="<?= htmlspecialchars($user['username']) ?>"></td>
-                </tr>
-                <tr>
-                    <th>Email</th>
-                    <td><input type="email" name="email" value="<?= htmlspecialchars($user['email']) ?>"></td>
-                </tr>
-                <tr>
-                    <th>Docteur</th>
-                    <td><select name="doctor">
-                        <option value=0 <?= $user['doctor'] == 0 ? 'selected' : '' ?>>Patient</option>
-                        <option value=1 <?= $user['doctor'] == 1 ? 'selected' : '' ?>>Docteur</option>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2"><button type="submit">Mettre à jour</button></td>
-                </tr>
-            </table>
-        </form>
-    <?php endforeach; ?>
+    <aside> <!-- Sidebar -->
+        <nav>
+            <ul>
+                <li><a href="logout.php">Se déconnecter</a></li>
+            </ul>
+        </nav>
+    </aside>
+    <main>
+        <?php foreach ($users as $user): ?>
+            <form method="POST">
+                <input type="hidden" name="users_id" value="<?= htmlspecialchars($user['users_id']) ?>">
+                <table>
+                    <tr>
+                        <th>Username</th>
+                        <td><input type="text" name="username" value="<?= htmlspecialchars($user['username']) ?>"></td>
+                    </tr>
+                    <tr>
+                        <th>Email</th>
+                        <td><input type="email" name="email" value="<?= htmlspecialchars($user['email']) ?>"></td>
+                    </tr>
+                    <tr>
+                        <th>Docteur</th>
+                        <td><select name="doctor">
+                            <option value=0 <?= $user['doctor'] == 0 ? 'selected' : '' ?>>Patient</option>
+                            <option value=1 <?= $user['doctor'] == 1 ? 'selected' : '' ?>>Docteur</option>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><button type="submit">Mettre à jour</button></td>
+                    </tr>
+                </table>
+            </form>
+        <?php endforeach; ?>
+    </main>
 </body>
 </html>
