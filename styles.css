@@ -13,7 +13,7 @@
     --blanc: #FFFFFF;
     --gris-clair: #F6F6F6;
     --gris-moyen: #929292;
-    --blanc: #ffffff;
+    --blanc-page: #ffffff;
     --vert-emeraude: #00A95F;
     --vert-emeraude-light: #C3FAD5;
     --orange-terre: #FA5C00;
@@ -91,7 +91,7 @@
 body {
     font-family: var(--font-primary);
     background: linear-gradient(135deg, var(--gris-clair) 0%, #E8E8E8 100%);
-    color: var(--blanc);
+    color: var(--blanc-page);
     line-height: 1.6;
     min-height: 100vh;
     animation: fadeIn 0.8s ease;
@@ -163,7 +163,7 @@ form {
 }
 
 label {
-    color: var(--gris-fonce);
+    color: var(--blanc-page);
     font-weight: 600;
     margin-bottom: var(--spacing-xs);
     display: block;
@@ -221,7 +221,7 @@ select:hover {
 select option {
     padding: 8px 12px;
     background: var(--blanc);
-    color: var(--gris-fonce);
+    color: var(--blanc-page);
 }
 
 select option:hover {
