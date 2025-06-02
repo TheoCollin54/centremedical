@@ -13,7 +13,7 @@
     --blanc: #FFFFFF;
     --gris-clair: #F6F6F6;
     --gris-moyen: #929292;
-    --gris-fonce: #3A3A3A;
+    --gris-fonce: #ffffff;
     --vert-emeraude: #00A95F;
     --vert-emeraude-light: #C3FAD5;
     --orange-terre: #FA5C00;
@@ -619,19 +619,3 @@ button[type="submit"]:hover {
         transition-duration: 0.01ms !important;
     }
 }
-
-/* Mode sombre désactivé - toujours en mode clair */
-/* 
-@media (prefers-color-scheme: dark) {
-    :root {
-        --gris-clair: #2A2A2A;
-        --blanc: #1E1E1E;
-        --gris-fonce: #E0E0E0;
-        --gris-moyen: #B0B0B0;
-    }
-    
-    body {
-        background: linear-gradient(135deg, #1A1A1A 0%, #2A2A2A 100%);
-    }
-}
-*/
