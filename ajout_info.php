@@ -41,13 +41,8 @@
         exit();
     }
 
-    $sql = "SELECT u.username AS patient_name, r.title, r.date, r.place
-        FROM rdv2 r
-        JOIN users u ON r.patient_id = u.users_id
-        WHERE r.doctor_id = :user_id";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute(['user_id' => $user_id]);
-    $rendezvous = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $stmt = $pdo->query("SELECT users_id, username FROM users");
+    $utilisateurs = $stmt->fetchAll();
 ?>
 
 <!DOCTYPE html>
@@ -55,32 +50,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mes rendez-vous</title>
+    <title>Ajouter des informations</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <aside> <!-- Sidebar -->
         <nav>
             <ul>
-                <li>Mes rendez-vous</li>
+                <li><a href="dashboard_doctor.php">Mes rendez-vous</a></li>
                 <li><a href="ajout_rdv.php">Ajouter un rendez-vous</a></li>
-                <li><a href="ajout_info.php">Ajouter des informations</a></li>
+                <li>Ajouter des informations</li>
                 <li><a href="logout.php">Se déconnecter</a></li>
             </ul>
         </nav>
     </aside>
     <main>
-        <?php if (empty($rendezvous)): ?>
-        <p>Vous n'avez aucun rendez-vous.</p>
-        <?php else: ?>
-            <ul>
-                <?php foreach ($rendezvous as $rdv): ?>
-                    <li>
-                        Patient : <?= htmlspecialchars($rdv['patient_name']) ?> <br> Intitulé : <?= htmlspecialchars($rdv['title']) ?> <br> Date : <?= htmlspecialchars($rdv['date']) ?> <br> Lieu : <?= htmlspecialchars($rdv['place']) ?>
-                    </li>
-                <?php endforeach; ?>
-            </ul>
-        <?php endif; ?>
+        <div class="container">
+            <form  action="add_info.php" method="POST">
+                <input type="hidden" name="doctor_id" value="<?php echo $_SESSION['users_id']; ?>">
+
+
+                <label for="users_id">Patient:</label>
+                <select name="users_id" id="users" required>
+                    <option value="">-- Sélectionner --</option>
+                    <?php foreach ($utilisateurs as $user): ?>
+                        <option value="<?= htmlspecialchars($user['users_id']) ?>">
+                            <?= htmlspecialchars($user['username']) ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+
+                <label for="title"><strong>Intitulé:</strong></label>
+                <input type="text" id="title" name="title" required>
+
+                <label for="place"><strong>Description:</strong></label>
+                <input type="text" id="description" name="description" required>
+
+                <button class="btn" type="submit" class="login-btn">Ajouter</button>
+            </form>
+        </div>  
     </main>
 </body>
 </html>

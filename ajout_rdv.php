@@ -57,8 +57,9 @@
     <aside> <!-- Sidebar -->
         <nav>
             <ul>
-                <li>Ajouter rendez-vous</a></li>
-                <li><a href="ajout_rdv.php">Ajouter un rendez-vous</a></li>
+                <li><a href="dashboard_doctor.php">Mes rendez-vous</a></li>
+                <li>Ajouter un rendez-vous</li>
+                <li><a href="ajout_info.php">Ajouter des informations</a></li>
                 <li><a href="logout.php">Se déconnecter</a></li>
             </ul>
         </nav>

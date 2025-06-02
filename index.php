@@ -20,6 +20,7 @@
         </form>
         <p>Vous n'avez pas de compte ? Inscrivez-vous !</p>
         <button class="btn" onclick="window.location.href='page_d_inscription.php'">S'inscrire</button>
+        <br>
         <a href="mdp_oublie.php"> Mot de passe oublié </a>
     </div>
 </body>
