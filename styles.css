@@ -13,7 +13,7 @@
     --blanc: #FFFFFF;
     --gris-clair: #F6F6F6;
     --gris-moyen: #929292;
-    --gris-fonce: #ffffff;
+    --blanc: #ffffff;
     --vert-emeraude: #00A95F;
     --vert-emeraude-light: #C3FAD5;
     --orange-terre: #FA5C00;
@@ -91,7 +91,7 @@
 body {
     font-family: var(--font-primary);
     background: linear-gradient(135deg, var(--gris-clair) 0%, #E8E8E8 100%);
-    color: var(--gris-fonce);
+    color: var(--blanc);
     line-height: 1.6;
     min-height: 100vh;
     animation: fadeIn 0.8s ease;
