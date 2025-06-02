@@ -7,9 +7,9 @@
 
 :root {
     /* Couleurs officielles service public français */
-    --vert: #009130;
+    --bleu-france: #000091;
     --bleu-france-light: #6A6AF4;
-    --blue: #0069e1;
+    --rouge-marianne: #E1000F;
     --blanc: #FFFFFF;
     --gris-clair: #F6F6F6;
     --gris-moyen: #929292;
@@ -132,11 +132,11 @@ body::before {
     left: 0;
     right: 0;
     height: 6px;
-    background: linear-gradient(90deg, var(--vert), var(--vert-emeraude));
+    background: linear-gradient(90deg, var(--bleu-france), var(--vert-emeraude));
 }
 
 h1 {
-    color: var(--vert);
+    color: var(--bleu-france);
     text-align: center;
     margin-bottom: var(--spacing-lg);
     font-size: 2rem;
@@ -174,7 +174,9 @@ input[type="text"],
 input[type="username"],
 input[type="email"],
 input[type="password"],
-input[type="tinyint"] {
+input[type="tinyint"],
+input[type="date"],
+select {
     width: 100%;
     padding: 12px 16px;
     border: 2px solid #E0E0E0;
@@ -183,18 +185,69 @@ input[type="tinyint"] {
     font-family: var(--font-primary);
     transition: all var(--transition-normal);
     background: var(--blanc);
+    cursor: pointer;
 }
 
-input:focus {
+input:focus,
+select:focus {
     outline: none;
-    border-color: var(--vert);
+    border-color: var(--bleu-france);
     box-shadow: 0 0 0 3px rgba(0, 0, 145, 0.1);
     transform: translateY(-2px);
 }
 
-input:invalid:not(:focus):not(:placeholder-shown) {
+input:invalid:not(:focus):not(:placeholder-shown),
+select:invalid:not(:focus):not([value=""]) {
     border-color: var(--rouge-marianne);
     animation: shake 0.5s ease;
+}
+
+/* Styles spéciaux pour select */
+select {
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23929292' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 18px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+select:hover {
+    border-color: var(--bleu-france-light);
+    cursor: pointer;
+}
+
+select option {
+    padding: 8px 12px;
+    background: var(--blanc);
+    color: var(--gris-fonce);
+}
+
+select option:hover {
+    background: var(--bleu-france-light);
+    color: var(--blanc);
+}
+
+/* Styles spéciaux pour input date */
+input[type="date"] {
+    position: relative;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000091' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3crect x='3' y='4' width='18' height='18' rx='2' ry='2'%3e%3c/rect%3e%3cline x1='16' y1='2' x2='16' y2='6'%3e%3c/line%3e%3cline x1='8' y1='2' x2='8' y2='6'%3e%3c/line%3e%3cline x1='3' y1='10' x2='21' y2='10'%3e%3c/line%3e%3c/svg%3e");
+    background-size: 18px;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: opacity var(--transition-fast);
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator:hover {
+    opacity: 1;
+}
+
+input[type="date"]:hover {
+    border-color: var(--bleu-france-light);
 }
 
 /* Boutons */
@@ -463,6 +516,9 @@ button[type="submit"]:hover {
     box-shadow: var(--shadow-light);
 }
 
+/* ============================================
+   ANIMATIONS SPÉCIALES
+   ============================================ */
 
 /* Animation de chargement */
 .loading {
@@ -564,7 +620,8 @@ button[type="submit"]:hover {
     }
 }
 
-/* Mode sombre (optionnel) */
+/* Mode sombre désactivé - toujours en mode clair */
+/* 
 @media (prefers-color-scheme: dark) {
     :root {
         --gris-clair: #2A2A2A;
@@ -577,3 +634,4 @@ button[type="submit"]:hover {
         background: linear-gradient(135deg, #1A1A1A 0%, #2A2A2A 100%);
     }
 }
+*/
