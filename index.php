@@ -8,20 +8,13 @@
 </head>
 <body>
     <div class="container">
-        <h1>Connexion</h1> <!--Formulaire de connexion-->
-        <form  action="login.php" method="POST">
-            <label for="username"><strong>Nom d'utilisateur :</strong></label>
-            <input type="username" id="username" name="username" required>
-
-            <label for="password"><strong>Mot de passe:</strong></label>
-            <input type="password" id="password" name="password" required>
-
-            <button class="btn" type="submit" class="login-btn">Se connecter</button>
-        </form>
-        <p>Vous n'avez pas de compte ? Inscrivez-vous !</p>
-        <button class="btn" onclick="window.location.href='page_d_inscription.php'">S'inscrire</button>
-        <br>
-        <a href="mdp_oublie.php"> Mot de passe oublié </a>
+        <h1>Patient</h1> <!--Formulaire de connexion-->
+        <a href="demande_rdv.php">
+            <img src ="./img/calendar.png" alt = "calendar" class = "btn">
+        </a>
+        <a href="#">
+            <img src ="./img/information.png" alt = "info" class = "btn" >
+        </a>
     </div>
 </body>
 </html>

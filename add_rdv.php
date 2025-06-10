@@ -1,7 +1,7 @@
 <?php
 // Connexion à la base de données
 $host = 'localhost';
-$dbname = 'centre-medical';
+$dbname = 'centremedical';
 $username_db = 'root';
 $password_db = '';
 try {
@@ -13,19 +13,23 @@ try {
 
 // Vérification si le formulaire est soumis
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    
     // Récupération et sécurisation des données
-    $patient_id = htmlspecialchars(trim($_POST['users_id']));
-    $doctor_id = htmlspecialchars(trim($_POST['doctor_id']));
-    $title = htmlspecialchars(trim($_POST['title']));
+    
+    $patient_nom = htmlspecialchars(trim($_POST['name']));
+    $patient_prenom = htmlspecialchars(trim($_POST['firstname']));
+    $patient_tel = htmlspecialchars(trim($_POST['tel']));
+    $num_secu = htmlspecialchars(trim($_POST['numsecu']));
+    $doctor_id = htmlspecialchars(trim($_POST['users_id']));
     $date = trim($_POST['date']);
-    $place = trim($_POST['place']);
 
     // Insertion en base de données
     try {
-        $stmt = $pdo->prepare("INSERT INTO rdv2 (patient_id, doctor_id, title, date, place) VALUES (?, ?, ?, ?, ?)");
-        $stmt->execute([$patient_id, $doctor_id, $title, $date, $place]);
-        echo "Ajout réussie !";
-        header("Location: dashboard_doctor.php");
+        $stmt = $pdo->prepare("INSERT INTO rdv2 (rdv_id, patient_nom, patient_prenom, patient_tel, num_secu, doctor_id, date) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $stmt->execute([$rdv_id, $patient_nom, $patient_prenom, $patient_tel, $num_secu, $doctor_id, $date]);
+        echo "Ajout réussi !";
+        header("Location: index.php?success=1");
+        exit();
     } catch (PDOException $e) {
         if ($e->errorInfo[1] == 1062) {
             echo "Erreur";
