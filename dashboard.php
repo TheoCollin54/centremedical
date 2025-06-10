@@ -1,18 +1,22 @@
 <?php
     session_start();
 
+    require_once ('./db/connection.php'); 
+
+    
+    $host = $dbConn['host'];
+    $username_db = $dbConn['user'];
+    $password_db = $dbConn['pass'];
+    $dbname = $dbConn['name'];
+
+
     // Vérifie que l'utilisateur est connecté
     if (!isset($_SESSION['users_id'])) {
-        header("Location: index_doc.php"); // redirection vers la page de connexion si non connecté
+        header("Location: index.php"); // redirection vers la page de connexion si non connecté
         exit();
     }
 
     $user_id = $_SESSION['users_id'];
-
-    $host = 'localhost';
-    $dbname = 'centremedical';
-    $username_db = 'root';
-    $password_db = '';
 
     try {
         $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username_db, $password_db);

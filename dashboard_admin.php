@@ -9,10 +9,13 @@
 
     $user_id = $_SESSION['users_id'];
 
-    $host = 'localhost';
-    $dbname = 'centre-medical';
-    $username_db = 'root';
-    $password_db = '';
+    require_once ('./db/connection.php'); 
+
+    
+    $host = $dbConn['host'];
+    $username_db = $dbConn['user'];
+    $password_db = $dbConn['pass'];
+    $dbname = $dbConn['name'];
 
     try {
         $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username_db, $password_db);
@@ -31,7 +34,7 @@
         $stmt->execute([$username, $email, $id]);
     }
 
-    $users = $pdo->query("SELECT users_id, username, email, doctor FROM users")->fetchAll(PDO::FETCH_ASSOC);
+    $users = $pdo->query("SELECT username FROM users ")->fetchAll(PDO::FETCH_ASSOC);
 
     $sql_user = "SELECT username FROM users WHERE users_id = :user_id";
     $stmt_user = $pdo->prepare($sql_user);
@@ -43,15 +46,7 @@
         exit();
     }
 
-    $sql_doctor = "SELECT doctor FROM users WHERE users_id = :user_id";
-    $stmt_doctor = $pdo->prepare($sql_doctor);
-    $stmt_doctor->execute(['user_id' => $user_id]);
-    $doctor = $stmt_doctor->fetch(PDO::FETCH_ASSOC);
-
-    if ($doctor && $doctor['doctor'] === 1) {
-        header("Location: dashboard_doctor.php");
-        exit();
-    }
+    
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $users_id = $_POST['users_id'];
