@@ -66,7 +66,7 @@ CREATE TABLE rdv2 (
 --
 
 INSERT INTO rdv2 (rdv_id, patient_nom, patient_prenom, patient_tel, num_secu, doctor_id, date) VALUES
-(1, 'Dupont', 'Jean', '0708093949', '19847582957481928', 2, '2025-06-23'),
+(1, 'Dupont', 'Jean', '0708093949', '19847582957481928', 1, '2025-06-23'),
 (2, 'Martin', 'Claire', '0601020304', '284759382000112', 3, '2025-05-28'),
 (3, 'Lemoine', 'Julien', '0623456789', '123456789123456', 1, '2025-05-29');
 
