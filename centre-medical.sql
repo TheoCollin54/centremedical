@@ -55,7 +55,7 @@ CREATE TABLE rdv2 (
   patient_nom varchar(100) NOT NULL,
   patient_prenom varchar(100) NOT NULL,
   patient_tel varchar(10) NOT NULL,
-  num_secu int(15) NOT NULL,
+  num_secu varchar(15) NOT NULL,
   doctor_id int(11) NOT NULL,
   date date NOT NULL,
   PRIMARY KEY (rdv_id)
