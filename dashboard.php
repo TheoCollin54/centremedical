@@ -10,7 +10,7 @@
     $user_id = $_SESSION['users_id'];
 
     $host = 'localhost';
-    $dbname = 'centre-medical';
+    $dbname = 'centremedical';
     $username_db = 'root';
     $password_db = '';
 
@@ -31,23 +31,19 @@
         exit();
     }
 
-    $sql_doctor = "SELECT doctor FROM users WHERE users_id = :user_id";
-    $stmt_doctor = $pdo->prepare($sql_doctor);
-    $stmt_doctor->execute(['user_id' => $user_id]);
-    $doctor = $stmt_doctor->fetch(PDO::FETCH_ASSOC);
-
-    if ($doctor && $doctor['doctor'] === 1) {
-        header("Location: dashboard_doctor.php");
-        exit();
-    }
-
-    $sql = "SELECT u.username AS doctor_name, r.title, r.date, r.place
+    $sql = "SELECT r.patient_nom, r.patient_prenom, r.patient_tel, r.num_secu, r.date
         FROM rdv2 r
-        JOIN users u ON r.doctor_id = u.users_id
-        WHERE r.patient_id = :user_id";
+        WHERE r.doctor_id  = :user_id";
     $stmt = $pdo->prepare($sql);
     $stmt->execute(['user_id' => $user_id]);
     $rendezvous = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+    $sql_name = "SELECT username 
+                FROM users
+                WHERE users_id = :user_id";
+    $stmt_name = $pdo->prepare($sql_name);
+    $stmt_name->execute(['user_id' => $user_id]);
+    $name = $stmt_name->fetch(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -62,11 +58,12 @@
     <aside> <!-- Sidebar -->
         <nav>
             <ul>
-                <li>Mes rendez-vous</a></li>
-                <li><a href="infos_sante.php">Informations de santé</a></li>
                 <li><a href="logout.php">Se déconnecter</a></li>
             </ul>
         </nav>
+        <p class = "doctor_name">
+            <?= htmlspecialchars($name['username']) ?>
+        </p>
     </aside>
     <main>
         <?php if (empty($rendezvous)): ?>
@@ -75,7 +72,7 @@
             <ul>
                 <?php foreach ($rendezvous as $rdv): ?>
                     <li>
-                        Docteur : <?= htmlspecialchars($rdv['doctor_name']) ?> <br> Intitulé : <?= htmlspecialchars($rdv['title']) ?> <br> Date : <?= htmlspecialchars($rdv['date']) ?> <br> Lieu : <?= htmlspecialchars($rdv['place']) ?>
+                        Nom : <?= htmlspecialchars($rdv['patient_nom']) ?> <br> Prénom : <?= htmlspecialchars($rdv['patient_prenom']) ?> <br> Téléphone : <?= htmlspecialchars($rdv['patient_tel']) ?> <br> Numéro de sécurité sociale : <?= htmlspecialchars($rdv['num_secu']) ?><br> Date : <?= htmlspecialchars($rdv['date']) ?>
                     </li>
                 <?php endforeach; ?>
             </ul>

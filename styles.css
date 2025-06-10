@@ -428,7 +428,7 @@ select:not(#users) option:hover {
    ============================================ */
 
 .btn {
-    background: linear-gradient(135deg, var(--bleu-france), var(--bleu-france-light));
+    background: linear-gradient(135deg, var(--bleu-claire), var(--bleu-france-light));
     color: var(--bleu-claire);
     border: none;
     padding: 16px 32px;
@@ -461,7 +461,7 @@ select:not(#users) option:hover {
     transform: translateY(-4px);
     box-shadow: var(--shadow-heavy);
     animation: pulse 0.3s ease;
-    background: linear-gradient(135deg, var(--vert-emeraude), var(--bleu-france));
+    background: linear-gradient(135deg, var(--bleu-france-light), var(--bleu-france));
 }
 
 .btn:hover::before {

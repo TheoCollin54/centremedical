@@ -3,7 +3,7 @@ session_start(); // Pour gérer les sessions utilisateur
 
 // Connexion à la base de données
 $host = 'localhost';
-$dbname = 'centre-medical';
+$dbname = 'centremedical';
 $username_db = 'root';
 $password_db = '';
 
