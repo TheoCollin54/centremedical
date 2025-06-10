@@ -17,6 +17,7 @@
     --vert-emeraude: #00A95F;
     --vert-emeraude-light: #C3FAD5;
     --orange-terre: #FA5C00;
+    --bleu-claire: #00a993;
     
     /* Typographie */
     --font-primary: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -50,47 +51,6 @@
     --shadow-medium: 0 4px 8px rgba(255, 255, 255, 0.15);
     --shadow-heavy: 0 8px 24px rgba(255, 255, 255, 0.2);
 }
-
-/* ============================================
-   SÉLECTEUR DE THÈME
-   ============================================ */
-
-.theme-toggle {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 9999;
-    background: var(--blanc);
-    border: 2px solid var(--bleu-france);
-    border-radius: 50px;
-    padding: 8px 16px;
-    cursor: pointer;
-    box-shadow: var(--shadow-medium);
-    transition: all var(--transition-normal);
-    font-family: var(--font-primary);
-    font-weight: 600;
-    color: var(--bleu-france);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.theme-toggle:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-heavy);
-    background: var(--bleu-france);
-    color: var(--blanc);
-}
-
-.theme-toggle::before {
-    content: "🌙";
-    font-size: 1.2rem;
-}
-
-[data-theme="dark"] .theme-toggle::before {
-    content: "☀️";
-}
-
 /* Animation keyframes */
 @keyframes fadeIn {
     from {
@@ -469,7 +429,7 @@ select:not(#users) option:hover {
 
 .btn {
     background: linear-gradient(135deg, var(--bleu-france), var(--bleu-france-light));
-    color: var(--blanc);
+    color: var(--bleu-claire);
     border: none;
     padding: 16px 32px;
     border-radius: 12px;
