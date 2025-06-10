@@ -3,7 +3,7 @@
 
     // Vérifie que l'utilisateur est connecté
     if (!isset($_SESSION['users_id'])) {
-        header("Location: index.php"); // redirection vers la page de connexion si non connecté
+        header("Location: index_doc.php"); // redirection vers la page de connexion si non connecté
         exit();
     }
 
@@ -55,9 +55,17 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Message de succès après redirection vers l'index si le rendez-vous a bien été ajouté-->
+    <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
+    <script>
+        alert("Le rendez-vous a bien été ajouté ✅");
+    </script>
+    <?php endif; ?>
     <aside> <!-- Sidebar -->
         <nav>
             <ul>
+                <li><a href="#">Mes rendez-vous</a></li>
+                <li><a href="demande_rdv_doc.php">Ajouter un rendez-vous</a></li>
                 <li><a href="logout.php">Se déconnecter</a></li>
             </ul>
         </nav>
