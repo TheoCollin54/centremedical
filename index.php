@@ -7,6 +7,13 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Message de succès après redirection vers l'index si le rendez-vous a bien été ajouté-->
+    <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
+    <script>
+        alert("Le rendez-vous a bien été ajouté ✅");
+    </script>
+    <?php endif; ?>
+
     <div class="container">
         <h1>Patient</h1> <!--Formulaire de connexion-->
         <a href="demande_rdv.php">
