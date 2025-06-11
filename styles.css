@@ -536,6 +536,14 @@ label[for="numsecu"]::before {
     margin-right: 5px;
 }
 
+/* Quitar centrado en los campos de teléfono y número de seguridad social */
+#tel,
+input[name="tel"],
+#numsecu,
+input[name="numsecu"] {
+    text-align: left;
+}
+
 /* ============================================
    STYLES SPÉCIAUX PARA SELECT PATIENT (users)
    ============================================ */
