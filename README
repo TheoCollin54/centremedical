@@ -4,3 +4,42 @@ $username_db = 'if0_39171546';
 $password_db = 'l9tQBbp4zG';
 
 https://centremedical.infinityfreeapp.com/index.php
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_user'])) {
+    $users_id = intval($_POST['users_id']);
+
+        try {
+            // DÉBUT DE TRANSACTION
+            $pdo->beginTransaction();
+
+            // Suppression dans les autres tables si nécessaire
+            $pdo->prepare("DELETE FROM rdv2 WHERE doctor_id = ?")->execute([$users_id]);
+
+            // Suppression de l'utilisateur
+            $pdo->prepare("DELETE FROM users WHERE users_id = ?")->execute([$users_id]);
+
+            // COMMIT
+            $pdo->commit();
+        } catch (Exception $e) {
+            $pdo->rollBack();
+            echo "Erreur lors de la suppression : " . $e->getMessage();
+        }
+    }
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $users_id = $_POST['users_id'];
+        $username = $_POST['username'];
+        $email = $_POST['email'];
+        $doctor = $_POST['doctor'];
+
+        // Sécurisation basique
+        $users_id = intval($users_id);
+        $doctor = intval($doctor);
+
+        // Mise à jour en base de données
+        $stmt = $pdo->prepare('UPDATE users SET username = ?, email = ?, doctor = ? WHERE users_id = ?');
+        $stmt->execute([$username, $email, $doctor, $users_id]);
+
+        $stmt = $pdo->query('SELECT * FROM users');
+        $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
