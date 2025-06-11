@@ -35,7 +35,7 @@
         exit();
     }
 
-    $sql = "SELECT r.patient_nom, r.patient_prenom, r.patient_tel, r.num_secu, r.date
+    $sql = "SELECT r.rdv_id, r.patient_nom, r.patient_prenom, r.patient_tel, r.num_secu, r.date
         FROM rdv2 r
         WHERE r.doctor_id  = :user_id";
     $stmt = $pdo->prepare($sql);
@@ -85,7 +85,16 @@
             <ul>
                 <?php foreach ($rendezvous as $rdv): ?>
                     <li>
-                        Nom : <?= htmlspecialchars($rdv['patient_nom']) ?> <br> Prénom : <?= htmlspecialchars($rdv['patient_prenom']) ?> <br> Téléphone : <?= htmlspecialchars($rdv['patient_tel']) ?> <br> Numéro de sécurité sociale : <?= htmlspecialchars($rdv['num_secu']) ?><br> Date : <?= htmlspecialchars($rdv['date']) ?>
+                        Nom : <?= htmlspecialchars($rdv['patient_nom']) ?> <br>
+                        Prénom : <?= htmlspecialchars($rdv['patient_prenom']) ?> <br>
+                        Téléphone : <?= htmlspecialchars($rdv['patient_tel']) ?> <br>
+                        Numéro de sécurité sociale : <?= htmlspecialchars($rdv['num_secu']) ?><br>
+                        Date : <?= htmlspecialchars($rdv['date']) ?><br>
+
+                        <form method="POST" action="delete_rdv.php" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce rendez-vous ?');">
+                            <input type="hidden" name="rdv_id" value="<?= htmlspecialchars($rdv['rdv_id']) ?>">
+                            <button type="submit">Supprimer</button>
+                        </form>
                     </li>
                 <?php endforeach; ?>
             </ul>
