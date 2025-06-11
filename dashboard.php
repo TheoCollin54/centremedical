@@ -68,12 +68,13 @@
     <aside> <!-- Sidebar -->
         <nav>
             <ul>
-                <li><a href="#">Mes rendez-vous</a></li>
+                <li><a href="#" class = "inactive">Mes rendez-vous</a></li>
                 <li><a href="demande_rdv_doc.php">Ajouter un rendez-vous</a></li>
                 <li><a href="logout.php">Se déconnecter</a></li>
             </ul>
         </nav>
-        <p class = "doctor_name">
+        <br>
+        <p class = "doctor_name">Connecté en tant que :
             <?= htmlspecialchars($name['username']) ?>
         </p>
     </aside>

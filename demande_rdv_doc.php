@@ -58,12 +58,13 @@
         <nav>
             <ul>
                 <li><a href="dashboard.php">Mes rendez-vous</a></li>
-                <li><a href ="#">Ajouter un rendez-vous</a></li>
+                <li><a href ="#" class = "inactive">Ajouter un rendez-vous</a></li>
                 <li><a href="logout.php">Se déconnecter</a></li>
             </ul>
         </nav>
         </nav>
-        <p class = "doctor_name">
+        <br>
+        <p class = "doctor_name">Connecté en tant que :
             <?= htmlspecialchars($name['username']) ?>
         </p>
     </aside>
