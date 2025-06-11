@@ -3,7 +3,7 @@
 
     // Vérifie que l'utilisateur est connecté
     if (!isset($_SESSION['users_id'])) {
-        header("Location: index.php"); // redirection vers la page de connexion si non connecté
+        header("Location: index_doc.php"); // redirection vers la page de connexion si non connecté
         exit();
     }
 
@@ -34,7 +34,7 @@
         $stmt->execute([$username, $email, $id]);
     }
 
-    $users = $pdo->query("SELECT username FROM users ")->fetchAll(PDO::FETCH_ASSOC);
+    $users = $pdo->query("SELECT * FROM users ")->fetchAll(PDO::FETCH_ASSOC);
 
     $sql_user = "SELECT username FROM users WHERE users_id = :user_id";
     $stmt_user = $pdo->prepare($sql_user);
@@ -52,15 +52,13 @@
         $users_id = $_POST['users_id'];
         $username = $_POST['username'];
         $email = $_POST['email'];
-        $doctor = $_POST['doctor'];
 
         // Sécurisation basique
         $users_id = intval($users_id);
-        $doctor = intval($doctor);
 
         // Mise à jour en base de données
-        $stmt = $pdo->prepare('UPDATE users SET username = ?, email = ?, doctor = ? WHERE users_id = ?');
-        $stmt->execute([$username, $email, $doctor, $users_id]);
+        $stmt = $pdo->prepare('UPDATE users SET username = ?, email = ? WHERE users_id = ?');
+        $stmt->execute([$username, $email, $users_id]);
 
         $stmt = $pdo->query('SELECT * FROM users');
         $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -96,13 +94,7 @@
                         <th>Email</th>
                         <td><input type="email" name="email" value="<?= htmlspecialchars($user['email']) ?>"></td>
                     </tr>
-                    <tr>
-                        <th>Docteur</th>
-                        <td><select name="doctor">
-                            <option value=0 <?= $user['doctor'] == 0 ? 'selected' : '' ?>>Patient</option>
-                            <option value=1 <?= $user['doctor'] == 1 ? 'selected' : '' ?>>Docteur</option>
-                        </td>
-                    </tr>
+                    
                     <tr>
                         <td colspan="2"><button type="submit">Mettre à jour</button></td>
                     </tr>
