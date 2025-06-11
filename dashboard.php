@@ -93,7 +93,7 @@
 
                         <form method="POST" action="delete_rdv.php" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce rendez-vous ?');">
                             <input type="hidden" name="rdv_id" value="<?= htmlspecialchars($rdv['rdv_id']) ?>">
-                            <button type="submit">Supprimer</button>
+                            <button type="submit" style="background-color:red;color:white;">Supprimer</button>
                         </form>
                     </li>
                 <?php endforeach; ?>
