@@ -74,9 +74,16 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+       <!-- Message de succès après redirection vers la page d'ajout si l'user a bien été ajouté-->
+        <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
+        <script>
+            alert("Le spécialiste a bien été ajouté ✅");
+        </script>
+        <?php endif; ?>
     <aside> <!-- Sidebar -->
         <nav>
             <ul>
+                <li><a href="ajout_doc.php">Ajouter un spécialiste</a></li>
                 <li><a href="logout.php">Se déconnecter</a></li>
             </ul>
         </nav>
