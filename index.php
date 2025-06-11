@@ -16,12 +16,21 @@
 
     <div class="container">
         <h1>Patient</h1> <!--Formulaire de connexion-->
-        <a href="demande_rdv.php">
+
+        <div class = "icon">
+            <a href="demande_rdv.php">
             <img src ="./img/calendar.png" alt = "calendar" class = "btn">
+            <h3>Prise de rendez-vous</h3>
         </a>
-        <a href="#">
-            <img src ="./img/information.png" alt = "info" class = "btn" >
-        </a>
+        
+        </div>
+        
+        <div class = "icon">
+            <a href="#">
+                <img src ="./img/information.png" alt = "info" class = "btn" >
+            </a>
+
+        </div>
     </div>
 </body>
 </html>
