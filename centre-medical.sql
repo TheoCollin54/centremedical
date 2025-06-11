@@ -90,6 +90,13 @@ INSERT INTO users (users_id, username, email, password) VALUES
 (3, 'Dr Maboul', 'maboul@gmail.com', '$2y$10$Ug7PnAD18P.InNNGx1TVLOVmp6xqptk6DHUAp7e1b8lbI1Bo1dBu.');
 
 --
+-- AUTO_INCREMENT pour la table `infos`
+--
+
+ALTER TABLE infos
+  MODIFY info_id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+
+--
 -- AUTO_INCREMENT pour la table `rdv2`
 --
 ALTER TABLE rdv2
