@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <aside>
         <nav>
             <ul>
-                <li><a href="dashboard.php">Retour au tableau de bord</a></li>
+                <li><a href="dashboard.php">Retour à l'accueil</a></li>
             </ul>
         </nav>
     </aside>

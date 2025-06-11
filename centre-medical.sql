@@ -26,12 +26,12 @@ USE centremedical;
 -- Structure de la table `infos`
 --
 
--- CREATE TABLE `infos` (
---   `info_id` int(11) NOT NULL,
---   `patient_id` int(11) NOT NULL,
---   `title` varchar(100) NOT NULL,
---   `description` varchar(255) NOT NULL
--- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE infos (
+  info_id int(11) NOT NULL,
+  title varchar(100) NOT NULL,
+  description varchar(255) NOT NULL,
+  PRIMARY KEY (info_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --
 -- -- Déchargement des données de la table `infos`
