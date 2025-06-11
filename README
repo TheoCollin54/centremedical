@@ -1,52 +1,17 @@
-$host = 'sql113.infinityfree.com';
-$dbname = 'if0_39171546_centremedical';
-$username_db = 'if0_39171546';
-$password_db = 'l9tQBbp4zG';
-
+CONTENU DE db/connection.php :
+<?php
+    $dbConn = array(
+        'user' => 'if0_39171546',
+        'pass' => 'l9tQBbp4zG',
+        'name' => 'if0_39171546_centremedical',
+        'host' => 'sql113.infinityfree.com'
+    );
+    
+    // Connexion à la base de données
+    $conn = new mysqli($dbConn['host'], $dbConn['user'], $dbConn['pass'], $dbConn['name']);
+    //Vérification de la connexion
+    if ($conn->connect_error) {
+        die('Erreur de connexion');
+    }    
+?>
 https://centremedical.infinityfreeapp.com/index.php
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_user'])) {
-    $users_id = intval($_POST['users_id']);
-
-        try {
-            // DÉBUT DE TRANSACTION
-            $pdo->beginTransaction();
-
-            // Suppression dans les autres tables si nécessaire
-            $pdo->prepare("DELETE FROM rdv2 WHERE doctor_id = ?")->execute([$users_id]);
-
-            // Suppression de l'utilisateur
-            $pdo->prepare("DELETE FROM users WHERE users_id = ?")->execute([$users_id]);
-
-            // COMMIT
-            $pdo->commit();
-        } catch (Exception $e) {
-            $pdo->rollBack();
-            echo "Erreur lors de la suppression : " . $e->getMessage();
-        }
-    }
-
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $users_id = $_POST['users_id'];
-        $username = $_POST['username'];
-        $email = $_POST['email'];
-        $doctor = $_POST['doctor'];
-
-        // Sécurisation basique
-        $users_id = intval($users_id);
-        $doctor = intval($doctor);
-
-        // Mise à jour en base de données
-        $stmt = $pdo->prepare('UPDATE users SET username = ?, email = ?, doctor = ? WHERE users_id = ?');
-        $stmt->execute([$username, $email, $doctor, $users_id]);
-
-        $stmt = $pdo->query('SELECT * FROM users');
-        $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-
-<tr>
-                        <td colspan="2">
-                            <button type="submit">Mettre à jour</button>
-                            <button type="submit" name="delete_user" onclick="return confirm('Supprimer cet utilisateur ?');" style="background-color:red;color:white;">Supprimer</button>
-                        </td>
-                    </tr>
