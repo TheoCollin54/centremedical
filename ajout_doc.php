@@ -48,14 +48,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <title>Ajouter un utilisateur</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css"> <!-- Assure-toi que ce fichier existe -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     
     <aside>
         <nav>
             <ul>
-                <li><a href="#" class = "inactive">Ajouter un médecin</a></li>
+                <li><a class = "inactive">Ajouter un médecin</a></li>
                 <li><a href="ajout_info.php">Ajouter une information</a></li>
                 <li><a href="dashboard_admin.php">Retour à l'accueil</a></li>
                 <li><a href="logout.php">Se déconnecter</a></li>

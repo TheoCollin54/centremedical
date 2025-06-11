@@ -748,15 +748,9 @@ button[type="submit"]:hover {
 }
 
 a.inactive {
-    /* background-color: #ccc !important; */
-    /* Fond gris */
-    /* color: #666 !important; */
-    /* Texte gris */
     cursor: not-allowed !important;
     /* Curseur interdit */
-    /* pointer-events: none !important; */
-    /* Désactive les clics */
-    opacity: 0.6 !important;
+    opacity: 0.5 !important;
     /* Effet visuel d'inactivité */
 }
 
