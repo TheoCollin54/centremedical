@@ -88,7 +88,7 @@
                 <input type="number" id="numsecu" name="numsecu" required>
 
                 <label for="date"><strong>Date du rendez-vous :</strong></label>
-                <input type="date" id="date" name="date" required>
+                <input type="text" id="date" name="date" required>
 
                 <button class="btn" type="submit" class="login-btn">Ajouter</button>
             </form>
