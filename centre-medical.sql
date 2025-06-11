@@ -11,18 +11,14 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+--
+-- Base de données : `centremedical`
+--
 
 CREATE DATABASE centremedical;
 
 USE centremedical;
---
--- Base de données : `centremedical`
---
+
 
 -- --------------------------------------------------------
 
@@ -94,42 +90,6 @@ INSERT INTO users (users_id, username, email, password) VALUES
 (3, 'Dr Maboul', 'maboul@gmail.com', '$2y$10$Ug7PnAD18P.InNNGx1TVLOVmp6xqptk6DHUAp7e1b8lbI1Bo1dBu.');
 
 --
--- Index pour les tables déchargées
---
-
---
--- Index pour la table `infos`
---
--- ALTER TABLE `infos`
---   ADD PRIMARY KEY (`info_id`),
---   ADD KEY `user_id` (`patient_id`);
-
---
--- Index pour la table `rdv2`
---
-
--- ALTER TABLE rdv2
---   ADD KEY patient_id (patient_id),
---   ADD KEY doctor_id (doctor_id);
-
---
--- Index pour la table `users`
---
--- ALTER TABLE users
---   ADD UNIQUE KEY email (email),
---   ADD UNIQUE KEY username (username);
-
---
--- AUTO_INCREMENT pour les tables déchargées
---
-
---
--- AUTO_INCREMENT pour la table `infos`
---
--- ALTER TABLE `infos`
---   MODIFY `info_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
 -- AUTO_INCREMENT pour la table `rdv2`
 --
 ALTER TABLE rdv2
@@ -142,22 +102,8 @@ ALTER TABLE users
   MODIFY users_id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 
 --
--- Contraintes pour les tables déchargées
---
-
---
--- Contraintes pour la table `infos`
---
--- ALTER TABLE `infos`
---   ADD CONSTRAINT `infos_ibfk_1` FOREIGN KEY (`patient_id`) REFERENCES `users` (`users_id`);
-
---
--- Contraintes pour la table `rdv2`
+-- Relation entre `rdv2` pour la table `users` (clé étrangère `doctor_id` faisant référence à `users_id`)
 --
 ALTER TABLE rdv2
   ADD CONSTRAINT `rdv2_ibfk_2` FOREIGN KEY (doctor_id) REFERENCES users (users_id);
 COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
