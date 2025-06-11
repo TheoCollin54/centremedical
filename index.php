@@ -20,7 +20,7 @@
         <div class = "icon">
             <a href="demande_rdv.php">
             <img src ="./img/calendar.png" alt = "calendar" class = "btn">
-            <h3>Prise de rendez-vous</h3>
+            <h3>Prise de rendez-vous</h3>    
         </a>
         
         </div>
@@ -28,6 +28,7 @@
         <div class = "icon">
             <a href="#">
                 <img src ="./img/information.png" alt = "info" class = "btn" >
+                <h3>Informations</h3>
             </a>
 
         </div>
