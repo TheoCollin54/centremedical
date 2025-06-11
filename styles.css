@@ -232,6 +232,143 @@ body::before {
     background: linear-gradient(90deg, var(--bleu-france), var(--vert-emeraude));
 }
 
+/* ============================================
+   STYLES PARA INDEX.PHP - ICONOS FULLSCREEN
+   ============================================ */
+
+/* Contenedor especial para index.php sin caja */
+.index-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: var(--spacing-lg);
+    background: transparent;
+    box-shadow: none;
+    border-radius: 0;
+    animation: fadeIn 1s ease;
+}
+
+.index-container::before {
+    display: none;
+}
+
+.index-container h1 {
+    font-size: 3.5rem;
+    margin-bottom: var(--spacing-xl);
+    color: var(--bleu-france);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    animation: pulse 2s infinite;
+}
+
+.icon-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-xl);
+    width: 100%;
+    max-width: 800px;
+    margin-top: var(--spacing-xl);
+}
+
+.icon-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(145deg, var(--blanc), #f8f9ff);
+    border-radius: 25px;
+    padding: var(--spacing-xl);
+    text-decoration: none;
+    transition: all var(--transition-normal);
+    box-shadow: var(--shadow-medium);
+    border: 3px solid transparent;
+    min-height: 250px;
+    position: relative;
+    overflow: hidden;
+}
+
+.icon-link::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left var(--transition-slow);
+}
+
+.icon-link:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: var(--shadow-heavy);
+    border-color: var(--bleu-france);
+    background: linear-gradient(145deg, #f8f9ff, var(--blanc));
+}
+
+.icon-link:hover::before {
+    left: 100%;
+}
+
+.icon-link:first-child {
+    border-color: var(--vert-emeraude);
+}
+
+.icon-link:first-child:hover {
+    border-color: var(--vert-emeraude);
+    background: linear-gradient(145deg, #f0fff4, var(--blanc));
+}
+
+.icon-link:last-child {
+    border-color: var(--orange-terre);
+}
+
+.icon-link:last-child:hover {
+    border-color: var(--orange-terre);
+    background: linear-gradient(145deg, #fff8f0, var(--blanc));
+}
+
+.icon-link .btn {
+    width: 120px;
+    height: 120px;
+    border-radius: 20px;
+    margin-bottom: var(--spacing-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    box-shadow: none;
+    transition: all var(--transition-normal);
+}
+
+.icon-link .btn img {
+    width: 80px;
+    height: 80px;
+    transition: all var(--transition-normal);
+}
+
+.icon-link:hover .btn {
+    transform: scale(1.1);
+    animation: pulse 0.5s ease;
+}
+
+.icon-link:hover .btn img {
+    filter: brightness(1.2) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
+
+.icon-text {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--gris-fonce);
+    text-align: center;
+    margin-top: var(--spacing-sm);
+    transition: color var(--transition-fast);
+}
+
+.icon-link:hover .icon-text {
+    color: var(--bleu-france);
+}
+
 h1 {
     color: var(--bleu-france);
     text-align: center;
@@ -276,6 +413,7 @@ input[type="text"],
 input[type="username"],
 input[type="email"],
 input[type="password"],
+input[type="number"],
 input[type="tinyint"],
 input[type="date"],
 select {
@@ -307,7 +445,99 @@ select:invalid:not(:focus):not([value=""]) {
 }
 
 /* ============================================
-   STYLES SPÉCIAUX POUR SELECT PATIENT (users)
+   STYLES SPÉCIAUX POUR NÚMERO DE TELÉFONO
+   ============================================ */
+
+#tel,
+input[name="tel"] {
+    background: linear-gradient(145deg, var(--blanc), #f0f8ff);
+    border: 2px solid var(--bleu-claire);
+    position: relative;
+    font-weight: 500;
+    padding-left: 50px;
+}
+
+#tel::before,
+input[name="tel"]::before {
+    content: "📞";
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.3rem;
+    pointer-events: none;
+}
+
+#tel:hover,
+input[name="tel"]:hover {
+    border-color: var(--bleu-claire);
+    box-shadow: 0 0 15px rgba(0, 169, 147, 0.3);
+    animation: glow 1s ease;
+}
+
+#tel:focus,
+input[name="tel"]:focus {
+    border-color: var(--bleu-claire);
+    box-shadow: 0 0 0 4px rgba(0, 169, 147, 0.2);
+    background: linear-gradient(145deg, var(--blanc), #f0f8ff);
+}
+
+/* Añadir el ícono con pseudo-elemento personalizado */
+label[for="tel"]::before {
+    content: "📞 ";
+    font-size: 1.2rem;
+    margin-right: 5px;
+}
+
+/* ============================================
+   STYLES SPÉCIAUX PARA NÚMERO DE SEGURIDAD SOCIAL
+   ============================================ */
+
+#numsecu,
+input[name="numsecu"] {
+    background: linear-gradient(145deg, var(--blanc), #fff0f8);
+    border: 2px solid var(--rouge-marianne);
+    position: relative;
+    font-weight: 500;
+    padding-left: 50px;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 2px;
+}
+
+#numsecu::before,
+input[name="numsecu"]::before {
+    content: "🆔";
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.3rem;
+    pointer-events: none;
+}
+
+#numsecu:hover,
+input[name="numsecu"]:hover {
+    border-color: var(--rouge-marianne);
+    box-shadow: 0 0 15px rgba(225, 0, 15, 0.3);
+    animation: glow 1s ease;
+}
+
+#numsecu:focus,
+input[name="numsecu"]:focus {
+    border-color: var(--rouge-marianne);
+    box-shadow: 0 0 0 4px rgba(225, 0, 15, 0.2);
+    background: linear-gradient(145deg, var(--blanc), #fff0f8);
+}
+
+/* Añadir el ícono con pseudo-elemento personalizado */
+label[for="numsecu"]::before {
+    content: "🆔 ";
+    font-size: 1.2rem;
+    margin-right: 5px;
+}
+
+/* ============================================
+   STYLES SPÉCIAUX PARA SELECT PATIENT (users)
    ============================================ */
 
 #users {
@@ -368,7 +598,7 @@ select:invalid:not(:focus):not([value=""]) {
 }
 
 /* ============================================
-   STYLES SPÉCIAUX POUR INPUT DATE
+   STYLES SPÉCIAUX PARA INPUT DATE
    ============================================ */
 
 #date,
