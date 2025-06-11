@@ -115,7 +115,8 @@
     <aside> <!-- Sidebar -->
         <nav>
             <ul>
-                <li><a href="ajout_doc.php">Ajouter un spécialiste</a></li>
+                <li><a href="ajout_doc.php">Ajouter un médecin</a></li>
+                <li><a href="ajout_info.php">Ajouter une information</a></li>
                 <li><a href="logout.php">Se déconnecter</a></li>
             </ul>
         </nav>
