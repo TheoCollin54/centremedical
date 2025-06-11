@@ -48,6 +48,27 @@
 
     
 
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_user'])) {
+    $users_id = intval($_POST['users_id']);
+
+        try {
+            // DÉBUT DE TRANSACTION
+            $pdo->beginTransaction();
+
+            // Suppression dans les autres tables si nécessaire
+            $pdo->prepare("DELETE FROM rdv2 WHERE doctor_id = ?")->execute([$users_id]);
+
+            // Suppression de l'utilisateur
+            $pdo->prepare("DELETE FROM users WHERE users_id = ?")->execute([$users_id]);
+
+            // COMMIT
+            $pdo->commit();
+        } catch (Exception $e) {
+            $pdo->rollBack();
+            echo "Erreur lors de la suppression : " . $e->getMessage();
+        }
+    }
+
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $users_id = $_POST['users_id'];
         $username = $_POST['username'];
@@ -58,7 +79,7 @@
 
         // Mise à jour en base de données
         $stmt = $pdo->prepare('UPDATE users SET username = ?, email = ? WHERE users_id = ?');
-        $stmt->execute([$username, $email, $users_id]);
+        $stmt->execute([$username, $email,  $users_id]);
 
         $stmt = $pdo->query('SELECT * FROM users');
         $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -103,7 +124,10 @@
                     </tr>
                     
                     <tr>
-                        <td colspan="2"><button type="submit">Mettre à jour</button></td>
+                        <td colspan="2">
+                            <button type="submit">Mettre à jour</button>
+                            <button type="submit" name="delete_user" onclick="return confirm('Supprimer cet utilisateur ?');" style="background-color:red;color:white;">Supprimer</button>
+                        </td>
                     </tr>
                 </table>
             </form>
