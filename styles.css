@@ -445,7 +445,7 @@ select:invalid:not(:focus):not([value=""]) {
 }
 
 /* ============================================
-   STYLES SPÉCIAUX POUR NÚMERO DE TELÉFONO
+   STYLES SPÉCIAUX PARA NÚMERO DE TELÉFONO
    ============================================ */
 
 #tel,
@@ -455,6 +455,7 @@ input[name="tel"] {
     position: relative;
     font-weight: 500;
     padding-left: 50px;
+    text-align: left !important; /* Forzar alineación a la izquierda */
 }
 
 #tel::before,
@@ -480,6 +481,7 @@ input[name="tel"]:focus {
     border-color: var(--bleu-claire);
     box-shadow: 0 0 0 4px rgba(0, 169, 147, 0.2);
     background: linear-gradient(145deg, var(--blanc), #f0f8ff);
+    text-align: left !important; /* Mantener alineación al hacer focus */
 }
 
 /* Añadir el ícono con pseudo-elemento personalizado */
@@ -502,6 +504,7 @@ input[name="numsecu"] {
     padding-left: 50px;
     font-family: 'Courier New', monospace;
     letter-spacing: 2px;
+    text-align: left !important; /* Forzar alineación a la izquierda */
 }
 
 #numsecu::before,
@@ -527,6 +530,7 @@ input[name="numsecu"]:focus {
     border-color: var(--rouge-marianne);
     box-shadow: 0 0 0 4px rgba(225, 0, 15, 0.2);
     background: linear-gradient(145deg, var(--blanc), #fff0f8);
+    text-align: left !important; /* Mantener alineación al hacer focus */
 }
 
 /* Añadir el ícono con pseudo-elemento personalizado */
@@ -534,14 +538,6 @@ label[for="numsecu"]::before {
     content: "🆔 ";
     font-size: 1.2rem;
     margin-right: 5px;
-}
-
-/* Quitar centrado en los campos de teléfono y número de seguridad social */
-#tel,
-input[name="tel"],
-#numsecu,
-input[name="numsecu"] {
-    text-align: left;
 }
 
 /* ============================================
