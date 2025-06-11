@@ -53,9 +53,10 @@
     <aside> <!-- Sidebar -->
         <nav>
             <ul>
-                <li><a href="ajout_doc.php">Ajouter un spécialiste</a></li>
+                <li><a href="ajout_doc.php">Ajouter un médecin</a></li>
                 <li><a href="#" class = "selected">Ajouter une information</a></li>
                 <li><a href="dashboard_admin.php">Retour à l'accueil</a></li>
+                <li><a href="logout.php">Se déconnecter</a></li>
             </ul>
         </nav>
     </aside>
