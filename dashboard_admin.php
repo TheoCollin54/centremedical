@@ -24,15 +24,7 @@
         die("Erreur de connexion : " . $e->getMessage());
     }
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $id = $_POST['users_id'];
-        $username = $_POST['username'];
-        $email = $_POST['email'];
-
-        // Mise à jour des données
-        $stmt = $pdo->prepare("UPDATE users SET username = ?, email = ? WHERE users_id = ?");
-        $stmt->execute([$username, $email, $id]);
-    }
+    
 
     $users = $pdo->query("SELECT * FROM users ")->fetchAll(PDO::FETCH_ASSOC);
 
@@ -42,7 +34,7 @@
     $user = $stmt_user->fetch(PDO::FETCH_ASSOC);
 
     if ($user && $user['username'] !== 'admin') {
-        header("Location: dashboard.php");
+        header("Location: index_doc.php");
         exit();
     }
 
@@ -63,13 +55,16 @@
 
             // COMMIT
             $pdo->commit();
+
+            //Message de succès
+            header("Location: dashboard_admin.php?success=3");
         } catch (Exception $e) {
             $pdo->rollBack();
             echo "Erreur lors de la suppression : " . $e->getMessage();
         }
     }
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !isset($_POST['delete_user'])) {
         $users_id = $_POST['users_id'];
         $username = $_POST['username'];
         $email = $_POST['email'];
@@ -83,6 +78,7 @@
 
         $stmt = $pdo->query('SELECT * FROM users');
         $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        header("Location: dashboard_admin.php?success=2");
     }
 ?>
 
@@ -95,12 +91,27 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-       <!-- Message de succès après redirection vers la page d'ajout si l'user a bien été ajouté-->
+       <!-- Message de succès après redirection vers le dashboard si l'user a bien été ajouté-->
         <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
         <script>
-            alert("Le spécialiste a bien été ajouté ✅");
+            alert("L'utilisateur a bien été ajouté ✅");
         </script>
         <?php endif; ?>
+
+        <!-- Message de succès après redirection vers le dashboard si l'user a bien été modifié-->
+        <?php if (isset($_GET['success']) && $_GET['success'] == 2): ?>
+        <script>
+            alert("L'utilisateur a bien été modifié ✅");
+        </script>
+        <?php endif; ?>
+
+        <!-- Message de succès après redirection vers le dashboard si l'user a bien été supprimé-->
+        <?php if (isset($_GET['success']) && $_GET['success'] == 3): ?>
+        <script>
+            alert("L'utilisateur a bien été supprimé ✅");
+        </script>
+        <?php endif; ?>
+
     <aside> <!-- Sidebar -->
         <nav>
             <ul>
@@ -125,7 +136,7 @@
                     
                     <tr>
                         <td colspan="2">
-                            <button type="submit">Mettre à jour</button>
+                            <button type="submit" onclick="return confirm('Modifier cet utilisateur ?');">Mettre à jour</button>
                             <button type="submit" name="delete_user" onclick="return confirm('Supprimer cet utilisateur ?');" style="background-color:red;color:white;">Supprimer</button>
                         </td>
                     </tr>
