@@ -748,6 +748,7 @@ button[type="submit"]:hover {
 }
 
 a.inactive {
+    background-color: red;
     cursor: not-allowed !important;
     /* Curseur interdit */
     opacity: 0.5 !important;
