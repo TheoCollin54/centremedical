@@ -18,23 +18,23 @@
     --vert-emeraude-light: #C3FAD5;
     --orange-terre: #FA5C00;
     --bleu-claire: #00a993;
-    
+
     /* Typographie */
     --font-primary: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     --font-secondary: 'Arial', sans-serif;
-    
+
     /* Espacements */
     --spacing-xs: 0.5rem;
     --spacing-sm: 1rem;
     --spacing-md: 1.5rem;
     --spacing-lg: 2rem;
     --spacing-xl: 3rem;
-    
+
     /* Transitions */
     --transition-fast: 0.2s ease;
     --transition-normal: 0.3s ease;
     --transition-slow: 0.5s ease;
-    
+
     /* Ombres */
     --shadow-light: 0 2px 4px rgba(0, 0, 0, 0.1);
     --shadow-medium: 0 4px 8px rgba(0, 0, 0, 0.15);
@@ -51,12 +51,14 @@
     --shadow-medium: 0 4px 8px rgba(255, 255, 255, 0.15);
     --shadow-heavy: 0 8px 24px rgba(255, 255, 255, 0.2);
 }
+
 /* Animation keyframes */
 @keyframes fadeIn {
     from {
         opacity: 0;
         transform: translateY(20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -68,6 +70,7 @@
         opacity: 0;
         transform: translateX(-30px);
     }
+
     to {
         opacity: 1;
         transform: translateX(0);
@@ -78,21 +81,27 @@
     0% {
         transform: scale(1);
     }
+
     50% {
         transform: scale(1.05);
     }
+
     100% {
         transform: scale(1);
     }
 }
 
 @keyframes shake {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: translateX(0);
     }
+
     25% {
         transform: translateX(-5px);
     }
+
     75% {
         transform: translateX(5px);
     }
@@ -102,9 +111,11 @@
     0% {
         box-shadow: 0 0 5px var(--vert-emeraude);
     }
+
     50% {
         box-shadow: 0 0 20px var(--vert-emeraude), 0 0 30px var(--vert-emeraude);
     }
+
     100% {
         box-shadow: 0 0 5px var(--vert-emeraude);
     }
@@ -677,7 +688,8 @@ table {
     animation: fadeIn 0.8s ease;
 }
 
-th, td {
+th,
+td {
     padding: var(--spacing-md);
     text-align: left;
     border-bottom: 1px solid #E0E0E0;
@@ -735,6 +747,19 @@ button[type="submit"]:hover {
     animation: spin 1s linear infinite;
 }
 
+a.inactive {
+    /* background-color: #ccc !important; */
+    /* Fond gris */
+    /* color: #666 !important; */
+    /* Texte gris */
+    cursor: not-allowed !important;
+    /* Curseur interdit */
+    /* pointer-events: none !important; */
+    /* Désactive les clics */
+    opacity: 0.6 !important;
+    /* Effet visuel d'inactivité */
+}
+
 @keyframes spin {
     to {
         transform: rotate(360deg);
@@ -750,35 +775,35 @@ button[type="submit"]:hover {
         grid-template-columns: 1fr;
         grid-template-rows: auto 1fr;
     }
-    
+
     aside {
         padding: var(--spacing-md);
     }
-    
+
     aside::before {
         font-size: 2rem;
         margin-bottom: var(--spacing-md);
     }
-    
+
     .container,
     .ajout-rdv-container {
         margin: 2vh var(--spacing-md);
         padding: var(--spacing-lg);
     }
-    
+
     h1,
     .ajout-rdv-title {
         font-size: 1.5rem;
     }
-    
+
     nav a:hover {
         transform: none;
     }
-    
+
     li:not(nav li):hover {
         transform: none;
     }
-    
+
     .theme-toggle {
         top: 10px;
         right: 10px;
@@ -788,24 +813,26 @@ button[type="submit"]:hover {
 }
 
 @media (max-width: 480px) {
+
     .container,
     .ajout-rdv-container {
         margin: var(--spacing-md);
         padding: var(--spacing-md);
     }
-    
+
     main {
         padding: var(--spacing-md);
     }
-    
+
     table {
         font-size: 0.9rem;
     }
-    
-    th, td {
+
+    th,
+    td {
         padding: var(--spacing-sm);
     }
-    
+
     .theme-toggle {
         position: relative;
         top: auto;
