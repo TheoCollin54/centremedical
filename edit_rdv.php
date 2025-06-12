@@ -9,6 +9,7 @@
 
     $user_id = $_SESSION['users_id'];
 
+
     require_once ('./db/connection.php'); 
 
     
@@ -17,62 +18,75 @@
     $password_db = $dbConn['pass'];
     $dbname = $dbConn['name'];
 
+    
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['rdv_id'])) {
+        
+        $user_id = $_SESSION['users_id'];
+
+    } else {
+        header("Location: dashboard.php");
+        exit();
+    }
+
     try {
         $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username_db, $password_db);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);      
     } catch (PDOException $e) {
-        die("Erreur de connexion : " . $e->getMessage());
+        die("Erreur lors de la suppression : " . $e->getMessage());
     }
+    $rdv_id = $_POST['rdv_id'];
+
+
+    $sql_rdv = "SELECT * FROM rdv2 WHERE rdv_id = :rdv_id";
+    $stmt_rdv = $pdo->prepare($sql_rdv);
+    $stmt_rdv->execute(['rdv_id' => $rdv_id]);
+    $rdv = $stmt_rdv->fetch(PDO::FETCH_ASSOC);
+
+
+
+    // $stmt = $pdo->prepare("UPDATE rdv2 SET date = ?");
+    // $stmt->execute([$date]);
 
     
 
-    $rdv = $pdo->query("SELECT * FROM rdv2 ")->fetchAll(PDO::FETCH_ASSOC);
 
-    $stmt = $pdo->query("SELECT users_id, username, speciality FROM users WHERE username != 'admin'");
-    $medecins = $stmt->fetchAll();
+    // if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // $rdv_id = intval($_POST['rdv_id']);
 
-    $sql_user = "SELECT username FROM users WHERE users_id = :user_id";
-    $stmt_user = $pdo->prepare($sql_user);
-    $stmt_user->execute(['user_id' => $user_id]);
-    $user = $stmt_user->fetch(PDO::FETCH_ASSOC);
-    
+    //     try {
+    //         // DÉBUT DE TRANSACTION
+    //         $pdo->beginTransaction();
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_rdv'])) {
-    $rdv_id = intval($_POST['rdv_id']);
+    //         // Suppression du rendez-vous
+    //         $pdo->prepare("DELETE FROM rdv2 WHERE rdv_id = ?")->execute([$rdv_id]);
 
-        try {
-            // DÉBUT DE TRANSACTION
-            $pdo->beginTransaction();
+    //         // COMMIT
+    //         $pdo->commit();
 
-            // Suppression du rendez-vous
-            $pdo->prepare("DELETE FROM rdv2 WHERE rdv_id = ?")->execute([$rdv_id]);
-
-            // COMMIT
-            $pdo->commit();
-
-            //Message de succès
-            header("Location: edit_rdv_admin.php?success=3");
-        } catch (Exception $e) {
-            $pdo->rollBack();
-            echo "Erreur lors de la suppression : " . $e->getMessage();
-        }
-    }
+    //         //Message de succès
+    //         header("Location: edit_rdv_admin.php?success=3");
+    //     } catch (Exception $e) {
+    //         $pdo->rollBack();
+    //         echo "Erreur lors de la suppression : " . $e->getMessage();
+    //     }
+    // }
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !isset($_POST['delete_rdv'])) {
-        $rdv_id = $_POST['rdv_id'];
-        $patient_nom = $_POST['name'];
-        $patient_prenom = $_POST['firstname'];
-        $patient_tel = $_POST['tel'];
-        $num_secu = $_POST['numsecu'];
-        $doctor_id = $_POST['doctor_id'];
+        // $rdv_id = $_POST['rdv_id'];
+        // $patient_nom = $_POST['name'];
+        // $patient_prenom = $_POST['firstname'];
+        // $patient_tel = $_POST['tel'];
+        // $num_secu = $_POST['numsecu'];
+        // $doctor_id = $_POST['doctor_id'];
         $date = $_POST['date'];
 
         // Sécurisation basique
         $rdv_id = intval($rdv_id);
 
         // Mise à jour en base de données
-        $stmt = $pdo->prepare('UPDATE rdv2 SET doctor_id = ?, patient_nom = ?, patient_prenom = ?, patient_tel = ?, num_secu = ?, date = ? WHERE rdv_id = ?');
-        $stmt->execute([$doctor_id, $patient_nom, $patient_prenom, $patient_tel, $num_secu, $date, $rdv_id]);
+        $stmt = $pdo->prepare('UPDATE rdv2 SET date = ? WHERE rdv_id = ?');
+        $stmt->execute([$date]);
 
         $stmt = $pdo->query('SELECT * FROM rdv2');
         $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
