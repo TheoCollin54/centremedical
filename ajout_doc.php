@@ -57,6 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <nav>
             <ul>
                 <li><a class = "inactive">Ajouter un médecin</a></li>
+                <li><a href="edit_rdv_admin.php">Gérer les rendez-vous</a></li>
                 <li><a href="ajout_info.php">Ajouter une information</a></li>
                 <li><a href="dashboard_admin.php">Retour à l'accueil</a></li>
                 <li><a href="logout.php">Se déconnecter</a></li>
