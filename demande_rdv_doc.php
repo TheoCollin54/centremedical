@@ -54,6 +54,18 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Messages d'erreur -->
+    <?php if (isset($_GET['fail']) && $_GET['fail'] == 1): ?>
+    <script>
+        alert("Le numéro de téléphone n'est pas valide ❌");
+    </script>
+    <?php endif; ?>
+
+    <?php if (isset($_GET['fail']) && $_GET['fail'] == 2): ?>
+    <script>
+        alert("Le numéro de sécurité sociale n'est pas valide ❌");
+    </script>
+    <?php endif; ?>
     <aside> <!-- Sidebar -->
         <nav>
             <ul>
@@ -81,11 +93,11 @@
                 <label for="firstname"><strong>Prénom :</strong></label>
                 <input type="text" id="firstname" name="firstname" required>
 
-                <label for="tel"><strong>Numéro de téléphone :</strong></label>
+                <label for="tel" maxlength="10" minlength="10"><strong>Numéro de téléphone :</strong></label>
                 <input type="number" id="tel" name="tel" required>
                 
                 <label for="numsecu"><strong>Numéro de sécurité sociale :</strong></label>
-                <input type="number" id="numsecu" name="numsecu" required>
+                <input type="number" id="numsecu" name="numsecu" maxlength="15" minlength="15" required>
 
                 <label for="date"><strong>Date du rendez-vous :</strong></label>
                 <input type="date" id="date" name="date" required>
