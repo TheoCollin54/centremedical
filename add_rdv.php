@@ -26,10 +26,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $doctor_id = htmlspecialchars(trim($_POST['users_id']));
     $date = trim($_POST['date']);
 
-    if (empty($patient_tel)) {
+    if (!preg_match('/^\d{10}$/', $patient_tel)) {
         header("Location: demande_rdv.php?fail=1");
         exit();
     }
+
 
     
     if (!preg_match('/^\d{15}$/', $num_secu)) {
