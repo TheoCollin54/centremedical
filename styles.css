@@ -1,4 +1,3 @@
-/* Reset et base */
 * {
     margin: 0;
     padding: 0;
@@ -6,7 +5,7 @@
 }
 
 :root {
-    /* Couleurs officielles service public français */
+    /* Couleurs principal */
     --bleu-france: #000091;
     --bleu-france-light: #6A6AF4;
     --rouge-marianne: #E1000F;
@@ -19,109 +18,64 @@
     --orange-terre: #FA5C00;
     --bleu-claire: #00a993;
 
-    /* Typographie */
+    /* Typography */
     --font-primary: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    --font-secondary: 'Arial', sans-serif;
 
-    /* Espacements */
+    /* Spacies */
     --spacing-xs: 0.5rem;
     --spacing-sm: 1rem;
     --spacing-md: 1.5rem;
     --spacing-lg: 2rem;
     --spacing-xl: 3rem;
 
-    /* Transitions */
+    /* Transicion */
     --transition-fast: 0.2s ease;
     --transition-normal: 0.3s ease;
-    --transition-slow: 0.5s ease;
 
-    /* Ombres */
+    /* Sombres */
     --shadow-light: 0 2px 4px rgba(0, 0, 0, 0.1);
     --shadow-medium: 0 4px 8px rgba(0, 0, 0, 0.15);
     --shadow-heavy: 0 8px 24px rgba(0, 0, 0, 0.2);
 }
 
-/* Variables pour le thème sombre */
-[data-theme="dark"] {
-    --blanc: #1E1E1E;
-    --gris-clair: #2A2A2A;
-    --gris-fonce: #E0E0E0;
-    --gris-moyen: #B0B0B0;
-    --shadow-light: 0 2px 4px rgba(255, 255, 255, 0.1);
-    --shadow-medium: 0 4px 8px rgba(255, 255, 255, 0.15);
-    --shadow-heavy: 0 8px 24px rgba(255, 255, 255, 0.2);
-}
+/* ============================================
+   ANIMATION
+   ============================================ */
 
-/* Animation keyframes */
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes slideInLeft {
-    from {
-        opacity: 0;
-        transform: translateX(-30px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
+    from { opacity: 0; transform: translateX(-30px); }
+    to { opacity: 1; transform: translateX(0); }
 }
 
 @keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
-
-    50% {
-        transform: scale(1.05);
-    }
-
-    100% {
-        transform: scale(1);
-    }
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
 }
 
 @keyframes shake {
-
-    0%,
-    100% {
-        transform: translateX(0);
-    }
-
-    25% {
-        transform: translateX(-5px);
-    }
-
-    75% {
-        transform: translateX(5px);
-    }
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
 }
 
 @keyframes glow {
-    0% {
-        box-shadow: 0 0 5px var(--vert-emeraude);
-    }
-
-    50% {
-        box-shadow: 0 0 20px var(--vert-emeraude), 0 0 30px var(--vert-emeraude);
-    }
-
-    100% {
-        box-shadow: 0 0 5px var(--vert-emeraude);
-    }
+    0%, 100% { box-shadow: 0 0 5px var(--vert-emeraude); }
+    50% { box-shadow: 0 0 20px var(--vert-emeraude); }
 }
 
-/* Styles de base */
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ============================================
+   STYLE DE BASE
+   ============================================ */
+
 body {
     font-family: var(--font-primary);
     background: linear-gradient(135deg, var(--gris-clair) 0%, #E8E8E8 100%);
@@ -136,7 +90,7 @@ body {
     background: linear-gradient(135deg, #1A1A1A 0%, var(--gris-clair) 100%);
 }
 
-/* En-tête avec marianne */
+/* Barre superieur 3 couleur */
 body::before {
     content: "";
     position: fixed;
@@ -149,7 +103,175 @@ body::before {
 }
 
 /* ============================================
-   STYLES SPÉCIFIQUES POUR AJOUT_RDV
+   CONTAINER PRINCIPAL
+   ============================================ */
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: var(--spacing-xl);
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* ============================================
+   TITRES
+   ============================================ */
+
+h1 {
+    font-size: 3.5rem;
+    margin-bottom: var(--spacing-xl);
+    color: var(--bleu-france);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    animation: pulse 2s infinite;
+    text-align: center;
+}
+
+.ajout-rdv-title {
+    color: var(--bleu-france);
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+    font-size: 2.2rem;
+    font-weight: 700;
+    position: relative;
+    animation: slideInLeft 0.6s ease;
+}
+
+.ajout-rdv-title::after {
+    content: "";
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--vert-emeraude), var(--bleu-france));
+    margin: var(--spacing-sm) auto;
+    border-radius: 2px;
+    animation: glow 2s infinite;
+}
+
+/* ============================================
+   CONTAINER DES ICONES
+   ============================================ */
+
+.icons-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-xl);
+    width: 100%;
+    max-width: 700px;
+    background: var(--blanc);
+    padding: var(--spacing-xl);
+    border-radius: 25px;
+    box-shadow: var(--shadow-heavy);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 145, 0.1);
+}
+
+.icons-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, var(--bleu-france), var(--vert-emeraude), var(--orange-terre));
+}
+
+/* ============================================
+   ICONS INDIVIDUELS
+   ============================================ */
+
+.icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    min-height: 200px;
+    transition: all var(--transition-normal);
+}
+
+.icon a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: inherit;
+    padding: var(--spacing-lg);
+    border-radius: 20px;
+    transition: all var(--transition-normal);
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.icon a::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s;
+}
+
+.icon a:hover {
+    transform: translateY(-10px);
+    background: linear-gradient(145deg, #f8f9ff, rgba(0, 169, 95, 0.05));
+    box-shadow: var(--shadow-medium);
+}
+
+.icon a:hover::before {
+    left: 100%;
+}
+
+.icon .btn {
+    width: 80px;
+    height: 80px;
+    transition: all var(--transition-normal);
+    margin-bottom: var(--spacing-md);
+    border-radius: 15px;
+    padding: 10px;
+}
+
+.icon a:hover .btn {
+    transform: scale(1.15);
+    filter: brightness(1.2) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
+
+.icon h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--gris-fonce);
+    text-align: center;
+    margin: 0;
+    transition: color var(--transition-fast);
+}
+
+.icon a:hover h3 {
+    color: var(--bleu-france);
+}
+
+/* Separateur des icons */
+.icon:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    right: -var(--spacing-lg);
+    top: 20%;
+    bottom: 20%;
+    width: 2px;
+    background: linear-gradient(180deg, transparent, var(--gris-clair), transparent);
+}
+
+/* ============================================
+   CONTAINER AJOUV RDV
    ============================================ */
 
 .ajout-rdv-container {
@@ -185,252 +307,10 @@ body::before {
     animation: pulse 2s infinite;
 }
 
-.ajout-rdv-title {
-    color: var(--bleu-france);
-    text-align: center;
-    margin-bottom: var(--spacing-xl);
-    font-size: 2.2rem;
-    font-weight: 700;
-    position: relative;
-    animation: slideInLeft 0.6s ease;
-}
-
-.ajout-rdv-title::after {
-    content: "";
-    display: block;
-    width: 80px;
-    height: 4px;
-    background: linear-gradient(90deg, var(--vert-emeraude), var(--bleu-france));
-    margin: var(--spacing-sm) auto;
-    border-radius: 2px;
-    animation: glow 2s infinite;
-}
-
 /* ============================================
-   STYLES POUR LES FORMULAIRES
+   FORMULAIRE
    ============================================ */
 
-/* Container pricipal meliore */
-.container {
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   justify-content: center;
-   min-height: 100vh;
-   padding: var(--spacing-xl);
-   max-width: 900px;
-   margin: 0 auto;
-}
-
-/* titre principal */
-h1 {
-   font-size: 3.5rem;
-   margin-bottom: var(--spacing-xl);
-   color: var(--bleu-france);
-   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-   animation: pulse 2s infinite;
-   text-align: center;
-}
-
-/* Container des icone meliore */
-.icons-container {
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   gap: var(--spacing-xl);
-   width: 100%;
-   max-width: 700px;
-   background: var(--blanc);
-   padding: var(--spacing-xl);
-   border-radius: 25px;
-   box-shadow: var(--shadow-heavy);
-   position: relative;
-   overflow: hidden;
-   border: 1px solid rgba(0, 0, 145, 0.1);
-}
-
-/* Efect decorative superieur */
-.icons-container::before {
-   content: "";
-   position: absolute;
-   top: 0;
-   left: 0;
-   right: 0;
-   height: 6px;
-   background: linear-gradient(90deg, var(--bleu-france), var(--vert-emeraude), var(--orange-terre));
-}
-
-/* chaque icone idividuel */
-.icon {
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   justify-content: center;
-   flex: 1;
-   min-height: 200px;
-   transition: all var(--transition-normal);
-}
-
-.icon a {
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   justify-content: center;
-   text-decoration: none;
-   color: inherit;
-   padding: var(--spacing-lg);
-   border-radius: 20px;
-   transition: all var(--transition-normal);
-   width: 100%;
-   height: 100%;
-   position: relative;
-   overflow: hidden;
-}
-
-.icon a::before {
-   content: "";
-   position: absolute;
-   top: 0;
-   left: -100%;
-   width: 100%;
-   height: 100%;
-   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-   transition: left var(--transition-slow);
-}
-
-.icon a:hover {
-   transform: translateY(-10px);
-   background: linear-gradient(145deg, #f8f9ff, rgba(0, 169, 95, 0.05));
-   box-shadow: var(--shadow-medium);
-}
-
-.icon a:hover::before {
-   left: 100%;
-}
-
-/* Imágenes de los iconos */
-.icon .btn {
-   width: 80px;
-   height: 80px;
-   transition: all var(--transition-normal);
-   margin-bottom: var(--spacing-md);
-   border-radius: 15px;
-   padding: 10px;
-}
-
-.icon a:hover .btn {
-   transform: scale(1.15);
-   filter: brightness(1.2) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
-}
-
-/* Texto de los iconos */
-.icon h3 {
-   font-size: 1.2rem;
-   font-weight: 600;
-   color: var(--gris-fonce);
-   text-align: center;
-   margin: 0;
-   transition: color var(--transition-fast);
-}
-
-.icon a:hover h3 {
-   color: var(--bleu-france);
-}
-
-/* Separador visual entre iconos */
-/* .icon:not(:last-child)::after {
-   content: "";
-   position: absolute;
-   right: -var(--spacing-lg);
-   top: 20%;
-   bottom: 20%;
-   width: 2px;
-   background: linear-gradient(180deg, transparent, var(--gris-clair), transparent);
-} */
-
-/* Efectos especiales para cada icono */
-.icon:first-child a:hover {
-   background: linear-gradient(145deg, #f0fff4, rgba(0, 169, 95, 0.1));
-   border: 2px solid var(--vert-emeraude);
-}
-
-.icon:nth-child(2) a:hover {
-   background: linear-gradient(145deg, #fff8f0, rgba(250, 92, 0, 0.1));
-   border: 2px solid var(--orange-terre);
-}
-
-/* Responsive design para contenedor de iconos */
-@media (max-width: 768px) {
-   .container {
-       padding: var(--spacing-lg);
-   }
-
-   h1 {
-       font-size: 2.5rem;
-       margin-bottom: var(--spacing-lg);
-   }
-
-   .icons-container {
-       flex-direction: column;
-       gap: var(--spacing-lg);
-       padding: var(--spacing-lg);
-       max-width: 400px;
-   }
-
-   .icon {
-       min-height: 150px;
-       width: 100%;
-   }
-
-   .icon:not(:last-child)::after {
-       display: none;
-   }
-
-   /* Agregar separador horizontal en mobile */
-   .icon:not(:last-child) {
-       border-bottom: 2px solid var(--gris-clair);
-       padding-bottom: var(--spacing-md);
-       margin-bottom: var(--spacing-md);
-   }
-
-   .icon .btn {
-       width: 60px;
-       height: 60px;
-   }
-
-   .icon h3 {
-       font-size: 1.1rem;
-   }
-}
-
-@media (max-width: 480px) {
-   .container {
-       padding: var(--spacing-md);
-   }
-
-   h1 {
-       font-size: 2rem;
-   }
-
-   .icons-container {
-       padding: var(--spacing-md);
-       max-width: 320px;
-   }
-
-   .icon {
-       min-height: 120px;
-   }
-
-   .icon .btn {
-       width: 50px;
-       height: 50px;
-   }
-
-   .icon h3 {
-       font-size: 1rem;
-   }
-}
-/* Styles des formulaires */
 form {
     display: flex;
     flex-direction: column;
@@ -443,21 +323,18 @@ label {
     margin-bottom: var(--spacing-xs);
     display: block;
     transition: color var(--transition-fast);
-    position: relative;
 }
 
 label strong {
     color: var(--bleu-france);
 }
 
+/* Inputs generals */
 input[type="text"],
-input[type="username"],
 input[type="email"],
 input[type="password"],
 input[type="number"],
-input[type="tinyint"],
 input[type="date"],
-input[type="speciality"],
 select {
     width: 100%;
     padding: 14px 18px;
@@ -468,7 +345,6 @@ select {
     transition: all var(--transition-normal);
     background: var(--blanc);
     cursor: pointer;
-    position: relative;
 }
 
 input:focus,
@@ -480,117 +356,80 @@ select:focus {
     background: linear-gradient(145deg, var(--blanc), #f8f9ff);
 }
 
-input:invalid:not(:focus):not(:placeholder-shown),
-select:invalid:not(:focus):not([value=""]) {
+input:invalid:not(:focus):not(:placeholder-shown) {
     border-color: var(--rouge-marianne);
     animation: shake 0.5s ease;
 }
 
 /* ============================================
-   STYLES SPÉCIAUX PARA NÚMERO DE TELÉFONO
+   INPUTS ESPECIAUX
    ============================================ */
 
+/* Teléfono */
 #tel,
 input[name="tel"] {
     background: linear-gradient(145deg, var(--blanc), #f0f8ff);
     border: 2px solid var(--rouge-marianne);
-    position: relative;
     font-weight: 500;
-    padding-left: 20px;
-    text-align: left !important; /* Forzar alineación a la izquierda */
-}
-
-#tel::before,
-input[name="tel"]::before {
-    content: "📞";
-    position: absolute;
-    left: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 1.3rem;
-    pointer-events: none;
+    text-align: left;
 }
 
 #tel:hover,
 input[name="tel"]:hover {
     border-color: var(--rouge-marianne);
     box-shadow: 0 0 15px rgba(225, 0, 15, 0.1);
-    animation: glow 1s ease;
 }
 
 #tel:focus,
 input[name="tel"]:focus {
     border-color: var(--rouge-marianne);
     box-shadow: 0 0 0 4px rgba(225, 0, 15, 0.3);
-    background: linear-gradient(145deg, var(--blanc), #f0f8ff);
-    text-align: left !important; /* Mantener alineación al hacer focus */
 }
 
-/* Añadir el ícono con pseudo-elemento personalizado */
 label[for="tel"]::before {
     content: "📞 ";
     font-size: 1.2rem;
-    margin-right: 5px;
 }
 
-/* ============================================
-   STYLES SPÉCIAUX PARA NÚMERO DE SEGURIDAD SOCIAL
-   ============================================ */
-
+/* Numero de segurité social */
 #numsecu,
 input[name="numsecu"] {
     background: linear-gradient(145deg, var(--blanc), #fff0f8);
     border: 2px solid var(--rouge-marianne);
-    position: relative;
     font-weight: 500;
-    padding-left: 20px;
     font-family: 'Courier New', monospace;
     letter-spacing: 2px;
-    text-align: left !important; /* Forzar alineación a la izquierda */
-}
-
-#numsecu::before,
-input[name="numsecu"]::before {
-    content: "🆔";
-    position: absolute;
-    left: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 1.3rem;
-    pointer-events: none;
+    text-align: left;
 }
 
 #numsecu:hover,
 input[name="numsecu"]:hover {
     border-color: var(--rouge-marianne);
     box-shadow: 0 0 15px rgba(225, 0, 15, 0.1);
-    animation: glow 1s ease;
 }
 
 #numsecu:focus,
 input[name="numsecu"]:focus {
     border-color: var(--rouge-marianne);
     box-shadow: 0 0 0 4px rgba(225, 0, 15, 0.3);
-    background: linear-gradient(145deg, var(--blanc), #fff0f8);
-    text-align: left !important; /* Mantener alineación al hacer focus */
 }
 
-/* Añadir el ícono con pseudo-elemento personalizado */
 label[for="numsecu"]::before {
     content: "🆔 ";
     font-size: 1.2rem;
-    margin-right: 5px;
 }
 
-/* ============================================
-   STYLES SPÉCIAUX PARA SELECT PATIENT (users)
-   ============================================ */
-
+/* Select de users */
 #users {
     background: linear-gradient(145deg, var(--blanc), #f8f9ff);
     border: 2px solid var(--vert-emeraude);
-    position: relative;
     font-weight: 500;
+    padding-left: 45px;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300A95F' stroke-width='2'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 20px;
+    appearance: none;
 }
 
 #users::before {
@@ -603,21 +442,9 @@ label[for="numsecu"]::before {
     pointer-events: none;
 }
 
-#users {
-    padding-left: 45px;
-    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300A95F' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
-    background-repeat: no-repeat;
-    background-position: right 12px center;
-    background-size: 20px;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-}
-
 #users:hover {
     border-color: var(--vert-emeraude);
     box-shadow: 0 0 15px rgba(0, 169, 95, 0.3);
-    animation: glow 1s ease;
 }
 
 #users:focus {
@@ -626,97 +453,47 @@ label[for="numsecu"]::before {
     background: linear-gradient(145deg, var(--blanc), #f0fff4);
 }
 
-#users option {
-    padding: 12px 16px;
-    background: var(--blanc);
-    color: var(--gris-fonce);
-    border-bottom: 1px solid #E0E0E0;
-}
-
-#users option:hover {
-    background: var(--vert-emeraude-light);
-    color: var(--gris-fonce);
-}
-
-#users option:first-child {
-    color: var(--gris-moyen);
-    font-style: italic;
-}
-
-/* ============================================
-   STYLES SPÉCIAUX PARA INPUT DATE
-   ============================================ */
-
-#date,
+/* Input date */
 input[type="date"] {
     background: linear-gradient(145deg, var(--blanc), #fff8f0);
     border: 2px solid var(--rouge-marianne);
-    position: relative;
     font-weight: 500;
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {
-    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FA5C00' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3crect x='3' y='4' width='18' height='18' rx='2' ry='2'%3e%3c/rect%3e%3cline x1='16' y1='2' x2='16' y2='6'%3e%3c/line%3e%3cline x1='8' y1='2' x2='8' y2='6'%3e%3c/line%3e%3cline x1='3' y1='10' x2='21' y2='10'%3e%3c/line%3e%3c/svg%3e");
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FA5C00' stroke-width='2'%3e%3crect x='3' y='4' width='18' height='18' rx='2'%3e%3c/rect%3e%3cline x1='16' y1='2' x2='16' y2='6'%3e%3c/line%3e%3cline x1='8' y1='2' x2='8' y2='6'%3e%3c/line%3e%3cline x1='3' y1='10' x2='21' y2='10'%3e%3c/line%3e%3c/svg%3e");
     background-size: 22px;
     cursor: pointer;
     opacity: 0.8;
     transition: all var(--transition-fast);
-    padding: 4px;
-    border-radius: 4px;
-}
-
-input[type="date"]::-webkit-calendar-picker-indicator:hover {
-    opacity: 1;
-    background-color: rgba(225, 0, 15, 0.1);
-    transform: scale(1.1);
 }
 
 input[type="date"]:hover {
     border-color: var(--orange-terre);
     box-shadow: 0 0 15px rgba(225, 0, 15, 0.3);
-    animation: glow 1s ease;
 }
 
 input[type="date"]:focus {
     border-color: var(--orange-terre);
     box-shadow: 0 0 0 4px rgba(250, 92, 0, 0.2);
-    background: linear-gradient(145deg, var(--blanc), #fff8f0);
 }
 
-/* Style général pour les autres selects et inputs */
+/*Autres selects */
 select:not(#users) {
-    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23929292' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23929292' stroke-width='2'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
     background-repeat: no-repeat;
     background-position: right 12px center;
     background-size: 18px;
-    -webkit-appearance: none;
-    -moz-appearance: none;
     appearance: none;
 }
 
-select:not(#users):hover {
-    border-color: var(--bleu-france-light);
-    cursor: pointer;
-}
-
-select:not(#users) option {
-    padding: 8px 12px;
-    background: var(--blanc);
-    color: var(--gris-fonce);
-}
-
-select:not(#users) option:hover {
-    background: var(--bleu-france-light);
-    color: var(--blanc);
-}
-
 /* ============================================
-   BOUTONS
+   BUTONS
    ============================================ */
 
 .btn {
     background: linear-gradient(135deg, var(--bleu-claire), var(--bleu-france-light));
-    color: var(--bleu-claire);
+    color: var(--blanc);
     border: none;
     padding: 16px 32px;
     border-radius: 12px;
@@ -741,13 +518,12 @@ select:not(#users) option:hover {
     width: 100%;
     height: 100%;
     background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-    transition: left var(--transition-slow);
+    transition: left 0.5s;
 }
 
 .btn:hover {
     transform: translateY(-4px);
     box-shadow: var(--shadow-heavy);
-    animation: pulse 0.3s ease;
     background: linear-gradient(135deg, var(--bleu-france-light), var(--bleu-france));
 }
 
@@ -755,17 +531,11 @@ select:not(#users) option:hover {
     left: 100%;
 }
 
-.btn:active {
-    transform: translateY(-2px);
-}
-
-/* Bouton spécial pour ajout RDV */
 .btn-ajout-rdv {
     background: linear-gradient(135deg, var(--vert-emeraude), var(--orange-terre));
     font-size: 1.2rem;
     padding: 18px 36px;
     border-radius: 15px;
-    position: relative;
 }
 
 .btn-ajout-rdv::after {
@@ -774,8 +544,25 @@ select:not(#users) option:hover {
     font-size: 1.3rem;
 }
 
+button[type="submit"] {
+    background: var(--vert-emeraude);
+    color: var(--blanc);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    font-weight: 500;
+}
+
+button[type="submit"]:hover {
+    background: #00954A;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-light);
+}
+
 /* ============================================
-   LIENS
+   liens
    ============================================ */
 
 a {
@@ -804,17 +591,15 @@ a:hover::after {
     width: 100%;
 }
 
-p {
-    text-align: center;
-    margin: var(--spacing-md) 0;
-    color: var(--gris-moyen);
+a.inactive {
+    cursor: not-allowed;
+    opacity: 0.5;
 }
 
 /* ============================================
-   STYLES POUR LES DASHBOARDS
+   DASHBOARD ET SIDEBAR
    ============================================ */
 
-/* Layout avec sidebar */
 body:has(aside) {
     display: grid;
     grid-template-columns: 280px 1fr;
@@ -822,14 +607,12 @@ body:has(aside) {
     gap: 0;
 }
 
-/* Sidebar */
 aside {
     background: linear-gradient(180deg, var(--bleu-france), var(--bleu-france-light));
     color: var(--blanc);
     padding: var(--spacing-lg);
     box-shadow: var(--shadow-medium);
     animation: slideInLeft 0.8s ease;
-    position: relative;
 }
 
 aside::before {
@@ -853,10 +636,6 @@ nav li {
     animation-fill-mode: both;
 }
 
-nav li:nth-child(2) {
-    animation-delay: 0.5s;
-}
-
 nav a {
     display: block;
     padding: 12px 16px;
@@ -868,27 +647,11 @@ nav a {
     overflow: hidden;
 }
 
-nav a::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.1);
-    transition: left var(--transition-normal);
-}
-
 nav a:hover {
     background: rgba(255, 255, 255, 0.2);
     transform: translateX(10px);
 }
 
-nav a:hover::before {
-    left: 100%;
-}
-
-/* Contenu principal */
 main {
     padding: var(--spacing-xl);
     animation: fadeIn 1s ease;
@@ -896,7 +659,10 @@ main {
     animation-fill-mode: both;
 }
 
-/* Liste des rendez-vous */
+/* ============================================
+   LISTE ET TABLES
+   ============================================ */
+
 ul:not(nav ul) {
     list-style: none;
     display: grid;
@@ -913,7 +679,6 @@ li:not(nav li) {
     transition: all var(--transition-normal);
     animation: fadeIn 0.8s ease;
     position: relative;
-    overflow: hidden;
 }
 
 li:not(nav li)::before {
@@ -931,28 +696,6 @@ li:not(nav li):hover {
     border-left-color: var(--bleu-france);
 }
 
-li:not(nav li):nth-child(even) {
-    animation-delay: 0.2s;
-}
-
-/* Message vide */
-main p {
-    text-align: center;
-    font-size: 1.2rem;
-    color: var(--gris-moyen);
-    margin-top: var(--spacing-xl);
-    padding: var(--spacing-xl);
-    background: var(--blanc);
-    border-radius: 12px;
-    box-shadow: var(--shadow-light);
-    animation: fadeIn 1s ease;
-}
-
-/* ============================================
-   STYLES POUR DASHBOARD ADMIN
-   ============================================ */
-
-/* Tables admin */
 table {
     width: 100%;
     max-width: 600px;
@@ -982,32 +725,29 @@ tr:hover {
     transition: background var(--transition-fast);
 }
 
-/* Boutons dans les tables */
-button[type="submit"] {
-    background: var(--vert-emeraude);
-    color: var(--blanc);
-    border: none;
-    padding: 8px 16px;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all var(--transition-normal);
-    font-weight: 500;
+/* ============================================
+   PARAGRAHES
+   ============================================ */
+
+p {
+    text-align: center;
+    margin: var(--spacing-md) 0;
+    color: var(--gris-moyen);
 }
 
-button[type="submit"]:hover {
-    background: #00954A;
-    transform: translateY(-2px);
+main p {
+    font-size: 1.2rem;
+    margin-top: var(--spacing-xl);
+    padding: var(--spacing-xl);
+    background: var(--blanc);
+    border-radius: 12px;
     box-shadow: var(--shadow-light);
+    animation: fadeIn 1s ease;
 }
 
 /* ============================================
-   ANIMATIONS SPÉCIALES
+   EFECT DE CHARGEMENT
    ============================================ */
-
-/* Animation de chargement */
-.loading {
-    position: relative;
-}
 
 .loading::after {
     content: "";
@@ -1021,19 +761,6 @@ button[type="submit"]:hover {
     border-top-color: var(--bleu-france);
     border-radius: 50%;
     animation: spin 1s linear infinite;
-}
-
-a.inactive {
-    cursor: not-allowed !important;
-    /* Curseur interdit */
-    opacity: 0.5 !important;
-    /* Effet visuel d'inactivité */
-}
-
-@keyframes spin {
-    to {
-        transform: rotate(360deg);
-    }
 }
 
 /* ============================================
@@ -1066,6 +793,37 @@ a.inactive {
         font-size: 1.5rem;
     }
 
+    .icons-container {
+        flex-direction: column;
+        gap: var(--spacing-lg);
+        padding: var(--spacing-lg);
+        max-width: 400px;
+    }
+
+    .icon {
+        min-height: 150px;
+        width: 100%;
+    }
+
+    .icon:not(:last-child)::after {
+        display: none;
+    }
+
+    .icon:not(:last-child) {
+        border-bottom: 2px solid var(--gris-clair);
+        padding-bottom: var(--spacing-md);
+        margin-bottom: var(--spacing-md);
+    }
+
+    .icon .btn {
+        width: 60px;
+        height: 60px;
+    }
+
+    .icon h3 {
+        font-size: 1.1rem;
+    }
+
     nav a:hover {
         transform: none;
     }
@@ -1073,21 +831,35 @@ a.inactive {
     li:not(nav li):hover {
         transform: none;
     }
-
-    .theme-toggle {
-        top: 10px;
-        right: 10px;
-        padding: 6px 12px;
-        font-size: 0.9rem;
-    }
 }
 
 @media (max-width: 480px) {
-
     .container,
     .ajout-rdv-container {
         margin: var(--spacing-md);
         padding: var(--spacing-md);
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    .icons-container {
+        padding: var(--spacing-md);
+        max-width: 320px;
+    }
+
+    .icon {
+        min-height: 120px;
+    }
+
+    .icon .btn {
+        width: 50px;
+        height: 50px;
+    }
+
+    .icon h3 {
+        font-size: 1rem;
     }
 
     main {
@@ -1102,30 +874,17 @@ a.inactive {
     td {
         padding: var(--spacing-sm);
     }
-
-    .theme-toggle {
-        position: relative;
-        top: auto;
-        right: auto;
-        margin: var(--spacing-sm) auto;
-        display: block;
-        width: fit-content;
-    }
 }
 
-
-
 /* ============================================
-   ACCESSIBILITÉ
+   ACCESIBILITE
    ============================================ */
 
-/* Focus visible pour accessibilité */
 *:focus-visible {
     outline: 2px solid var(--bleu-france);
     outline-offset: 2px;
 }
 
-/* Réduction des animations pour ceux qui les préfèrent */
 @media (prefers-reduced-motion: reduce) {
     * {
         animation-duration: 0.01ms !important;
