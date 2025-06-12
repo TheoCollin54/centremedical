@@ -68,13 +68,14 @@
         $users_id = $_POST['users_id'];
         $username = $_POST['username'];
         $email = $_POST['email'];
+        $speciality = $_POST['speciality'];
 
         // Sécurisation basique
         $users_id = intval($users_id);
 
         // Mise à jour en base de données
-        $stmt = $pdo->prepare('UPDATE users SET username = ?, email = ? WHERE users_id = ?');
-        $stmt->execute([$username, $email,  $users_id]);
+        $stmt = $pdo->prepare('UPDATE users SET username = ?, email = ?, speciality = ? WHERE users_id = ?');
+        $stmt->execute([$username, $email, $speciality, $users_id]);
 
         $stmt = $pdo->query('SELECT * FROM users');
         $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -135,6 +136,11 @@
                         <td><input type="email" name="email" value="<?= htmlspecialchars($user['email']) ?>"></td>
                     </tr>
                     
+                    <tr>
+                        <th>Spécialité</th>
+                        <td><input type="speciality" name="speciality" value="<?= htmlspecialchars($user['speciality']) ?>"></td>
+                    </tr>
+
                     <tr>
                         <td colspan="2">
                             <button type="submit" onclick="return confirm('Modifier cet utilisateur ?');">Mettre à jour</button>
