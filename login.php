@@ -34,7 +34,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo "Connexion réussie ! Bienvenue, " . htmlspecialchars($user['username']);
         header("Location: dashboard.php");
     } else {
-        echo "Identifiants incorrects.";
+        header("Location: index_doc.php?fail=login");
+        exit();
     }
 }
 ?>

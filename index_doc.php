@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Message d'erreur -->
+     <?php if (isset($_GET['fail']) && $_GET['fail'] == "login"): ?>
+        <script>alert("Nom d'utilisateur ou mot de passe incorrects ❌");</script>
+    <?php endif; ?>
     <div class="container">
         <h1>Connexion</h1> <!--Formulaire de connexion-->
         <form  action="login.php" method="POST">
