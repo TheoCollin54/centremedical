@@ -39,7 +39,7 @@ $stmt = $pdo->prepare($sql);
 $stmt->execute(['user_id' => $user_id]);
 $rendezvous = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-$sql_name = "SELECT username FROM users WHERE users_id = :user_id";
+$sql_name = "SELECT username, speciality FROM users WHERE users_id = :user_id";
 $stmt_name = $pdo->prepare($sql_name);
 $stmt_name->execute(['user_id' => $user_id]);
 $name = $stmt_name->fetch(PDO::FETCH_ASSOC);
@@ -131,7 +131,11 @@ const rdvData = <?php
         </ul>
     </nav>
     <br>
-    <p class="doctor_name">Connecté en tant que : <?= htmlspecialchars($name['username']) ?></p>
+    <p class="doctor_name">
+        Connecté en tant que : <?= htmlspecialchars($name['username']) ?>
+        (<?= htmlspecialchars($name['speciality']) ?>)
+    </p>
+
 </aside>
 
 <main>
