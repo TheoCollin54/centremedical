@@ -19,6 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = htmlspecialchars(trim($_POST['username']));
     $email = htmlspecialchars(trim($_POST['email']));
     $password = htmlspecialchars(trim($_POST['password']));
+    $speciality = htmlspecialchars(trim($_POST['speciality']));
 
     // Vérifie si l'email existe déjà
     $stmt_check = $pdo->prepare("SELECT COUNT(*) FROM users WHERE email = ?");
@@ -33,8 +34,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Insertion dans la base
         try {
-            $stmt = $pdo->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
-            $stmt->execute([$username, $email, $password_hash]);
+            $stmt = $pdo->prepare("INSERT INTO users (username, email, password, speciality) VALUES (?, ?, ?, ?)");
+            $stmt->execute([$username, $email, $password_hash, $speciality]);
 
             echo "Utilisateur ajouté avec succès.";
             header("Location: dashboard_admin.php?success=1");
