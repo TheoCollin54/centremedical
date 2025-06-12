@@ -26,6 +26,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $doctor_id = htmlspecialchars(trim($_POST['users_id']));
     $date = trim($_POST['date']);
 
+    if (empty($patient_tel)) {
+        header("Location: demande_rdv.php?fail=1");
+        exit();
+    }
+
+    
+    if (!preg_match('/^\d{15}$/', $num_secu)) {
+        header("Location: demande_rdv.php?fail=2");
+        exit();
+    }
+
     // Insertion en base de données
     try {
         $stmt = $pdo->prepare("INSERT INTO rdv2 (rdv_id, patient_nom, patient_prenom, patient_tel, num_secu, doctor_id, date) VALUES (?, ?, ?, ?, ?, ?, ?)");

@@ -17,7 +17,7 @@
         die("Erreur de connexion : " . $e->getMessage());
     }
 
-    $stmt = $pdo->query("SELECT users_id, username FROM users WHERE username != 'admin'");
+    $stmt = $pdo->query("SELECT users_id, username, speciality FROM users WHERE username != 'admin'");
     $medecins = $stmt->fetchAll();
 ?>
 
@@ -30,6 +30,18 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Messages d'erreur -->
+    <?php if (isset($_GET['fail']) && $_GET['fail'] == 1): ?>
+    <script>
+        alert("Le numéro de téléphone n'est pas valide ❌");
+    </script>
+    <?php endif; ?>
+
+    <?php if (isset($_GET['fail']) && $_GET['fail'] == 2): ?>
+    <script>
+        alert("Le numéro de sécurité sociale n'est pas valide ❌");
+    </script>
+    <?php endif; ?>
     <aside> <!-- Sidebar -->
         <nav>
             <ul>
@@ -46,7 +58,7 @@
                     <option value="">-- Sélectionner --</option>
                     <?php foreach ($medecins as $user): ?>
                         <option value="<?= htmlspecialchars($user['users_id']) ?>">
-                            <?= htmlspecialchars($user['username']) ?>
+                            <?= htmlspecialchars($user['username']) ?> (<?= htmlspecialchars($user['speciality']) ?>)
                         </option>
                     <?php endforeach; ?>
                 </select>

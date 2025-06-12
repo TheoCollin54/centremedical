@@ -6,7 +6,7 @@
     <title>Accueil</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class = "fondo-doc">
      
     <div class="container">
         <h1>Connexion</h1> <!--Formulaire de connexion-->

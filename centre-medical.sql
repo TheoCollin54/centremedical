@@ -50,11 +50,13 @@ CREATE TABLE rdv2 (
   rdv_id int(11) NOT NULL,
   patient_nom varchar(100) NOT NULL,
   patient_prenom varchar(100) NOT NULL,
-  patient_tel varchar(10) NOT NULL,
-  num_secu varchar(15) NOT NULL,
+  patient_tel char(10) NOT NULL,
+  num_secu char(15) NOT NULL,
   doctor_id int(11) NOT NULL,
   date date NOT NULL,
-  PRIMARY KEY (rdv_id)
+  PRIMARY KEY (rdv_id),
+  CHECK (CHAR_LENGTH(patient_tel) = 10),
+  CHECK (CHAR_LENGTH(num_secu) = 15)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
