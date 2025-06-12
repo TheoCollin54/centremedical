@@ -72,6 +72,22 @@
     to { transform: rotate(360deg); }
 }
 
+@keyframes iconFloat {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes iconGlow {
+    0%, 100% { 
+        box-shadow: 0 0 20px rgba(0, 169, 95, 0.3);
+        filter: brightness(1);
+    }
+    50% { 
+        box-shadow: 0 0 40px rgba(0, 169, 95, 0.6);
+        filter: brightness(1.2);
+    }
+}
+
 /* ============================================
    STYLE DE BASE
    ============================================ */
@@ -152,7 +168,130 @@ h1 {
 }
 
 /* ============================================
-   CONTAINER DES ICONES
+   CONTAINER LOGIN (NUEVO)
+   ============================================ */
+
+.login-container {
+    max-width: 450px;
+    width: 100%;
+    background: var(--blanc);
+    border-radius: 20px;
+    padding: var(--spacing-xl);
+    box-shadow: var(--shadow-heavy);
+    position: relative;
+    overflow: hidden;
+    animation: fadeIn 1s ease;
+    border: 1px solid rgba(0, 0, 145, 0.1);
+}
+
+.login-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, var(--bleu-france), var(--vert-emeraude), var(--orange-terre));
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+}
+
+.login-icon {
+    font-size: 4rem;
+    margin-bottom: var(--spacing-md);
+    animation: pulse 2s infinite;
+}
+
+.login-container h2 {
+    color: var(--bleu-france);
+    font-size: 1.8rem;
+    margin-bottom: var(--spacing-sm);
+    font-weight: 700;
+}
+
+.login-container p {
+    color: var(--gris-moyen);
+    font-size: 1rem;
+    margin: 0;
+}
+
+.input-group {
+    margin-bottom: var(--spacing-lg);
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-icon {
+    position: absolute;
+    left: 15px;
+    font-size: 1.2rem;
+    z-index: 2;
+    color: var(--gris-moyen);
+    transition: color var(--transition-fast);
+}
+
+.input-wrapper input {
+    padding-left: 50px !important;
+}
+
+.input-wrapper:focus-within .input-icon {
+    color: var(--bleu-france);
+}
+
+.login-btn {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    font-size: 1.1rem;
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.btn-arrow {
+    transition: transform var(--transition-normal);
+}
+
+.login-btn:hover .btn-arrow {
+    transform: translateX(5px);
+}
+
+.login-footer {
+    text-align: center;
+    margin-top: var(--spacing-lg);
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid #E0E0E0;
+}
+
+.forgot-password {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border-radius: 8px;
+    transition: all var(--transition-normal);
+}
+
+.forgot-password:hover {
+    background: rgba(0, 169, 95, 0.1);
+    transform: translateY(-2px);
+}
+
+.forgot-icon {
+    font-size: 1.1rem;
+}
+
+/* ============================================
+   CONTAINER DES ICONES MEJORADO
    ============================================ */
 
 .icons-container {
@@ -161,7 +300,7 @@ h1 {
     align-items: center;
     gap: var(--spacing-xl);
     width: 100%;
-    max-width: 700px;
+    max-width: 900px;
     background: var(--blanc);
     padding: var(--spacing-xl);
     border-radius: 25px;
@@ -182,7 +321,7 @@ h1 {
 }
 
 /* ============================================
-   ICONS INDIVIDUELS
+   ICONS INDIVIDUELS MEJORADOS
    ============================================ */
 
 .icon {
@@ -191,8 +330,13 @@ h1 {
     align-items: center;
     justify-content: center;
     flex: 1;
-    min-height: 200px;
+    min-height: 280px;
     transition: all var(--transition-normal);
+    position: relative;
+}
+
+.icon.large-icon {
+    min-height: 320px;
 }
 
 .icon a {
@@ -202,8 +346,8 @@ h1 {
     justify-content: center;
     text-decoration: none;
     color: inherit;
-    padding: var(--spacing-lg);
-    border-radius: 20px;
+    padding: var(--spacing-xl);
+    border-radius: 25px;
     transition: all var(--transition-normal);
     width: 100%;
     height: 100%;
@@ -223,9 +367,9 @@ h1 {
 }
 
 .icon a:hover {
-    transform: translateY(-10px);
-    background: linear-gradient(145deg, #f8f9ff, rgba(0, 169, 95, 0.05));
-    box-shadow: var(--shadow-medium);
+    transform: translateY(-15px);
+    background: linear-gradient(145deg, #f8f9ff, rgba(0, 169, 95, 0.08));
+    box-shadow: var(--shadow-heavy);
 }
 
 .icon a:hover::before {
@@ -233,42 +377,91 @@ h1 {
 }
 
 .icon .btn {
-    width: 80px;
-    height: 80px;
+    width: 120px;
+    height: 120px;
     transition: all var(--transition-normal);
-    margin-bottom: var(--spacing-md);
-    border-radius: 15px;
-    padding: 10px;
+    margin-bottom: var(--spacing-lg);
+    border-radius: 20px;
+    padding: 20px;
+    animation: iconFloat 3s ease-in-out infinite;
+}
+
+.icon .btn.large-btn {
+    width: 140px;
+    height: 140px;
+    border-radius: 25px;
+    padding: 25px;
 }
 
 .icon a:hover .btn {
-    transform: scale(1.15);
-    filter: brightness(1.2) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+    transform: scale(1.2);
+    filter: brightness(1.3) drop-shadow(0 8px 16px rgba(0, 0, 0, 0.25));
+    animation: iconGlow 2s ease-in-out infinite;
+}
+
+.icon a:hover .btn.large-btn {
+    transform: scale(1.25);
 }
 
 .icon h3 {
-    font-size: 1.2rem;
-    font-weight: 600;
+    font-size: 1.4rem;
+    font-weight: 700;
     color: var(--gris-fonce);
     text-align: center;
-    margin: 0;
+    margin: 0 0 var(--spacing-sm) 0;
     transition: color var(--transition-fast);
+}
+
+.icon.large-icon h3 {
+    font-size: 1.6rem;
+    margin-bottom: var(--spacing-md);
 }
 
 .icon a:hover h3 {
     color: var(--bleu-france);
+    text-shadow: 0 2px 4px rgba(0, 0, 145, 0.2);
 }
 
-/* Separateur des icons */
-/* .icon:not(:last-child)::after {
-    content: "";
+.icon-description {
+    font-size: 0.95rem;
+    color: var(--gris-moyen);
+    text-align: center;
+    margin: 0;
+    opacity: 0.8;
+    transition: all var(--transition-normal);
+}
+
+.icon a:hover .icon-description {
+    opacity: 1;
+    color: var(--vert-emeraude);
+    transform: translateY(-2px);
+}
+
+.icon-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-glow {
     position: absolute;
-    right: -var(--spacing-lg);
-    top: 20%;
-    bottom: 20%;
-    width: 2px;
-    background: linear-gradient(180deg, transparent, var(--gris-clair), transparent);
-} */
+    top: 50%;
+    left: 50%;
+    width: 160px;
+    height: 160px;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(0, 169, 95, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity var(--transition-normal);
+    z-index: -1;
+}
+
+.icon a:hover .icon-glow {
+    opacity: 1;
+    animation: pulse 2s infinite;
+}
 
 /* ============================================
    CONTAINER AJOUV RDV
@@ -746,7 +939,6 @@ main p {
     box-shadow: var(--shadow-light);
     animation: fadeIn 1s ease;
 }
-
 /* ============================================
    EFECT DE CHARGEMENT
    ============================================ */
