@@ -9,7 +9,7 @@ $dbname = $dbConn['name'];
 
 // Vérifie que l'utilisateur est connecté
 if (!isset($_SESSION['users_id'])) {
-    header("Location: index.php");
+    header("Location: index_doc.php");
     exit();
 }
 
@@ -156,9 +156,14 @@ const rdvData = <?php
     <p><strong>Numéro de sécu :</strong> <span id="modalSecu"></span></p>
     <p><strong>Date :</strong> <span id="modalDate"></span></p>
 
+    <form id="editForm" method="POST" action="edit_rdv.php">
+      <input type="hidden" name="rdv_id" id="modalRdvId" value="">
+      <button type="submit">Modifier</button>
+    </form>
+    <br>
     <form id="deleteForm" method="POST" action="delete_rdv.php" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce rendez-vous ?');">
       <input type="hidden" name="rdv_id" id="modalRdvId" value="">
-      <button type="submit" class="delete-btn">Supprimer ce rendez-vous</button>
+      <button type="submit" class="delete-btn">Supprimer</button>
     </form>
   </div>
 </div>

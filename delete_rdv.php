@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['rdv_id'])) {
         $stmt = $pdo->prepare("DELETE FROM rdv2 WHERE rdv_id = :rdv_id AND doctor_id = :doctor_id");
         $stmt->execute(['rdv_id' => $rdv_id, 'doctor_id' => $user_id]);
 
-        header("Location: dashboard.php?deleted=1");
+        header("Location: dashboard.php");
         exit();
     } catch (PDOException $e) {
         die("Erreur lors de la suppression : " . $e->getMessage());
