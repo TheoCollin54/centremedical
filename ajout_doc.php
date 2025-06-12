@@ -22,6 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = htmlspecialchars(trim($_POST['email']));
     $password = htmlspecialchars(trim($_POST['password']));
     $password_hash = password_hash($password, PASSWORD_DEFAULT);
+    $speciality = htmlspecialchars(trim($_POST['speciality']));
 
     // Vérifie si l'email existe déjà
     $stmt_check = $pdo->prepare("SELECT COUNT(*) FROM users WHERE email = ?");
@@ -32,8 +33,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $message = "❌ Un utilisateur avec cet email existe déjà.";
     } else {
         try {
-            $stmt = $pdo->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
-            $stmt->execute([$username, $email, $password_hash]);
+            $stmt = $pdo->prepare("INSERT INTO users (username, email, password, speciality) VALUES (?, ?, ?, ?)");
+            $stmt->execute([$username, $email, $password_hash, $speciality]);
             $message = "✅ Utilisateur ajouté avec succès.";
         } catch (PDOException $e) {
             $message = "❌ Erreur lors de l'ajout : " . $e->getMessage();
@@ -71,6 +72,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <form action ="add_doc.php" method="POST">
                 <label for="username"><strong>Nom d'utilisateur :</strong></label>
                 <input type="text" id="username" name="username" required>
+
+                <label for="speciality"><strong>Spécialité :</strong></label>
+                <input type="text" id="speciality" name="speciality" required>
 
                 <label for="email"><strong>Email :</strong></label>
                 <input type="email" id="email" name="email" required>
