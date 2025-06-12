@@ -89,6 +89,14 @@ $name = $stmt_name->fetch(PDO::FETCH_ASSOC);
     cursor: pointer;
     border-radius: 4px;
   }
+  button.delete-btn:hover {
+    background-color: darkred;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
 </style>
 
 <script>
