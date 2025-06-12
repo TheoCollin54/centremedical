@@ -1086,7 +1086,3 @@ main p {
         transition-duration: 0.01ms !important;
     }
 }
-.fondo-doc {
-    background: url('arrier plan index.webp') no-repeat center center fixed;
-    background-size: cover;
-}

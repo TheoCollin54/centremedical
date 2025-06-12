@@ -6,8 +6,7 @@
     <title>Accueil</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body class = "fondo-doc">
-     
+<body>
     <div class="container">
         <h1>Connexion</h1> <!--Formulaire de connexion-->
         <form  action="login.php" method="POST">
