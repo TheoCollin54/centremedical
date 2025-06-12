@@ -76,8 +76,9 @@
                 <label for="numsecu"><strong>Numéro de sécurité sociale :</strong></label>
                 <input type="number" id="numsecu" name="numsecu" maxlength="15" minlength="15" required>
 
-                <label for="date"><strong>Date du rendez-vous :</strong></label>
-                <input type="date" id="date" name="date" required>
+                <label for="date"><strong>Date et heure du rendez-vous :</strong></label>
+                <input type="datetime-local" id="date" name="date" required>
+
 
                 <button class="btn" type="submit" class="login-btn">Ajouter</button>
             </form>
