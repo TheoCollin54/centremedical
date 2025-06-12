@@ -674,10 +674,29 @@ input[type="date"]:focus {
     box-shadow: 0 0 0 4px rgba(250, 92, 0, 0.2);
 }
 
-label[for="users"]::before {
+label[for="date"]::before {
+    content: "📅";
+    font-size: 1.2rem;
+}
+
+label[for="users_id"]::before {
     content: "👨‍⚕️ ";
     font-size: 1.2rem;
 }
+
+/* Nom */
+label[for="name"]::before {
+    content: "👥";
+    font-size: 1.2rem;
+}
+
+/* Prénom */
+label[for="firstname"]::before {
+    content: "👥";
+    font-size: 1.2rem;
+}
+
+
 
 /*Autres selects */
 select:not(#users) {
