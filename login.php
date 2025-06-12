@@ -2,13 +2,13 @@
 session_start(); // Pour gérer les sessions utilisateur
 
 // Connexion à la base de données
-require_once ('./db/connection.php'); 
+require_once('./db/connection.php');
 
-    
-    $host = $dbConn['host'];
-    $username_db = $dbConn['user'];
-    $password_db = $dbConn['pass'];
-    $dbname = $dbConn['name'];
+
+$host = $dbConn['host'];
+$username_db = $dbConn['user'];
+$password_db = $dbConn['pass'];
+$dbname = $dbConn['name'];
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username_db, $password_db);

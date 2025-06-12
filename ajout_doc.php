@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require_once('./db/connection.php'); 
+require_once('./db/connection.php');
 
 $host = $dbConn['host'];
 $username_db = $dbConn['user'];
@@ -45,18 +45,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <title>Ajouter un utilisateur</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-    
+
     <aside>
         <nav>
             <ul>
-                <li><a class = "inactive">Ajouter un médecin</a></li>
+                <li><a class="inactive">Ajouter un médecin</a></li>
                 <li><a href="edit_rdv_admin.php">Gérer les rendez-vous</a></li>
                 <li><a href="ajout_info.php">Ajouter une information</a></li>
                 <li><a href="dashboard_admin.php">Retour à l'accueil</a></li>
@@ -64,13 +66,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </ul>
         </nav>
     </aside>
-    
+
     <main>
-         
+
         <div class="container">
             <h2>Ajouter un nouvel utilisateur</h2>
 
-            <form action ="add_doc.php" method="POST">
+            <form action="add_doc.php" method="POST">
                 <label for="username"><strong>Nom d'utilisateur :</strong></label>
                 <input type="text" id="username" name="username" required>
 
@@ -88,4 +90,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
     </main>
 </body>
+
 </html>

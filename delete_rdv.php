@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once ('./db/connection.php');
+require_once('./db/connection.php');
 
 $host = $dbConn['host'];
 $username_db = $dbConn['user'];
@@ -15,7 +15,7 @@ if (!isset($_SESSION['users_id'])) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['rdv_id'])) {
     $rdv_id = $_POST['rdv_id'];
     $user_id = $_SESSION['users_id'];
-    
+
     try {
         $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username_db, $password_db);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

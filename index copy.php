@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accueil</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <div class="container">
         <h1>Connexion</h1> <!--Formulaire de connexion-->
-        <form  action="login.php" method="POST">
+        <form action="login.php" method="POST">
             <label for="username"><strong>Nom d'utilisateur :</strong></label>
             <input type="username" id="username" name="username" required>
 
@@ -24,4 +26,5 @@
         <a href="mdp_oublie.php"> Mot de passe oublié </a>
     </div>
 </body>
+
 </html>

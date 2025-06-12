@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accueil</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <!-- Message d'erreur -->
-     <?php if (isset($_GET['fail']) && $_GET['fail'] == "login"): ?>
+    <?php if (isset($_GET['fail']) && $_GET['fail'] == "login"): ?>
         <script>alert("Nom d'utilisateur ou mot de passe incorrects ❌");</script>
     <?php endif; ?>
     <div class="container">
         <h1>Connexion</h1> <!--Formulaire de connexion-->
-        <form  action="login.php" method="POST">
+        <form action="login.php" method="POST">
             <label for="username"><strong>Nom d'utilisateur :</strong></label>
             <input type="username" id="username" name="username" required>
 
@@ -22,8 +24,9 @@
 
             <button class="btn" type="submit" class="login-btn">Se connecter</button>
         </form>
-        
+
         <a href="mdp_oublie.php"> Mot de passe oublié </a>
     </div>
 </body>
+
 </html>

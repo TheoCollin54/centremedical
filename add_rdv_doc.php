@@ -1,11 +1,11 @@
 <?php
-require_once ('./db/connection.php'); 
+require_once('./db/connection.php');
 
-    
-    $host = $dbConn['host'];
-    $username_db = $dbConn['user'];
-    $password_db = $dbConn['pass'];
-    $dbname = $dbConn['name'];
+
+$host = $dbConn['host'];
+$username_db = $dbConn['user'];
+$password_db = $dbConn['pass'];
+$dbname = $dbConn['name'];
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username_db, $password_db);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -15,9 +15,9 @@ try {
 
 // Vérification si le formulaire est soumis
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    
+
     // Récupération et sécurisation des données
-    
+
     $patient_nom = htmlspecialchars(trim($_POST['name']));
     $patient_prenom = htmlspecialchars(trim($_POST['firstname']));
     $patient_tel = htmlspecialchars(trim($_POST['tel']));
@@ -25,14 +25,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $doctor_id = htmlspecialchars(trim($_POST['doctor_id']));
     $date = trim($_POST['date']);
 
-    
-    if (!preg_match('/^\d{10}$/', $patient_tel) ||empty($patient_tel)) {
+
+    if (!preg_match('/^\d{10}$/', $patient_tel) || empty($patient_tel)) {
         header("Location: demande_rdv_doc.php?fail=1");
         exit();
     }
 
 
-    
+
     if (!preg_match('/^\d{15}$/', $num_secu) || empty($num_secu)) {
         header("Location: demande_rdv_doc.php?fail=2");
         exit();
