@@ -37,7 +37,7 @@
     $stmt = $pdo->query("SELECT users_id, username FROM users");
     $utilisateurs = $stmt->fetchAll();
 
-    $sql_name = "SELECT username 
+    $sql_name = "SELECT username, speciality
                 FROM users
                 WHERE users_id = :user_id";
     $stmt_name = $pdo->prepare($sql_name);
@@ -76,8 +76,9 @@
         </nav>
         </nav>
         <br>
-        <p class = "doctor_name">Connecté en tant que :
-            <?= htmlspecialchars($name['username']) ?>
+        <p class="doctor_name">
+            Connecté en tant que : <?= htmlspecialchars($name['username']) ?>
+            (<?= htmlspecialchars($name['speciality']) ?>)
         </p>
     </aside>
     <main>
