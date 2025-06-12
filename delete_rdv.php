@@ -8,7 +8,7 @@ $password_db = $dbConn['pass'];
 $dbname = $dbConn['name'];
 
 if (!isset($_SESSION['users_id'])) {
-    header("Location: index.php");
+    header("Location: index_doc.php");
     exit();
 }
 
