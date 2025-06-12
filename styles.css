@@ -629,7 +629,7 @@ label[for="numsecu"]::before {
 }
 
 #users::before {
-    content: "👤";
+    content: "👨‍⚕️";
     position: absolute;
     left: 12px;
     top: 50%;
@@ -672,6 +672,11 @@ input[type="date"]:hover {
 input[type="date"]:focus {
     border-color: var(--orange-terre);
     box-shadow: 0 0 0 4px rgba(250, 92, 0, 0.2);
+}
+
+label[for="users"]::before {
+    content: "👨‍⚕️ ";
+    font-size: 1.2rem;
 }
 
 /*Autres selects */
