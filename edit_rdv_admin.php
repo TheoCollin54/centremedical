@@ -130,6 +130,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['delete_rdv'])) {
         </nav>
     </aside>
     <main>
+        <button onclick="window.location.href = 'ajout_rdv_admin.php'" class='btn' id='centrer'>Ajouter un rendez-vous</button>
         <?php foreach ($rdv as $rdv): ?>
             <form method="POST">
                 <input type="hidden" name="rdv_id" value="<?= htmlspecialchars($rdv['rdv_id']) ?>">
