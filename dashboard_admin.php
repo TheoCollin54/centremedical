@@ -81,6 +81,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['delete_user'])) {
     $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
     header("Location: dashboard_admin.php?success=2");
 }
+
+$message = "";
+if (isset($_GET['success'])) {
+    switch ($_GET['success']) {
+        case 1:
+            $message = "L'utilisateur a bien été ajouté ✅";
+            break;
+        case 2:
+            $message = "L'utilisateur a bien été modifié ✅";
+            break;
+        case 3:
+            $message = "L'utilisateur a bien été supprimé ✅";
+            break;
+        case 4:
+            $message = "L'information a bien été ajoutée ✅";
+            break;
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -93,35 +111,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['delete_user'])) {
     <link rel="stylesheet" href="styles.css">
 </head>
 
-<body>
-    <!-- Message de succès après redirection vers le dashboard si l'user a bien été ajouté-->
-    <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
-        <script>
-            alert("L'utilisateur a bien été ajouté ✅");
-        </script>
-    <?php endif; ?>
-
-    <!-- Message de succès après redirection vers le dashboard si l'user a bien été modifié-->
-    <?php if (isset($_GET['success']) && $_GET['success'] == 2): ?>
-        <script>
-            alert("L'utilisateur a bien été modifié ✅");
-        </script>
-    <?php endif; ?>
-
-    <!-- Message de succès après redirection vers le dashboard si l'user a bien été supprimé-->
-    <?php if (isset($_GET['success']) && $_GET['success'] == 3): ?>
-        <script>
-            alert("L'utilisateur a bien été supprimé ✅");
-        </script>
-    <?php endif; ?>
-
-    <!-- Message de succès après redirection vers le dashboard si l'information a bien été ajoutée-->
-    <?php if (isset($_GET['success']) && $_GET['success'] == 4): ?>
-        <script>
-            alert("L'information a bien été ajoutée ✅");
-        </script>
-    <?php endif; ?>
-
+<body data-message="<?= htmlspecialchars($message) ?>">
     <aside> <!-- Sidebar -->
         <nav>
             <ul>
@@ -165,6 +155,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['delete_user'])) {
             </form>
         <?php endforeach; ?>
     </main>
+    <script src="./js/scriptMsg.js"></script>
 </body>
 
 </html>

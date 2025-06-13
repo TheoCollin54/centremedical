@@ -35,6 +35,14 @@ if ($user && $user['username'] !== 'admin') {
     header("Location: index_doc.php");
     exit();
 }
+$message = "";
+if (isset($_GET['fail'])) {
+    if ($_GET['fail'] == 1) {
+        $message = "Le numéro de téléphone n'est pas valide ❌";
+    } elseif ($_GET['fail'] == 2) {
+        $message = "Le numéro de sécurité sociale n'est pas valide ❌";
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -49,19 +57,7 @@ if ($user && $user['username'] !== 'admin') {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
 
-<body>
-    <!-- Messages d'erreur -->
-    <?php if (isset($_GET['fail']) && $_GET['fail'] == 1): ?>
-        <script>
-            alert("Le numéro de téléphone n'est pas valide ❌");
-        </script>
-    <?php endif; ?>
-
-    <?php if (isset($_GET['fail']) && $_GET['fail'] == 2): ?>
-        <script>
-            alert("Le numéro de sécurité sociale n'est pas valide ❌");
-        </script>
-    <?php endif; ?>
+<body data-message="<?= htmlspecialchars($message) ?>">
     <aside> <!-- Sidebar -->
         <nav>
             <ul>
@@ -112,14 +108,8 @@ if ($user && $user['username'] !== 'admin') {
     <!-- Flatpickr JS -->
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/fr.js"></script>
-    <script>
-        flatpickr("#date", {
-            enableTime: true,
-            dateFormat: "Y-m-d H:i:S", // Format compatible TIMESTAMP
-            time_24hr: true,
-            minuteIncrement: 15,
-            locale:"fr"
-        });
-    </script>
+    <script src="./js/scriptCalendar.js"></script>
+    <script src="./js/scriptMsg.js"></script>
 </body>
+
 </html>

@@ -43,6 +43,18 @@ $sql_name = "SELECT username, speciality FROM users WHERE users_id = :user_id";
 $stmt_name = $pdo->prepare($sql_name);
 $stmt_name->execute(['user_id' => $user_id]);
 $name = $stmt_name->fetch(PDO::FETCH_ASSOC);
+
+$message = '';
+if (isset($_GET['success'])) {
+    switch ((int) $_GET['success']) {
+        case 1:
+            $message = "✅ Le rendez-vous a bien été ajouté.";
+            break;
+        case 3:
+            $message = "✅ Le rendez-vous a bien été supprimé.";
+            break;
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -129,11 +141,7 @@ $name = $stmt_name->fetch(PDO::FETCH_ASSOC);
 
 </head>
 
-<body>
-    <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
-        <script>alert("Le rendez-vous a bien été ajouté ✅");</script>
-    <?php endif; ?>
-
+<body data-message="<?= htmlspecialchars($message) ?>">
     <aside>
         <nav>
             <ul>
@@ -227,6 +235,7 @@ $name = $stmt_name->fetch(PDO::FETCH_ASSOC);
             };
         });
     </script>
+    <script src="./js/scriptMsg.js"></script>
 </body>
 
 </html>

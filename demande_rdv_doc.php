@@ -43,6 +43,19 @@ $sql_name = "SELECT username, speciality
 $stmt_name = $pdo->prepare($sql_name);
 $stmt_name->execute(['user_id' => $user_id]);
 $name = $stmt_name->fetch(PDO::FETCH_ASSOC);
+
+
+$message = '';
+if (isset($_GET['fail'])) {
+    switch ((int) $_GET['fail']) {
+        case 1:
+            $message = "Le numéro de téléphone n'est pas valide ❌";
+            break;
+        case 2:
+            $message = "Le numéro de sécurité sociale n'est pas valide ❌";
+            break;
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -57,19 +70,8 @@ $name = $stmt_name->fetch(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
 
-<body>
-    <!-- Messages d'erreur -->
-    <?php if (isset($_GET['fail']) && $_GET['fail'] == 1): ?>
-        <script>
-            alert("Le numéro de téléphone n'est pas valide ❌");
-        </script>
-    <?php endif; ?>
+<body data-message="<?= htmlspecialchars($message) ?>">
 
-    <?php if (isset($_GET['fail']) && $_GET['fail'] == 2): ?>
-        <script>
-            alert("Le numéro de sécurité sociale n'est pas valide ❌");
-        </script>
-    <?php endif; ?>
     <aside> <!-- Sidebar -->
         <nav>
             <ul>
@@ -115,6 +117,7 @@ $name = $stmt_name->fetch(PDO::FETCH_ASSOC);
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/fr.js"></script>
     <script src="./js/scriptCalendar.js"></script>
+    <script src="./js/scriptMsg.js"></script>
 </body>
 
 </html>

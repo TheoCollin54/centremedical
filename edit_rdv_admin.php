@@ -84,6 +84,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['delete_rdv'])) {
     $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
     header("Location: edit_rdv_admin.php?success=2");
 }
+
+$message = "";
+if (isset($_GET['success'])) {
+    switch ($_GET['success']) {
+        case 1:
+            $message = "Le rendez-vous a bien été ajouté ✅";
+            break;
+        case 2:
+            $message = "Le rendez-vous a bien été modifié ✅";
+            break;
+        case 3:
+            $message = "Le rendez-vous a bien été supprimé ✅";
+            break;
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -98,28 +114,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['delete_rdv'])) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
 
-<body>
-    <!-- Message de succès après redirection vers le dashboard si l'user a bien été ajouté-->
-    <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
-        <script>
-            alert("Le rendez-vous a bien été ajouté ✅");
-        </script>
-    <?php endif; ?>
-
-    <!-- Message de succès après redirection vers le dashboard si l'user a bien été modifié-->
-    <?php if (isset($_GET['success']) && $_GET['success'] == 2): ?>
-        <script>
-            alert("Le rendez-vous a bien été modifié ✅");
-        </script>
-    <?php endif; ?>
-
-    <!-- Message de succès après redirection vers le dashboard si l'user a bien été supprimé-->
-    <?php if (isset($_GET['success']) && $_GET['success'] == 3): ?>
-        <script>
-            alert("Le rendez-vous a bien été supprimé ✅");
-        </script>
-    <?php endif; ?>
-
+<body data-message="<?= htmlspecialchars($message) ?>">
     <aside> <!-- Sidebar -->
         <nav>
             <ul>
@@ -201,6 +196,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['delete_rdv'])) {
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/fr.js"></script>
     <script src="./js/scriptCalendar.js"></script>
+    <script src="./js/scriptMsg.js"></script>
 </body>
 
 </html>
