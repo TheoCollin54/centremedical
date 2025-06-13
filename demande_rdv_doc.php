@@ -117,11 +117,20 @@ $name = $stmt_name->fetch(PDO::FETCH_ASSOC);
     <script>
         flatpickr("#date", {
             enableTime: true,
-            dateFormat: "Y-m-d H:i:S", // Format compatible TIMESTAMP
+            dateFormat: "Y-m-d H:i:S",
             time_24hr: true,
             minuteIncrement: 15,
-            locale: "fr"
+            locale: "fr",
+            minTime: "08:00",
+            maxTime: "18:00",
+            disable: [
+                function (date) {
+                    // Bloque samedi (6) et dimanche (0)
+                    return (date.getDay() === 0);
+                }
+            ]
         });
+
     </script>
 </body>
 

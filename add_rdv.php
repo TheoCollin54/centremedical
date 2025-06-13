@@ -40,8 +40,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Insertion en base de données
     try {
-        $stmt = $pdo->prepare("INSERT INTO rdv2 (rdv_id, patient_nom, patient_prenom, patient_tel, num_secu, doctor_id, date) VALUES (?, ?, ?, ?, ?, ?, ?)");
-        $stmt->execute([$rdv_id, $patient_nom, $patient_prenom, $patient_tel, $num_secu, $doctor_id, $date]);
+        $stmt = $pdo->prepare("INSERT INTO rdv2 (patient_nom, patient_prenom, patient_tel, num_secu, doctor_id, date) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt->execute([$patient_nom, $patient_prenom, $patient_tel, $num_secu, $doctor_id, $date]);
         echo "Ajout réussi !";
         header("Location: index.php?success=1");
         exit();

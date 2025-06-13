@@ -91,15 +91,7 @@ $medecins = $stmt->fetchAll();
     <!-- Flatpickr JS -->
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/fr.js"></script>
-    <script>
-        flatpickr("#date", {
-            enableTime: true,
-            dateFormat: "Y-m-d H:i:S", // Format compatible TIMESTAMP
-            time_24hr: true,
-            minuteIncrement: 15,
-            locale:"fr"
-        });
-    </script>
+    <script src="./js/scriptCalendar.js"></script>
 </body>
 
 </html>
