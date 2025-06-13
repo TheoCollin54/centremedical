@@ -132,7 +132,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['delete_rdv'])) {
         </nav>
     </aside>
     <main>
-        <button onclick="window.location.href = 'ajout_rdv_admin.php'" class='btn' id='centrer'>Ajouter un rendez-vous</button>
+        <button onclick="window.location.href = 'ajout_rdv_admin.php'" class='btn' id='centrer'>Ajouter un
+            rendez-vous</button>
         <?php foreach ($rdv as $rdv): ?>
             <form method="POST">
                 <input type="hidden" name="rdv_id" value="<?= htmlspecialchars($rdv['rdv_id']) ?>">
@@ -143,12 +144,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['delete_rdv'])) {
                             <select name="doctor_id" id="doctor_id" required>
                                 <option value="">-- Sélectionner --</option>
                                 <?php foreach ($medecins as $user): ?>
-                                    <option value="<?= htmlspecialchars($user['users_id']) ?>">
+                                    <option value="<?= htmlspecialchars($user['users_id']) ?>"
+                                        <?= ($user['users_id'] == $rdv['doctor_id']) ? 'selected' : '' ?>>
                                         <?= htmlspecialchars($user['username']) ?>
                                         (<?= htmlspecialchars($user['speciality']) ?>)
                                     </option>
                                 <?php endforeach; ?>
                             </select>
+
                         </td>
                     </tr>
 
@@ -179,7 +182,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['delete_rdv'])) {
 
                         <td>
                             <input type="text" id="date" name="date" value="<?= htmlspecialchars($rdv['date']) ?>">
-                    </td>
+                        </td>
                     </tr>
 
                     <tr>
@@ -203,7 +206,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['delete_rdv'])) {
             dateFormat: "Y-m-d H:i:S", // Format compatible TIMESTAMP
             time_24hr: true,
             minuteIncrement: 15,
-            locale:"fr"
+            locale: "fr"
         });
     </script>
 </body>
