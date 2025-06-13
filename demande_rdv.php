@@ -40,6 +40,7 @@ if (isset($_GET['fail'])) {
     <link rel="stylesheet" href="styles.css">
     <!-- Flatpickr -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 
 <body data-message="<?= htmlspecialchars($message) ?>">
@@ -47,7 +48,7 @@ if (isset($_GET['fail'])) {
     <aside> <!-- Sidebar -->
         <nav>
             <ul>
-                <li><a href="index.php">Retour à l'accueil</a></li>
+                <li><a href="index.php"><i class="fas fa-home"></i> Retour à l'accueil</a></li>
             </ul>
         </nav>
     </aside>
