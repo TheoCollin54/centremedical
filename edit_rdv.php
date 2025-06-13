@@ -21,29 +21,24 @@ if (!isset($_SESSION['users_id'])) {
 }
 
 // Si on a reçu un rdv_id depuis le bouton "Modifier"
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['rdv_id'])) {
+if (isset($_POST['rdv_id'])) {
     $rdv_id = $_POST['rdv_id'];
-
-    // Récupérer les infos du rendez-vous
-    $stmt = $pdo->prepare("SELECT * FROM rdv2 WHERE rdv_id = :rdv_id");
-    $stmt->execute(['rdv_id' => $rdv_id]);
-    $rdv = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if (!$rdv) {
-        echo "Rendez-vous introuvable.";
-        exit();
-    }
-
+} elseif (isset($_GET['rdv_id'])) {
+    $rdv_id = $_GET['rdv_id'];
 } else {
-    // Sinon on redirige vers le tableau de bord
     header("Location: dashboard.php");
     exit();
 }
 
+// Récupérer les infos du rendez-vous
+$stmt = $pdo->prepare("SELECT * FROM rdv2 WHERE rdv_id = :rdv_id");
+$stmt->execute(['rdv_id' => $rdv_id]);
+$rdv = $stmt->fetch(PDO::FETCH_ASSOC);
 
-
-$message = "";
-
+if (!$rdv) {
+    echo "Rendez-vous introuvable.";
+    exit();
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['rdv_id'], $_POST['date'])) {
     $rdv_id = intval($_POST['rdv_id']);
@@ -52,8 +47,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['rdv_id'], $_POST['dat
     $stmt = $pdo->prepare("UPDATE rdv2 SET date = :date WHERE rdv_id = :rdv_id");
     $stmt->execute(['date' => $newDate, 'rdv_id' => $rdv_id]);
 
+    // Redirection après modification pour éviter de resoumettre le formulaire au refresh
+    header("Location: edit_rdv.php?rdv_id=$rdv_id&success=1");
+    exit();
+}
+
+$message = "";
+if (isset($_GET['success']) && $_GET['success'] == 1) {
     $message = "✅ Le rendez-vous a été mis à jour.";
 }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -67,15 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['rdv_id'], $_POST['dat
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
 
-<body>
-    <?php if ($message): ?>
-        <script>
-            alert("<?= htmlspecialchars($message) ?>");
-            window.location.href = "edit_rdv.php?rdv_id=<?= urlencode($rdv['rdv_id']) ?>";
-        </script>
-    <?php endif; ?>
-
-
+<body data-message="<?= htmlspecialchars($message) ?>">
     <aside> <!-- Sidebar -->
         <nav>
             <ul>
@@ -143,6 +139,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['rdv_id'], $_POST['dat
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/fr.js"></script>
     <script src="./js/scriptCalendar.js"></script>
+    <script src="./js/scriptMsg.js"></script>
 </body>
 
 </html>
