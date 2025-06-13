@@ -678,12 +678,6 @@ label[for="numsecu"]::before {
     appearance: none;
 }
 
-main #centrer {
-    margin: var(--spacing-lg) auto var(--spacing-xl) auto;
-    display: block;
-    width: fit-content;
-}
-
 #users::before {
     content: "👨‍⚕️";
     position: absolute;

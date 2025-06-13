@@ -89,37 +89,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['rdv_id'], $_POST['dat
             <input type="hidden" name="rdv_id" value="<?= htmlspecialchars($rdv['rdv_id']) ?>">
             <table>
                 <tr>
-                    <th>Date du rendez-vous</th>
-                    <td>
-                        <input type="datetime-local" name="date"
-                            value="<?= date('Y-m-d\TH:i', strtotime($rdv['date'])) ?>" required>
+                    <th>Nom</th>
+                    <td><input type="text" name="nom" value="<?= htmlspecialchars($rdv['patient_nom']) ?>" readonly>
                     </td>
                 </tr>
                 <tr>
-                    <th>Nom</th>
-                    <th>
-                        <span><?= htmlspecialchars($rdv['patient_nom']) ?></span></small>
-                    </th>
-                </tr>
-                <tr>
                     <th>Prénom</th>
-                    <th>
-                        <span><?= htmlspecialchars($rdv['patient_prenom']) ?></span>
-                    </th>
+                    <td><input type="text" name="prenom" value="<?= htmlspecialchars($rdv['patient_prenom']) ?>"
+                            readonly></td>
                 </tr>
                 <tr>
                     <th>Téléphone</th>
-                    <th>
-                        <span><?= htmlspecialchars($rdv['patient_tel']) ?></span>
-                    </th>
+                    <td><input type="text" name="tel" value="<?= htmlspecialchars($rdv['patient_tel']) ?>" readonly>
+                    </td>
                 </tr>
                 <tr>
                     <th>Numéro de sécurité sociale</th>
-                    <th>
-                        <span><?= htmlspecialchars($rdv['num_secu']) ?></span>
-                    </th>
+                    <td><input type="text" name="num_secu" value="<?= htmlspecialchars($rdv['num_secu']) ?>" readonly>
+                    </td>
                 </tr>
-
+                <tr>
+                    <th>Date du rendez-vous</th>
+                    <td><input type="datetime-local" name="date"
+                            value="<?= date('Y-m-d\TH:i', strtotime($rdv['date'])) ?>" required></td>
+                </tr>
                 <tr>
                     <td colspan="2">
                         <button type="submit"

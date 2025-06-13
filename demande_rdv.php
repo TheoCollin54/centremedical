@@ -87,5 +87,4 @@ $medecins = $stmt->fetchAll();
         </div>
     </main>
 </body>
-
 </html>
