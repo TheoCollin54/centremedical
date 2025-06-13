@@ -141,10 +141,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['delete_rdv'])) {
                             <select name="doctor_id" id="doctor_id" required>
                                 <option value="">-- Sélectionner --</option>
                                 <?php foreach ($medecins as $user): ?>
-                                    <option value="<?= htmlspecialchars($user['users_id']) ?>">
-                                        <?= htmlspecialchars($user['username']) ?>
-                                        (<?= htmlspecialchars($user['speciality']) ?>)
-                                    </option>
+                                    
+                                <option value="<?= htmlspecialchars($user['users_id']) ?>"
+                                <?php if ($user['users_id'] == $rdv['doctor_id']) echo 'selected'; ?>>
+                                    <?= htmlspecialchars($user['username']) ?> (<?= htmlspecialchars($user['speciality']) ?>)
+                                </option>
                                 <?php endforeach; ?>
                             </select>
                         </td>
