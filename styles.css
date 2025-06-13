@@ -814,6 +814,12 @@ select:not(#users) {
     font-size: 1.3rem;
 }
 
+#centrer {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
 button[type="submit"] {
     background: var(--vert-emeraude);
     color: var(--blanc);
