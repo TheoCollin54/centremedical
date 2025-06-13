@@ -64,7 +64,7 @@ if ($user && $user['username'] !== 'admin') {
         <nav>
             <ul>
                 <li><a href="ajout_doc.php">Ajouter un médecin</a></li>
-                <li><a href="edit_rdv_admin.php" class="inactive">Gérer les rendez-vous</a></li>
+                <li><a href="edit_rdv_admin.php">Gérer les rendez-vous</a></li>
                 <li><a href="ajout_info.php">Ajouter une information</a></li>
                 <li><a href="dashboard_admin.php">Retour à l'accueil</a></li>
                 <li><a href="logout.php">Se déconnecter</a></li>
