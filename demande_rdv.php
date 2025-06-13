@@ -19,6 +19,15 @@ try {
 
 $stmt = $pdo->query("SELECT users_id, username, speciality FROM users WHERE username != 'admin'");
 $medecins = $stmt->fetchAll();
+
+$message = "";
+if (isset($_GET['fail'])) {
+    if ($_GET['fail'] == 1) {
+        $message = "Le numéro de téléphone n'est pas valide ❌";
+    } elseif ($_GET['fail'] == 2) {
+        $message = "Le numéro de sécurité sociale n'est pas valide ❌";
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -33,19 +42,8 @@ $medecins = $stmt->fetchAll();
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
 
-<body>
-    <!-- Messages d'erreur -->
-    <?php if (isset($_GET['fail']) && $_GET['fail'] == 1): ?>
-        <script>
-            alert("Le numéro de téléphone n'est pas valide ❌");
-        </script>
-    <?php endif; ?>
+<body data-message="<?= htmlspecialchars($message) ?>">
 
-    <?php if (isset($_GET['fail']) && $_GET['fail'] == 2): ?>
-        <script>
-            alert("Le numéro de sécurité sociale n'est pas valide ❌");
-        </script>
-    <?php endif; ?>
     <aside> <!-- Sidebar -->
         <nav>
             <ul>
@@ -92,6 +90,7 @@ $medecins = $stmt->fetchAll();
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/fr.js"></script>
     <script src="./js/scriptCalendar.js"></script>
+    <script src="./js/scriptMsg.js"></script>
 </body>
 
 </html>
