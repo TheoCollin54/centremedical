@@ -112,9 +112,11 @@ $name = $stmt_name->fetch(PDO::FETCH_ASSOC);
         $events = [];
         foreach ($rendezvous as $rdv) {
             $events[] = [
-                'title' => htmlspecialchars($rdv['patient_nom'] . ' ' . $rdv['patient_prenom']),
+                'title' => htmlspecialchars($rdv['patient_nom']),
                 'start' => $rdv['date'],
                 'extendedProps' => [
+                    'prenom' => $rdv['patient_prenom'],
+                    'nom' => $rdv['patient_nom'],
                     'tel' => $rdv['patient_tel'],
                     'num_secu' => $rdv['num_secu']
                 ],
@@ -124,6 +126,7 @@ $name = $stmt_name->fetch(PDO::FETCH_ASSOC);
         echo json_encode($events);
         ?>;
     </script>
+
 </head>
 
 <body>
@@ -161,8 +164,9 @@ $name = $stmt_name->fetch(PDO::FETCH_ASSOC);
             <span id="rdvModalClose">&times;</span>
             <h3>Détails du rendez-vous</h3>
             <p><strong>Nom :</strong> <span id="modalNom"></span></p>
+            <p><strong>Prénom :</strong> <span id="modalPrenom"></span></p>
             <p><strong>Téléphone :</strong> <span id="modalTel"></span></p>
-            <p><strong>Numéro de sécu :</strong> <span id="modalSecu"></span></p>
+            <p><strong>Numéro de sécurité sociale :</strong> <span id="modalSecu"></span></p>
             <p><strong>Date :</strong> <span id="modalDate"></span></p>
 
             <form id="editForm" method="POST" action="edit_rdv.php">
@@ -184,6 +188,7 @@ $name = $stmt_name->fetch(PDO::FETCH_ASSOC);
             const modal = document.getElementById('rdvModal');
             const modalClose = document.getElementById('rdvModalClose');
             const modalNom = document.getElementById('modalNom');
+            const modalPrenom = document.getElementById('modalPrenom');
             const modalTel = document.getElementById('modalTel');
             const modalSecu = document.getElementById('modalSecu');
             const modalDate = document.getElementById('modalDate');
@@ -200,6 +205,7 @@ $name = $stmt_name->fetch(PDO::FETCH_ASSOC);
                 eventClick: function (info) {
                     // Affiche modale avec détails
                     modalNom.textContent = info.event.title;
+                    modalPrenom.textContent = info.event.extendedProps.prenom;
                     modalTel.textContent = info.event.extendedProps.tel;
                     modalSecu.textContent = info.event.extendedProps.num_secu;
                     modalDate.textContent = info.event.startStr;

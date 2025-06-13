@@ -94,6 +94,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['delete_rdv'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard administrateur</title>
     <link rel="stylesheet" href="styles.css">
+    <!-- Flatpickr -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
 
 <body>
@@ -141,11 +143,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['delete_rdv'])) {
                             <select name="doctor_id" id="doctor_id" required>
                                 <option value="">-- Sélectionner --</option>
                                 <?php foreach ($medecins as $user): ?>
-                                    
-                                <option value="<?= htmlspecialchars($user['users_id']) ?>"
-                                <?php if ($user['users_id'] == $rdv['doctor_id']) echo 'selected'; ?>>
-                                    <?= htmlspecialchars($user['username']) ?> (<?= htmlspecialchars($user['speciality']) ?>)
-                                </option>
+                                    <option value="<?= htmlspecialchars($user['users_id']) ?>">
+                                        <?= htmlspecialchars($user['username']) ?>
+                                        (<?= htmlspecialchars($user['speciality']) ?>)
+                                    </option>
                                 <?php endforeach; ?>
                             </select>
                         </td>
@@ -175,7 +176,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['delete_rdv'])) {
 
                     <tr>
                         <th>Date</th>
-                        <td><input type="datetime-local" name="date" value="<?= htmlspecialchars($rdv['date']) ?>"></td>
+
+                        <td>
+                            <input type="text" id="date" name="date" value="<?= htmlspecialchars($rdv['date']) ?>">
+                    </td>
                     </tr>
 
                     <tr>
@@ -190,6 +194,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['delete_rdv'])) {
             </form>
         <?php endforeach; ?>
     </main>
+    <!-- Flatpickr JS -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/fr.js"></script>
+    <script>
+        flatpickr("#date", {
+            enableTime: true,
+            dateFormat: "Y-m-d H:i:S", // Format compatible TIMESTAMP
+            time_24hr: true,
+            minuteIncrement: 15,
+            locale:"fr"
+        });
+    </script>
 </body>
 
 </html>

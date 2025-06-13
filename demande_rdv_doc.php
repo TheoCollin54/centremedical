@@ -53,6 +53,8 @@ $name = $stmt_name->fetch(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ajouter rendez-vous</title>
     <link rel="stylesheet" href="styles.css">
+    <!-- Flatpickr -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
 
 <body>
@@ -103,12 +105,24 @@ $name = $stmt_name->fetch(PDO::FETCH_ASSOC);
                 <input type="number" id="numsecu" name="numsecu" maxlength="15" minlength="15" required>
 
                 <label for="date"><strong>DATE ET HEURE DU RENDEZ-VOUS :</strong></label>
-                <input type="datetime-local" id="date" name="date" required>
+                <input type="text" id="date" name="date" required>
 
                 <button class="btn" type="submit" class="login-btn">Ajouter</button>
             </form>
         </div>
     </main>
+    <!-- Flatpickr JS -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/fr.js"></script>
+    <script>
+        flatpickr("#date", {
+            enableTime: true,
+            dateFormat: "Y-m-d H:i:S", // Format compatible TIMESTAMP
+            time_24hr: true,
+            minuteIncrement: 15,
+            locale: "fr"
+        });
+    </script>
 </body>
 
 </html>
