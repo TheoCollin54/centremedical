@@ -66,19 +66,19 @@ $medecins = $stmt->fetchAll();
                 </select>
 
 
-                <label for="name"><strong>Nom :</strong></label>
+                <label for="name"><strong>NOM :</strong></label>
                 <input type="text" id="name" name="name" required>
 
-                <label for="firstname"><strong>Prénom :</strong></label>
+                <label for="firstname"><strong>PRÉNOM :</strong></label>
                 <input type="text" id="firstname" name="firstname" required>
 
-                <label for="tel" maxlength="10" minlength="10"><strong>Numéro de téléphone :</strong></label>
+                <label for="tel" maxlength="10" minlength="10"><strong>TÉLÉPHONE :</strong></label>
                 <input type="number" id="tel" name="tel" required>
 
-                <label for="numsecu"><strong>Numéro de sécurité sociale :</strong></label>
+                <label for="numsecu"><strong>NUMÉRO DE SECURITÉ SOCIALE :</strong></label>
                 <input type="number" id="numsecu" name="numsecu" maxlength="15" minlength="15" required>
 
-                <label for="date"><strong>Date et heure du rendez-vous :</strong></label>
+                <label for="date"><strong>DATE ET HEURE DU RENDEZ-VOUS :</strong></label>
                 <input type="datetime-local" id="date" name="date" required>
 
 
