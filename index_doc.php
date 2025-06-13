@@ -13,9 +13,10 @@
     <?php if (isset($_GET['fail']) && $_GET['fail'] == "login"): ?>
         <script>alert("Nom d'utilisateur ou mot de passe incorrects ❌");</script>
     <?php endif; ?>
+    <h1>Connexion</h1>
     <div class="container">
-        <h1>Connexion</h1> <!--Formulaire de connexion-->
-        <form action="login.php" method="POST">
+        <!--Formulaire de connexion-->
+        <form action="login.php" method="POST" class = "index">
             <label for="username"><strong>Nom d'utilisateur :</strong></label>
             <input type="username" id="username" name="username" required>
 

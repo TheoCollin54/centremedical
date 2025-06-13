@@ -24,10 +24,10 @@
 
     <main>
 
+        <h2>Ajouter un nouvel utilisateur</h2>
         <div class="container">
-            <h2>Ajouter un nouvel utilisateur</h2>
 
-            <form action="add_doc.php" method="POST">
+            <form action="add_doc.php" method="POST" class = "index">
                 <label for="username"><strong>Nom d'utilisateur :</strong></label>
                 <input type="text" id="username" name="username" required>
 

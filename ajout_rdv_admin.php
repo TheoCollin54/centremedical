@@ -71,7 +71,7 @@ if (isset($_GET['fail'])) {
     </aside>
     <main>
         <div class="container">
-            <form action="add_rdv_admin.php" method="POST">
+            <form action="add_rdv_admin.php" method="POST" class = "index">
 
                 <label for="users_id">Choisissez votre médecin :</label>
                 <select name="users_id" id="users" required>

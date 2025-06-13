@@ -124,7 +124,7 @@ if (isset($_GET['success'])) {
     </aside>
     <main>
         <?php foreach ($users as $user): ?>
-            <form method="POST">
+            <form method="POST" class = "index">
                 <input type="hidden" name="users_id" value="<?= htmlspecialchars($user['users_id']) ?>">
                 <table>
                     <tr>

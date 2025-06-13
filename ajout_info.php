@@ -22,10 +22,10 @@
     </aside>
 
     <main>
+        <h2>Ajouter une information</h2>
         <div class="container">
-            <h2>Ajouter une information</h2>
 
-            <form action="add_info.php" method="POST">
+            <form action="add_info.php" method="POST" class = "index">
                 <label for="title"><strong>Titre :</strong></label>
                 <input type="text" id="title" name="title" required>
 

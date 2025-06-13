@@ -89,7 +89,7 @@ if (isset($_GET['fail'])) {
     </aside>
     <main>
         <div class="container">
-            <form action="add_rdv_doc.php" method="POST">
+            <form action="add_rdv_doc.php" method="POST" class = "index">
                 <input type="hidden" name="doctor_id" value="<?php echo $_SESSION['users_id']; ?>">
 
 

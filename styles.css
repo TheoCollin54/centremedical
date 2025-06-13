@@ -561,11 +561,7 @@ form {
 }
 
 form.index{
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
     transform: scale(1.5);
-    transform-origin: top left;
 }
 
 label {
