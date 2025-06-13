@@ -115,6 +115,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['delete_user'])) {
         </script>
     <?php endif; ?>
 
+    <!-- Message de succès après redirection vers le dashboard si l'information a bien été ajoutée-->
+    <?php if (isset($_GET['success']) && $_GET['success'] == 4): ?>
+        <script>
+            alert("L'information a bien été ajoutée ✅");
+        </script>
+    <?php endif; ?>
+
     <aside> <!-- Sidebar -->
         <nav>
             <ul>
