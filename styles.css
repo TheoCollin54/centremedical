@@ -560,7 +560,7 @@ form {
     gap: var(--spacing-md);
 }
 
-form.index{
+form.index {
     transform: scale(1.5);
 }
 
@@ -1173,4 +1173,11 @@ main p {
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
     }
+}
+
+.subtitle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
 }

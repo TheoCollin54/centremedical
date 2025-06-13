@@ -13,10 +13,10 @@
     <?php if (isset($_GET['fail']) && $_GET['fail'] == "login"): ?>
         <script>alert("Nom d'utilisateur ou mot de passe incorrects ❌");</script>
     <?php endif; ?>
-    <h1>Connexion</h1>
+    <h1 class="subtitle">Connexion</h1>
     <div class="container">
         <!--Formulaire de connexion-->
-        <form action="login.php" method="POST" class = "index">
+        <form action="login.php" method="POST" class="index">
             <label for="username"><strong>Nom d'utilisateur :</strong></label>
             <input type="username" id="username" name="username" required>
 
@@ -26,7 +26,8 @@
             <button class="btn" type="submit" class="login-btn">Se connecter</button>
         </form>
 
-        <a href="mdp_oublie.php"> Mot de passe oublié </a>
+        
+        <a href="mdp_oublie.php" style = "margin-top : 100px"> Mot de passe oublié </a>
     </div>
 </body>
 
