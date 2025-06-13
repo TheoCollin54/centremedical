@@ -560,7 +560,7 @@ form {
     gap: var(--spacing-md);
 }
 
-for.index {
+form.index {
     transform: scale(1.5);
 }
 
