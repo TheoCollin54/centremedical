@@ -93,7 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['rdv_id'], $_POST['dat
                 <tr>
                     <th>Date du rendez-vous</th>
                     <td>
-                        <input type="text" id="date" name="date" value = "<?= htmlspecialchars($rdv['date']) ?>">
+                        <input type="text" id="date" name="date" value="<?= htmlspecialchars($rdv['date']) ?>">
                     </td>
                 </tr>
                 <tr>
@@ -142,15 +142,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['rdv_id'], $_POST['dat
     <!-- Flatpickr JS -->
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/fr.js"></script>
-    <script>
-        flatpickr("#date", {
-            enableTime: true,
-            dateFormat: "Y-m-d H:i:S", // Format compatible TIMESTAMP
-            time_24hr: true,
-            minuteIncrement: 15,
-            locale: "fr"
-        });
-    </script>
+    <script src="./js/scriptCalendar.js"></script>
 </body>
 
 </html>
