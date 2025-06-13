@@ -15,7 +15,7 @@ try {
     die("Erreur de connexion : " . $e->getMessage());
 }
 
-$message = "";
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = htmlspecialchars(trim($_POST['username']));
@@ -30,14 +30,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $emailExists = $stmt_check->fetchColumn();
 
     if ($emailExists) {
-        $message = "❌ Un utilisateur avec cet email existe déjà.";
+        echo "❌ Un utilisateur avec cet email existe déjà.";
     } else {
         try {
             $stmt = $pdo->prepare("INSERT INTO users (username, email, password, speciality) VALUES (?, ?, ?, ?)");
             $stmt->execute([$username, $email, $password_hash, $speciality]);
-            $message = "✅ Utilisateur ajouté avec succès.";
         } catch (PDOException $e) {
-            $message = "❌ Erreur lors de l'ajout : " . $e->getMessage();
+            echo "❌ Erreur lors de l'ajout : " . $e->getMessage();
         }
     }
 }
