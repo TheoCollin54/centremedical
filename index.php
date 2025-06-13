@@ -28,7 +28,7 @@
         </div>
 
         <div class="icon">
-            <a href="#">
+            <a href="info.php">
                 <img src="./img/information.png" alt="info" class="btn">
                 <h3>Informations</h3>
             </a>
