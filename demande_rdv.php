@@ -75,7 +75,7 @@ $medecins = $stmt->fetchAll();
                 <label for="tel" maxlength="10" minlength="10"><strong>TÉLÉPHONE :</strong></label>
                 <input type="number" id="tel" name="tel" required>
 
-                <label for="numsecu"><strong>NUMÉRO DE SECURITÉ SOCIALE :</strong></label>
+                <label for="numsecu"><strong>NUMÉRO DE SÉCURITÉ SOCIALE :</strong></label>
                 <input type="number" id="numsecu" name="numsecu" maxlength="15" minlength="15" required>
 
                 <label for="date"><strong>DATE ET HEURE DU RENDEZ-VOUS :</strong></label>
