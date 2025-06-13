@@ -97,27 +97,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['rdv_id'], $_POST['dat
                 </tr>
                 <tr>
                     <th>Nom</th>
-                    <td>
-                        <span><?= htmlspecialchars($rdv['patient_nom']) ?></span>
-                    </td>
+                    <th>
+                        <span><?= htmlspecialchars($rdv['patient_nom']) ?></span></small>
+                    </th>
                 </tr>
                 <tr>
                     <th>Prénom</th>
-                    <td>
+                    <th>
                         <span><?= htmlspecialchars($rdv['patient_prenom']) ?></span>
-                    </td>
+                    </th>
                 </tr>
                 <tr>
                     <th>Téléphone</th>
-                    <td>
+                    <th>
                         <span><?= htmlspecialchars($rdv['patient_tel']) ?></span>
-                    </td>
+                    </th>
                 </tr>
                 <tr>
                     <th>Numéro de sécurité sociale</th>
-                    <td>
+                    <th>
                         <span><?= htmlspecialchars($rdv['num_secu']) ?></span>
-                    </td>
+                    </th>
                 </tr>
 
                 <tr>
