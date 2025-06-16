@@ -13,20 +13,27 @@ async function fetchUnavailableSlots(medecinId) {
     console.log('Fetching slots for medecinId:', medecinId);
     if (!medecinId) return;
 
-    const weekStartStr = startOfWeekDate.toISOString().split('T')[0];
-    const weekEnd = new Date(startOfWeekDate);
+    // Recalcul dynamique de la date de début de semaine avec le bon offset
+    const startOfWeek = new Date();
+    startOfWeek.setDate(startOfWeek.getDate() - startOfWeek.getDay() + 1 + weekOffset * 7);
+
+    const weekStartStr = startOfWeek.toISOString().split('T')[0];
+    const weekEnd = new Date(startOfWeek);
     weekEnd.setDate(weekEnd.getDate() + 6);
     const weekEndStr = weekEnd.toISOString().split('T')[0];
 
     try {
         const res = await fetch(`?ajax_get_slots=1&medecin_id=${medecinId}&start_date=${weekStartStr}&end_date=${weekEndStr}`);
         unavailableSlots = await res.json();
+        console.log('Créneaux indisponibles reçus :', unavailableSlots);
+        startOfWeekDate = startOfWeek; // <-- met à jour la variable globale pour le reste du script
         createWeekGrid();
         updateWeekLabel();
     } catch (e) {
         console.error(e);
     }
 }
+
 
 function getWeekDates(startDate) {
     const dates = [];
