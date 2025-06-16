@@ -53,7 +53,7 @@ CREATE TABLE rdv2 (
   patient_tel char(10) NOT NULL,
   num_secu char(15) NOT NULL,
   doctor_id int(11) NOT NULL,
-  date TIMESTAMP NOT NULL,
+  date TIMESTAMP NOT NULL UNIQUE,
   PRIMARY KEY (rdv_id),
   CHECK (CHAR_LENGTH(patient_tel) = 10),
   CHECK (CHAR_LENGTH(num_secu) = 15)
