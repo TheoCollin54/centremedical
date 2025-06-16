@@ -1011,12 +1011,13 @@ tr:hover {
    ============================================ */
 
 p {
-    text-align: bottom;
+    text-align: center;
     margin: var(--spacing-md) 0;
     color: var(--gris-moyen);
     position: absolute;
-    bottom: 0;
-    width: 100%;
+    bottom: 20px; /* Cambia de 0 a 20px o el valor que prefieras */
+    width: calc(100% - 40px);
+    left: 20px;
 }
 
 main p {
