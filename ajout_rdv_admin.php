@@ -23,6 +23,24 @@ try {
     die("Erreur de connexion : " . $e->getMessage());
 }
 
+
+// Requête AJAX dynamique avec dates de semaine
+if (isset($_GET['ajax_get_slots']) && isset($_GET['medecin_id'])) {
+    $medecinId = intval($_GET['medecin_id']);
+    $start = isset($_GET['start_date']) ? $_GET['start_date'] : date('Y-m-d');
+    $end = isset($_GET['end_date']) ? $_GET['end_date'] . ' 23:59:59' : date('Y-m-d 23:59:59');
+
+    $stmt = $pdo->prepare("SELECT date FROM rdv2 WHERE doctor_id = :medecinId AND date BETWEEN :start AND :end");
+    $stmt->execute(['medecinId' => $medecinId, 'start' => $start, 'end' => $end]);
+    $dates = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+    $slots = array_map(fn($d) => (new DateTime($d))->format("Y-m-d H:i"), $dates);
+
+    header('Content-Type: application/json');
+    echo json_encode($slots);
+    exit;
+}
+
 $stmt = $pdo->query("SELECT users_id, username, speciality FROM users WHERE username != 'admin'");
 $medecins = $stmt->fetchAll();
 
@@ -78,8 +96,7 @@ if (isset($_GET['fail'])) {
     </aside>
     <main>
         <div class="container">
-            <form action="add_rdv_admin.php" method="POST" class = "index">
-
+            <form action="add_rdv_admin.php" method="POST" class="index" style="scale:0.7">
                 <label for="users_id">Choisissez votre médecin :</label>
                 <select name="users_id" id="users" required>
                     <option value="">-- Sélectionner --</option>
@@ -104,7 +121,16 @@ if (isset($_GET['fail'])) {
                 <input type="number" id="numsecu" name="numsecu" maxlength="15" minlength="15" required>
 
                 <label for="date"><strong>DATE ET HEURE DU RENDEZ-VOUS :</strong></label>
-                <input type="text" id="date-input" name="date" required>
+                <div id="calendar-container">
+                    <div>
+                        <button type="button" id="prev-week">Semaine précédente</button>
+                        <span id="current-week-label"></span>
+                        <button type="button" id="next-week">Semaine suivante</button>
+                    </div>
+                    <div id="week-grid"></div>
+                    <div id="selected-info">Aucun créneau sélectionné</div>
+                </div>
+                <input type="hidden" name="date" id="hidden-date" required>
 
 
                 <button class="btn" type="submit" class="login-btn">Ajouter</button>
@@ -112,9 +138,6 @@ if (isset($_GET['fail'])) {
         </div>
     </main>
 
-    <!-- Flatpickr JS -->
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/fr.js"></script>
     <script src="./js/scriptCalendar.js"></script>
     <script src="./js/scriptMsg.js"></script>
 </body>

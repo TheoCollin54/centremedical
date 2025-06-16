@@ -75,12 +75,16 @@ if (isset($_GET['fail'])) {
                 </select>
                 <label for="name"><strong>NOM :</strong></label>
                 <input type="text" id="name" name="name" required>
+
                 <label for="firstname"><strong>PRÉNOM :</strong></label>
                 <input type="text" id="firstname" name="firstname" required>
+
                 <label for="tel"><strong>TÉLÉPHONE :</strong></label>
                 <input type="number" id="tel" name="tel" maxlength="10" minlength="10" required>
+
                 <label for="numsecu"><strong>NUMÉRO DE SÉCURITÉ SOCIALE :</strong></label>
                 <input type="number" id="numsecu" name="numsecu" maxlength="15" minlength="15" required>
+
                 <label for="date"><strong>DATE ET HEURE DU RENDEZ-VOUS :</strong></label>
                 <div id="calendar-container">
                     <div>
@@ -92,6 +96,7 @@ if (isset($_GET['fail'])) {
                     <div id="selected-info">Aucun créneau sélectionné</div>
                 </div>
                 <input type="hidden" name="date" id="hidden-date" required>
+
                 <button class="btn" type="submit">Ajouter</button>
             </form>
         </div>
@@ -100,5 +105,4 @@ if (isset($_GET['fail'])) {
     <script src="./js/scriptCalendar.js"></script>
     <script src="./js/scriptMsg></script>
 </body>
-
 </html>
