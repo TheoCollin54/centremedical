@@ -35,12 +35,19 @@ if ($user && $user['username'] !== 'admin') {
     header("Location: index_doc.php");
     exit();
 }
-$message = "";
+
+$message = '';
 if (isset($_GET['fail'])) {
-    if ($_GET['fail'] == 1) {
-        $message = "Le numéro de téléphone n'est pas valide ❌";
-    } elseif ($_GET['fail'] == 2) {
-        $message = "Le numéro de sécurité sociale n'est pas valide ❌";
+    switch ((int) $_GET['fail']) {
+        case 1:
+            $message = "Le numéro de téléphone n'est pas valide ❌";
+            break;
+        case 2:
+            $message = "Le numéro de sécurité sociale n'est pas valide ❌";
+            break;
+        case 3:
+            $message = "Le créneau est déjà réservé ❌";
+            break;
     }
 }
 ?>
