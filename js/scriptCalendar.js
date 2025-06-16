@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const dateInput = document.querySelector("#date-input");
+    const dateInput = document.querySelector("#date");
     if (dateInput) {
         flatpickr(dateInput, {
             enableTime: true,
