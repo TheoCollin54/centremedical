@@ -1014,6 +1014,9 @@ p {
     text-align: bottom;
     margin: var(--spacing-md) 0;
     color: var(--gris-moyen);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
 
 main p {
