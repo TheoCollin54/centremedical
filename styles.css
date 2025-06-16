@@ -1011,7 +1011,7 @@ tr:hover {
    ============================================ */
 
 p {
-    text-align: center;
+    text-align: bottom;
     margin: var(--spacing-md) 0;
     color: var(--gris-moyen);
 }
