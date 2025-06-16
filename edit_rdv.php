@@ -89,7 +89,7 @@ if (isset($_GET['success']) && $_GET['success'] == 1) {
                 <tr>
                     <th>Date du rendez-vous</th>
                     <td>
-                        <input type="text" id="date" name="date" value="<?= htmlspecialchars($rdv['date']) ?>">
+                        <input type="text" id="date-input" name="date" value="<?= htmlspecialchars($rdv['date']) ?>">
                     </td>
                 </tr>
                 <tr>
