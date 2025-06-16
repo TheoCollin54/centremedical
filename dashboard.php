@@ -178,13 +178,13 @@ if (isset($_GET['success'])) {
             <p><strong>Date :</strong> <span id="modalDate"></span></p>
 
             <form id="editForm" method="POST" action="edit_rdv.php">
-                <input type="hidden" name="rdv_id" id="modalRdvId" value="">
+                <input type="hidden" name="rdv_id" id="modalRdvIdEdit" value="">
                 <button type="submit">Modifier</button>
             </form>
             <br>
             <form id="deleteForm" method="POST" action="delete_rdv.php"
                 onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce rendez-vous ?');">
-                <input type="hidden" name="rdv_id" id="modalRdvId" value="">
+                <input type="hidden" name="rdv_id" id="modalRdvIdDel" value="">
                 <button type="submit" class="delete-btn">Supprimer</button>
             </form>
         </div>
@@ -200,7 +200,8 @@ if (isset($_GET['success'])) {
             const modalTel = document.getElementById('modalTel');
             const modalSecu = document.getElementById('modalSecu');
             const modalDate = document.getElementById('modalDate');
-            const modalRdvId = document.getElementById('modalRdvId');
+            const modalRdvIdEdit = document.getElementById('modalRdvIdEdit');
+            const modalRdvIdDel = document.getElementById('modalRdvIdDel');
 
             const calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth',
@@ -217,7 +218,8 @@ if (isset($_GET['success'])) {
                     modalTel.textContent = info.event.extendedProps.tel;
                     modalSecu.textContent = info.event.extendedProps.num_secu;
                     modalDate.textContent = info.event.startStr;
-                    modalRdvId.value = info.event.id;
+                    modalRdvIdEdit.value = info.event.id;
+                    modalRdvIdDel.value = info.event.id;
                     modal.style.display = "block";
                 }
             });
