@@ -110,7 +110,7 @@ if (isset($_GET['fail'])) {
                 <input type="number" id="numsecu" name="numsecu" maxlength="15" minlength="15" required>
 
                 <label for="date"><strong>DATE ET HEURE DU RENDEZ-VOUS :</strong></label>
-                <input type="text" id="date" name="date" required>
+                <input type="text" id="date-input" name="date" required>
 
                 <button class="btn" type="submit" class="login-btn">Ajouter</button>
             </form>
