@@ -48,6 +48,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } catch (PDOException $e) {
         if ($e->errorInfo[1] == 1062) {
             echo "Erreur";
+            header("Location: demande_rdv_doc.php?fail=3");
+            exit();
         } else {
             echo "Erreur lors de l'inscription : " . $e->getMessage();
         }

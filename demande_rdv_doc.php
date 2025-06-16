@@ -54,6 +54,9 @@ if (isset($_GET['fail'])) {
         case 2:
             $message = "Le numéro de sécurité sociale n'est pas valide ❌";
             break;
+        case 3:
+            $message = "Le créneau est déjà réservé ❌";
+            break;
     }
 }
 ?>
