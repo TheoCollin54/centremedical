@@ -1,5 +1,8 @@
 <?php
+session_start();
+
 require_once('./db/connection.php');
+
 
 
 $host = $dbConn['host'];
@@ -22,9 +25,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $patient_prenom = htmlspecialchars(trim($_POST['firstname']));
     $patient_tel = htmlspecialchars(trim($_POST['tel']));
     $num_secu = htmlspecialchars(trim($_POST['numsecu']));
-    $doctor_id = htmlspecialchars(trim($_POST['doctor_id']));
     $date = trim($_POST['date']);
 
+
+    if (!isset($_SESSION['users_id'])) {
+        die("Erreur : médecin non connecté.");
+    }
+    $doctor_id = $_SESSION['users_id'];
 
     if (!preg_match('/^\d{10}$/', $patient_tel) || empty($patient_tel)) {
         header("Location: demande_rdv_doc.php?fail=1");
@@ -40,8 +47,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Insertion en base de données
     try {
-        $stmt = $pdo->prepare("INSERT INTO rdv2 (rdv_id, patient_nom, patient_prenom, patient_tel, num_secu, doctor_id, date) VALUES (?, ?, ?, ?, ?, ?, ?)");
-        $stmt->execute([$rdv_id, $patient_nom, $patient_prenom, $patient_tel, $num_secu, $doctor_id, $date]);
+        $stmt = $pdo->prepare("INSERT INTO rdv2 (patient_nom, patient_prenom, patient_tel, num_secu, doctor_id, date) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt->execute([$patient_nom, $patient_prenom, $patient_tel, $num_secu, $doctor_id, $date]);
         echo "Ajout réussi !";
         header("Location: dashboard.php?success=1");
         exit();
