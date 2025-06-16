@@ -176,7 +176,7 @@ if (isset($_GET['success'])) {
                         <th>Date</th>
 
                         <td>
-                            <input type="text" id="date" name="date" value="<?= htmlspecialchars($rdv['date']) ?>">
+                            <input type="text" id="date-input" name="date" value="<?= htmlspecialchars($rdv['date']) ?>">
                         </td>
                     </tr>
 
