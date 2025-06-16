@@ -1337,3 +1337,44 @@ main p {
         grid-template-columns: 1fr;
     }
 }
+
+#calendar-container {
+            margin-top: 1em;
+        }
+        #week-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+            margin-bottom: 1em;
+        }
+        .day-column {
+            border: 1px solid #ccc;
+            padding: 5px;
+        }
+        .day-header {
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 5px;
+            background: #eee;
+        }
+        .time-slot {
+            padding: 4px;
+            margin: 2px 0;
+            text-align: center;
+            background: #d0f0d0;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .time-slot:hover {
+            background: #b0e0b0;
+        }
+        .time-slot.unavailable {
+            background: #f8d7da;
+            color: #aaa;
+            pointer-events: none;
+            cursor: not-allowed;
+        }
+        #selected-info {
+            margin-top: 10px;
+            font-weight: bold;
+        }
