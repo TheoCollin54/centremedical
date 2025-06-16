@@ -76,16 +76,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['delete_rdv'])) {
     // Sécurisation basique
     $rdv_id = intval($rdv_id);
 
-    // Mise à jour en base de données
-    $stmt = $pdo->prepare('UPDATE rdv2 SET doctor_id = ?, patient_nom = ?, patient_prenom = ?, patient_tel = ?, num_secu = ?, date = ? WHERE rdv_id = ?');
-    $stmt->execute([$doctor_id, $patient_nom, $patient_prenom, $patient_tel, $num_secu, $date, $rdv_id]);
+    try {
+        // Tentative de mise à jour
+        $stmt = $pdo->prepare('UPDATE rdv2 SET doctor_id = ?, patient_nom = ?, patient_prenom = ?, patient_tel = ?, num_secu = ?, date = ? WHERE rdv_id = ?');
+        $stmt->execute([$doctor_id, $patient_nom, $patient_prenom, $patient_tel, $num_secu, $date, $rdv_id]);
 
-    $stmt = $pdo->query('SELECT * FROM rdv2');
-    $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    header("Location: edit_rdv_admin.php?success=2");
+        header("Location: edit_rdv_admin.php?success=2");
+        exit();
+    } catch (PDOException $e) {
+        if ($e->errorInfo[1] == 1062) {
+            echo "Erreur";
+            header("Location: edit_rdv_admin.php?fail=1");
+            exit();
+        } else {
+            echo "Erreur lors de la modification : " . $e->getMessage();
+        }
+    }
 }
 
+
 $message = "";
+
+// Message de succès
 if (isset($_GET['success'])) {
     switch ($_GET['success']) {
         case 1:
@@ -99,6 +111,17 @@ if (isset($_GET['success'])) {
             break;
     }
 }
+
+// Message d'erreur
+if (isset($_GET['fail'])) {
+    switch ($_GET['fail']) {
+        case 1:
+            $message = "Le créneau est déjà réservé ❌";
+            break;
+    }
+}
+
+
 
 ?>
 
