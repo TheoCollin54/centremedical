@@ -925,7 +925,7 @@ nav a {
     transition: all var(--transition-normal);
     position: relative;
     overflow: hidden;
-    scale: 1.2;
+    /* scale: 1.2; */
 }
 
 nav a:hover {
