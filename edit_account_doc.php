@@ -71,50 +71,57 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <title>Modifier mes informations</title>
-     <link rel="stylesheet" href="./css/styles.css" />
+    <link rel="stylesheet" href="./css/styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
+
 <body>
-<aside>
-    <nav>
-        <ul>
-            <li><a href="#" class="inactive">Mes rendez-vous</a></li>
-            <li><a href="demande_rdv_doc.php">Ajouter un rendez-vous</a></li>
-            <li><a href="logout.php">Se déconnecter</a></li>
-        </ul>
-    </nav>
-    <br>
-    <p class="doctor_name">
-        Connecté en tant que : <?= htmlspecialchars($user['username']) ?>
-        (<?= htmlspecialchars($user['speciality']) ?>)
-    </p>
-</aside>
+    <aside>
+        <nav>
+            <ul>
+                <li><a href="dashboard.php">Mes rendez-vous</a></li>
+                <li><a href="demande_rdv_doc.php" >Ajouter un rendez-vous</a></li>
+                <li><a href="#" class="inactive">Modifier mes informations</a></li>
+                <li><a href="logout.php"><i class="fas fa-right-from-bracket"></i>Déconnexion</a></li>
+            </ul>
+        </nav>
+        <br>
+        <p class="doctor_name">
+            Connecté en tant que : <?= htmlspecialchars($user['username']) ?>
+            (<?= htmlspecialchars($user['speciality']) ?>)
+        </p>
+    </aside>
 
-<main>
-    <h2>Modifier mes informations</h2>
+    <main>
+        <h2>Modifier mes informations</h2>
 
-    <?php if ($message): ?>
-        <p><?= htmlspecialchars($message) ?></p>
-    <?php endif; ?>
+        <?php if ($message): ?>
+            <p><?= htmlspecialchars($message) ?></p>
+        <?php endif; ?>
 
-    <form method="post">
-        <label for="username">Nom d'utilisateur :</label>
-        <input type="text" name="username" id="username" value="<?= htmlspecialchars($user['username']) ?>" required>
+        <form method="post">
+            <label for="username">Nom d'utilisateur :</label>
+            <input type="text" name="username" id="username" value="<?= htmlspecialchars($user['username']) ?>"
+                required>
 
-        <label for="email">Email :</label>
-        <input type="email" name="email" id="email" value="<?= htmlspecialchars($user['email']) ?>" required>
+            <label for="email">Email :</label>
+            <input type="email" name="email" id="email" value="<?= htmlspecialchars($user['email']) ?>" required>
 
-        <label for="speciality">Spécialité :</label>
-        <input type="text" name="speciality" id="speciality" value="<?= htmlspecialchars($user['speciality']) ?>" required>
+            <label for="speciality">Spécialité :</label>
+            <input type="text" name="speciality" id="speciality" value="<?= htmlspecialchars($user['speciality']) ?>"
+                required>
 
-        <label for="password">Nouveau mot de passe :</label>
-        <input type="password" name="password" id="password">
-        <small>Laisser vide pour ne pas changer</small>
+            <label for="password">Nouveau mot de passe :</label>
+            <input type="password" name="password" id="password">
+            <small>Laisser vide pour ne pas changer</small>
 
-        <button type="submit">Enregistrer</button>
-    </form>
-</main>
+            <button type="submit">Enregistrer</button>
+        </form>
+    </main>
 </body>
+
 </html>

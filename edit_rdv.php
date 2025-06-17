@@ -78,6 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['rdv_id'], $_POST['dat
     <meta charset="UTF-8">
     <title>Modifier le rendez-vous</title>
     <link rel="stylesheet" href="./css/styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         .highlighted-date {
             margin: 10px 0;
@@ -102,7 +103,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['rdv_id'], $_POST['dat
             <ul>
                 <li><a href="dashboard.php">Mes rendez-vous</a></li>
                 <li><a href="demande_rdv_doc.php">Ajouter un rendez-vous</a></li>
-                <li><a href="logout.php">Se déconnecter</a></li>
+                <li><a href="edit_account_doc.php">Modifier mes informations</a></li>
+                <li><a href="logout.php"><i class="fas fa-right-from-bracket"></i>Déconnexion</a></li>
             </ul>
         </nav>
     </aside>

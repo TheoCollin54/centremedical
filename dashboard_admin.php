@@ -108,17 +108,19 @@ if (isset($_GET['success'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard administrateur</title>
-     <link rel="stylesheet" href="./css/styles.css" />
+    <link rel="stylesheet" href="./css/styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 
 <body data-message="<?= htmlspecialchars($message) ?>">
     <aside> <!-- Sidebar -->
         <nav>
             <ul>
+                <li><a href="#" class="inactive"><i class="fas fa-home"></i> Accueil</a></li>
                 <li><a href="ajout_doc.php">Ajouter un médecin</a></li>
-                <li><a href="edit_rdv_admin.php">Gérer les rendez-vous</a></li>
+                <!-- <li><a href="edit_rdv_admin.php">Gérer les rendez-vous</a></li> -->
                 <li><a href="ajout_info.php">Ajouter une information</a></li>
-                <li><a href="logout.php">Se déconnecter</a></li>
+                <li><a href="logout.php"><i class="fas fa-right-from-bracket"></i>Déconnexion</a></li>
             </ul>
         </nav>
     </aside>

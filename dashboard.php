@@ -107,7 +107,7 @@ if (isset($_GET['success'])) {
             <ul>
                 <li><a href="#" class="inactive">Mes rendez-vous</a></li>
                 <li><a href="demande_rdv_doc.php">Ajouter un rendez-vous</a></li>
-                <li><a href="edit_account_doc.php">Modifier ses informations</a></li>
+                <li><a href="edit_account_doc.php">Modifier mes informations</a></li>
                 <li><a href="logout.php"><i class="fas fa-right-from-bracket"></i>Déconnexion</a></li>
             </ul>
         </nav>

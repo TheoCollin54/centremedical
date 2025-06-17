@@ -101,8 +101,7 @@ if (isset($_GET['fail'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ajouter rendez-vous</title>
     <link rel="stylesheet" href="./css/styles.css" />
-    <!-- Flatpickr -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 
 <body data-message="<?= htmlspecialchars($message) ?>">
@@ -112,7 +111,8 @@ if (isset($_GET['fail'])) {
             <ul>
                 <li><a href="dashboard.php">Mes rendez-vous</a></li>
                 <li><a href="#" class="inactive">Ajouter un rendez-vous</a></li>
-                <li><a href="logout.php">Se déconnecter</a></li>
+                <li><a href="edit_account_doc.php">Modifier mes informations</a></li>
+                <li><a href="logout.php"><i class="fas fa-right-from-bracket"></i>Déconnexion</a></li>
             </ul>
         </nav>
         </nav>
@@ -142,7 +142,7 @@ if (isset($_GET['fail'])) {
                 <input type="number" id="numsecu" name="numsecu" maxlength="15" minlength="15" required>
 
                 <div id="calendar-container">
-                    <div class = "week-controls">
+                    <div class="week-controls">
                         <button type="button" id="prev-week">Semaine précédente</button>
                         <span id="current-week-label"></span>
                         <button type="button" id="next-week">Semaine suivante</button>
