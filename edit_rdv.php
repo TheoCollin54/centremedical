@@ -14,28 +14,21 @@ try {
     die("Erreur de connexion : " . $e->getMessage());
 }
 
-// Gestion AJAX pour les créneaux indisponibles
-if (isset($_GET['ajax_get_slots']) && $_GET['ajax_get_slots'] == 1) {
+// Requête AJAX dynamique avec dates de semaine
+if (isset($_GET['ajax_get_slots']) && isset($_GET['medecin_id'])) {
+    $medecinId = intval($_GET['medecin_id']);
+    $start = isset($_GET['start_date']) ? $_GET['start_date'] : date('Y-m-d');
+    $end = isset($_GET['end_date']) ? $_GET['end_date'] . ' 23:59:59' : date('Y-m-d 23:59:59');
+
+    $stmt = $pdo->prepare("SELECT date FROM rdv2 WHERE doctor_id = :medecinId AND date BETWEEN :start AND :end");
+    $stmt->execute(['medecinId' => $medecinId, 'start' => $start, 'end' => $end]);
+    $dates = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+    $slots = array_map(fn($d) => (new DateTime($d))->format("Y-m-d H:i"), $dates);
+
     header('Content-Type: application/json');
-
-    $doctor_id = $_GET['doctor_id'] ?? null;
-    $start_date = $_GET['start_date'] ?? null;
-    $end_date = $_GET['end_date'] ?? null;
-
-    if (!$doctor_id || !$start_date || !$end_date) {
-        echo json_encode(['error' => 'Paramètres manquants']);
-        exit();
-    }
-
-    $stmt = $pdo->prepare("SELECT date FROM rdv2 WHERE doctor_id = :doctor_id AND date BETWEEN :start_date AND :end_date");
-    $stmt->execute([
-        'doctor_id' => $doctor_id,
-        'start_date' => $start_date,
-        'end_date' => $end_date
-    ]);
-    $results = $stmt->fetchAll(PDO::FETCH_COLUMN);
-    echo json_encode($results);
-    exit();
+    echo json_encode($slots);
+    exit;
 }
 
 // Vérifie session
