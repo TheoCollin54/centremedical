@@ -65,14 +65,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['rdv_id'], $_POST['dat
     $stmt = $pdo->prepare("UPDATE rdv2 SET date = :date WHERE rdv_id = :rdv_id");
     $stmt->execute(['date' => $newDate, 'rdv_id' => $rdv_id]);
 
-    header("Location: edit_rdv.php?rdv_id=$rdv_id&success=1");
+    header("Location: dashboard.php?success=2");
     exit();
 }
 
-$message = "";
-if (isset($_GET['success']) && $_GET['success'] == 1) {
-    $message = "✅ Le rendez-vous a été mis à jour.";
-}
 ?>
 
 <!DOCTYPE html>
@@ -100,7 +96,7 @@ if (isset($_GET['success']) && $_GET['success'] == 1) {
     </style>
 </head>
 
-<body data-message="<?= htmlspecialchars($message) ?>">
+<body>
     <aside>
         <nav>
             <ul>

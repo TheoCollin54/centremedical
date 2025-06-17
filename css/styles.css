@@ -1238,18 +1238,22 @@ CALENDRIER
 }
 
 .time-slot.selected:hover {
-    background-color: var(--bleu-france);
+    background-color: #6A6AF4;
     color: white;
 }
 
 .time-slot.initial {
-    background-color: var(--bleu-france-light);
+    background-color: green;
     color: white;
+    border: 2px solid black;
+    border-radius: 8px;
 }
 
 .time-slot.initial:hover {
-    background-color: var(--bleu-france);
+    background-color: darkgreen;
     color: white;
+    border: 2px solid black;
+    border-radius: 4px;
 }
 
 .pause-midi {

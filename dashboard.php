@@ -54,6 +54,10 @@ if (isset($_GET['success'])) {
         case 1:
             $message = "✅ Le rendez-vous a bien été ajouté.";
             break;
+
+        case 2:
+            $message = "✅ Le rendez-vous a bien été modifié.";
+            break;
         case 3:
             $message = "✅ Le rendez-vous a bien été supprimé.";
             break;

@@ -109,30 +109,29 @@ function createWeekGrid() {
             const h = slot.hour.toString().padStart(2, '0');
             const m = slot.min.toString().padStart(2, '0');
             slotDiv.textContent = `${h}:${m}`;
-            // 2. Format de la date/heure pour ce créneau
+            // Format de la date/heure pour ce créneau
             const y = date.getFullYear();
             const mo = (date.getMonth() + 1).toString().padStart(2, '0');
             const d = date.getDate().toString().padStart(2, '0');
             const fullStr = `${y}-${mo}-${d} ${h}:${m}`;
 
-            // 3. Si le créneau correspond à la date sélectionnée, ajout de la classe "initial"
+            // Ajout de la classe "initial" si correspondance
             if (fullStr === selectedDateStr) {
                 slotDiv.classList.add('initial');
             }
-            else if (isUnavailable(date, slot.hour, slot.min)) {
+
+            // Gestion de l'indisponibilité
+            if (isUnavailable(date, slot.hour, slot.min)) {
                 slotDiv.classList.add('unavailable');
             } else {
+                // Ajout de l'event click pour tous les créneaux disponibles, même "initial"
                 slotDiv.addEventListener('click', () => {
-                    const y = date.getFullYear();
-                    const mo = (date.getMonth() + 1).toString().padStart(2, '0');
-                    const d = date.getDate().toString().padStart(2, '0');
-                    const fullStr = `${y}-${mo}-${d} ${h}:${m}`;
-                    // Enlève la classe "selected" de tous les créneaux
+                    // Retire la classe 'selected' de tous les créneaux
                     document.querySelectorAll('.time-slot.selected').forEach(el => {
                         el.classList.remove('selected');
                     });
 
-                    // Ajoute "selected" uniquement au créneau cliqué
+                    // Ajoute 'selected' au créneau cliqué (sans retirer 'initial')
                     slotDiv.classList.add('selected');
                     document.getElementById('hidden-date').value = fullStr;
                 });
@@ -140,6 +139,7 @@ function createWeekGrid() {
 
             dayCol.appendChild(slotDiv);
         });
+
 
         container.appendChild(dayCol);
     });
