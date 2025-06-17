@@ -82,6 +82,13 @@ function createWeekGrid() {
         dayCol.appendChild(header);
 
         slots.forEach(slot => {
+            // Ajouter la barre blanche après 11h30 (juste avant de reprendre à 13h)
+            if (slot.hour === 13 && slot.min === 0) {
+                const pauseDiv = document.createElement('div');
+                pauseDiv.className = 'pause-midi';
+                dayCol.appendChild(pauseDiv);
+            }
+
             const slotDiv = document.createElement('div');
             slotDiv.className = 'time-slot';
             const h = slot.hour.toString().padStart(2, '0');
@@ -100,12 +107,15 @@ function createWeekGrid() {
                     document.getElementById('selected-info').textContent = `Créneau sélectionné : ${fullStr}`;
                 });
             }
+
             dayCol.appendChild(slotDiv);
         });
 
         container.appendChild(dayCol);
     });
 }
+
+
 
 function updateWeekLabel() {
     const weekStart = new Date(startOfWeekDate);

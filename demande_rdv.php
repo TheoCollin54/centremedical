@@ -52,6 +52,15 @@ if (isset($_GET['fail'])) {
     <title>Ajouter rendez-vous</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+<style>
+    .pause-midi {
+        height: 24px;
+        /* hauteur équivalente à 12h00 et 12h30 */
+        background-color: white;
+        border-top: 1px solid #ccc;
+        border-bottom: 1px solid #ccc;
+    }
+</style>
 
 <body data-message="<?= htmlspecialchars($message) ?>">
     <aside>
