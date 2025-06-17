@@ -4,7 +4,6 @@ console.log('Valeur users au chargement:', document.getElementById('users')?.val
 let weekOffset = 0;
 const today = new Date();
 let startOfWeekDate = new Date();
-startOfWeekDate.setDate(startOfWeekDate.getDate() - startOfWeekDate.getDay() + 1);
 
 const daysOfWeek = ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'];
 let unavailableSlots = [];
@@ -25,7 +24,6 @@ async function fetchUnavailableSlots(medecinId) {
     try {
         const res = await fetch(`?ajax_get_slots=1&medecin_id=${medecinId}&start_date=${weekStartStr}&end_date=${weekEndStr}`);
         unavailableSlots = await res.json();
-        console.log('Créneaux indisponibles reçus :', unavailableSlots);
         startOfWeekDate = startOfWeek; // <-- met à jour la variable globale pour le reste du script
         createWeekGrid();
         updateWeekLabel();
@@ -78,7 +76,16 @@ function createWeekGrid() {
 
         const header = document.createElement('div');
         header.className = 'day-header';
-        header.textContent = `${daysOfWeek[idx]} ${date.getDate()}/${date.getMonth() + 1}`;
+        const daysOfWeekFR = ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'];
+        const monthsFR = ['janv.', 'févr.', 'mars', 'avril', 'mai', 'juin', 'juil.', 'août', 'sept.', 'oct.', 'nov.', 'déc.'];
+
+        function formatDateFR(date) {
+            const dayName = daysOfWeekFR[date.getDay()];
+            const dayNum = date.getDate();
+            const monthName = monthsFR[date.getMonth()];
+            return `${dayName} ${dayNum} ${monthName}`;
+        }
+        header.textContent = formatDateFR(date);
         dayCol.appendChild(header);
 
         slots.forEach(slot => {
@@ -103,8 +110,14 @@ function createWeekGrid() {
                     const mo = (date.getMonth() + 1).toString().padStart(2, '0');
                     const d = date.getDate().toString().padStart(2, '0');
                     const fullStr = `${y}-${mo}-${d} ${h}:${m}`;
+                    // Enlève la classe "selected" de tous les créneaux
+                    document.querySelectorAll('.time-slot.selected').forEach(el => {
+                        el.classList.remove('selected');
+                    });
+
+                    // Ajoute "selected" uniquement au créneau cliqué
+                    slotDiv.classList.add('selected');
                     document.getElementById('hidden-date').value = fullStr;
-                    document.getElementById('selected-info').textContent = `Créneau sélectionné : ${fullStr}`;
                 });
             }
 
@@ -123,7 +136,7 @@ function updateWeekLabel() {
     weekEnd.setDate(weekStart.getDate() + 6);
     const options = { day: '2-digit', month: '2-digit' };
     document.getElementById('current-week-label').textContent =
-        `Semaine du ${weekStart.toLocaleDateString('fr-FR', options)} au ${weekEnd.toLocaleDateString('fr-FR', options)}`;
+        ``;
     document.getElementById('prev-week').disabled = (weekOffset === 0);
 }
 
@@ -143,7 +156,6 @@ document.getElementById('prev-week').addEventListener('click', () => {
 
 document.getElementById('users').addEventListener('change', function () {
     document.getElementById('hidden-date').value = '';
-    document.getElementById('selected-info').textContent = 'Aucun créneau sélectionné';
     fetchUnavailableSlots(this.value);
 });
 
