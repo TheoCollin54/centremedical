@@ -24,6 +24,23 @@ try {
     die("Erreur de connexion : " . $e->getMessage());
 }
 
+// Requête AJAX dynamique avec dates de semaine
+if (isset($_GET['ajax_get_slots']) && isset($_GET['medecin_id'])) {
+    $medecinId = intval($_GET['medecin_id']);
+    $start = isset($_GET['start_date']) ? $_GET['start_date'] : date('Y-m-d');
+    $end = isset($_GET['end_date']) ? $_GET['end_date'] . ' 23:59:59' : date('Y-m-d 23:59:59');
+
+    $stmt = $pdo->prepare("SELECT date FROM rdv2 WHERE doctor_id = :medecinId AND date BETWEEN :start AND :end");
+    $stmt->execute(['medecinId' => $medecinId, 'start' => $start, 'end' => $end]);
+    $dates = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+    $slots = array_map(fn($d) => (new DateTime($d))->format("Y-m-d H:i"), $dates);
+
+    header('Content-Type: application/json');
+    echo json_encode($slots);
+    exit;
+}
+
 $sql_user = "SELECT username FROM users WHERE users_id = :user_id";
 $stmt_user = $pdo->prepare($sql_user);
 $stmt_user->execute(['user_id' => $user_id]);
@@ -83,7 +100,7 @@ if (isset($_GET['fail'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ajouter rendez-vous</title>
-     <link rel="stylesheet" href="./css/styles.css" />
+    <link rel="stylesheet" href="./css/styles.css" />
     <!-- Flatpickr -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
@@ -107,7 +124,7 @@ if (isset($_GET['fail'])) {
     </aside>
     <main>
         <div class="container">
-            <form action="add_rdv_doc.php" method="POST" class="index" style="scale : 0.7">
+            <form action="add_rdv_doc.php" method="POST" class="index">
                 <input type="hidden" id="users" value="<?php echo $_SESSION['users_id']; ?>">
 
 
@@ -125,13 +142,12 @@ if (isset($_GET['fail'])) {
                 <input type="number" id="numsecu" name="numsecu" maxlength="15" minlength="15" required>
 
                 <div id="calendar-container">
-                    <div>
+                    <div class = "week-controls">
                         <button type="button" id="prev-week">Semaine précédente</button>
                         <span id="current-week-label"></span>
                         <button type="button" id="next-week">Semaine suivante</button>
                     </div>
                     <div id="week-grid"></div>
-                    <div id="selected-info">Aucun créneau sélectionné</div>
                 </div>
                 <input type="hidden" name="date" id="hidden-date" required>
 

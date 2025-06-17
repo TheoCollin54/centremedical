@@ -153,10 +153,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['rdv_id'], $_POST['dat
                 </tr>
             </table>
         </form>
-        <h6>
-            📅 Date actuelle du rendez-vous : <span
-                id="current-selected-date"><?= htmlspecialchars(date("d/m/Y à H:i", strtotime($rdv['date']))) ?></span>
-        </h6>
     </main>
 
     <script src="./js/scriptCalendarEv.js"></script>
@@ -164,4 +160,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['rdv_id'], $_POST['dat
 
 </body>
 
-</html>
+</html>D
