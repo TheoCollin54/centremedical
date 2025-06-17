@@ -14,13 +14,37 @@ try {
     die("Erreur de connexion : " . $e->getMessage());
 }
 
-// Rediriger si l'utilisateur n'est pas connecté
+// Gestion AJAX pour les créneaux indisponibles
+if (isset($_GET['ajax_get_slots']) && $_GET['ajax_get_slots'] == 1) {
+    header('Content-Type: application/json');
+
+    $doctor_id = $_GET['doctor_id'] ?? null;
+    $start_date = $_GET['start_date'] ?? null;
+    $end_date = $_GET['end_date'] ?? null;
+
+    if (!$doctor_id || !$start_date || !$end_date) {
+        echo json_encode(['error' => 'Paramètres manquants']);
+        exit();
+    }
+
+    $stmt = $pdo->prepare("SELECT date FROM rdv2 WHERE doctor_id = :doctor_id AND date BETWEEN :start_date AND :end_date");
+    $stmt->execute([
+        'doctor_id' => $doctor_id,
+        'start_date' => $start_date,
+        'end_date' => $end_date
+    ]);
+    $results = $stmt->fetchAll(PDO::FETCH_COLUMN);
+    echo json_encode($results);
+    exit();
+}
+
+// Vérifie session
 if (!isset($_SESSION['users_id'])) {
     header("Location: index_doc.php");
     exit();
 }
 
-// Si on a reçu un rdv_id depuis le bouton "Modifier"
+// Récupération de l'ID du rdv
 if (isset($_POST['rdv_id'])) {
     $rdv_id = $_POST['rdv_id'];
 } elseif (isset($_GET['rdv_id'])) {
@@ -30,7 +54,7 @@ if (isset($_POST['rdv_id'])) {
     exit();
 }
 
-// Récupérer les infos du rendez-vous
+// Récupération des infos du rendez-vous
 $stmt = $pdo->prepare("SELECT * FROM rdv2 WHERE rdv_id = :rdv_id");
 $stmt->execute(['rdv_id' => $rdv_id]);
 $rdv = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -40,6 +64,7 @@ if (!$rdv) {
     exit();
 }
 
+// Traitement de la modification
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['rdv_id'], $_POST['date'])) {
     $rdv_id = intval($_POST['rdv_id']);
     $newDate = $_POST['date'];
@@ -47,7 +72,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['rdv_id'], $_POST['dat
     $stmt = $pdo->prepare("UPDATE rdv2 SET date = :date WHERE rdv_id = :rdv_id");
     $stmt->execute(['date' => $newDate, 'rdv_id' => $rdv_id]);
 
-    // Redirection après modification pour éviter de resoumettre le formulaire au refresh
     header("Location: edit_rdv.php?rdv_id=$rdv_id&success=1");
     exit();
 }
@@ -56,8 +80,6 @@ $message = "";
 if (isset($_GET['success']) && $_GET['success'] == 1) {
     $message = "✅ Le rendez-vous a été mis à jour.";
 }
-
-
 ?>
 
 <!DOCTYPE html>
@@ -66,13 +88,27 @@ if (isset($_GET['success']) && $_GET['success'] == 1) {
 <head>
     <meta charset="UTF-8">
     <title>Modifier le rendez-vous</title>
-     <link rel="stylesheet" href="./css/styles.css" />
-    <!-- Flatpickr -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="./css/styles.css" />
+    <style>
+        .highlighted-date {
+            margin: 10px 0;
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #0a4f91;
+        }
+
+        #calendar-container {
+            margin-bottom: 20px;
+        }
+
+        table {
+            margin-top: 20px;
+        }
+    </style>
 </head>
 
 <body data-message="<?= htmlspecialchars($message) ?>">
-    <aside> <!-- Sidebar -->
+    <aside>
         <nav>
             <ul>
                 <li><a href="dashboard.php">Mes rendez-vous</a></li>
@@ -85,44 +121,39 @@ if (isset($_GET['success']) && $_GET['success'] == 1) {
     <main>
         <form action="edit_rdv.php" method="POST">
             <input type="hidden" name="rdv_id" value="<?= htmlspecialchars($rdv['rdv_id']) ?>">
+            <input type="hidden" id="users" value="<?= htmlspecialchars($_SESSION['users_id']) ?>">
+
+            <!-- Calendrier -->
+            <label for="date"><strong>DATE ET HEURE DU RENDEZ-VOUS :</strong></label>
+            <div id="calendar-container">
+                <div class="week-controls">
+                    <button type="button" id="prev-week">Semaine précédente</button>
+                    <span id="current-week-label"></span>
+                    <button type="button" id="next-week">Semaine suivante</button>
+                </div>
+                <div id="week-grid"></div>
+            </div>
+            <input type="hidden" name="date" id="hidden-date" value="<?= htmlspecialchars($rdv['date']) ?>" required>
+
+
+
             <table>
                 <tr>
-                    <th>Date du rendez-vous</th>
-                    <td>
-                        <input type="text" id="date-input" name="date" value="<?= htmlspecialchars($rdv['date']) ?>">
-                    </td>
+                    <th>Nom</th>
+                    <td><?= htmlspecialchars($rdv['patient_nom']) ?></td>
                 </tr>
                 <tr>
-                    <th>Nom</th>
-                    <th>
-                        <span>
-                            <?= htmlspecialchars($rdv['patient_nom']) ?>
-                        </span>
-                    </th>
+                    <th>Prénom</th>
+                    <td><?= htmlspecialchars($rdv['patient_prenom']) ?></td>
                 </tr>
-                <th>Prénom</th>
-                <th>
-                    <span>
-                        <?= htmlspecialchars($rdv['patient_prenom']) ?>
-                    </span>
-                </th>
                 <tr>
                     <th>Téléphone</th>
-                    <th>
-                        <span>
-                            <?= htmlspecialchars($rdv['patient_tel']) ?>
-                        </span>
-                    </th>
+                    <td><?= htmlspecialchars($rdv['patient_tel']) ?></td>
                 </tr>
                 <tr>
                     <th>Numéro de sécurité sociale</th>
-                    <th>
-                        <span>
-                            <?= htmlspecialchars($rdv['num_secu']) ?>
-                        </span>
-                    </th>
+                    <td><?= htmlspecialchars($rdv['num_secu']) ?></td>
                 </tr>
-
                 <tr>
                     <td colspan="2">
                         <button type="submit"
@@ -133,13 +164,15 @@ if (isset($_GET['success']) && $_GET['success'] == 1) {
                 </tr>
             </table>
         </form>
+        <h6>
+            📅 Date actuelle du rendez-vous : <span
+                id="current-selected-date"><?= htmlspecialchars(date("d/m/Y à H:i", strtotime($rdv['date']))) ?></span>
+        </h6>
     </main>
 
-    <!-- Flatpickr JS -->
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/fr.js"></script>
     <script src="./js/scriptCalendar.js"></script>
     <script src="./js/scriptMsg.js"></script>
+
 </body>
 
 </html>

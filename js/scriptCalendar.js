@@ -22,8 +22,15 @@ async function fetchUnavailableSlots(medecinId) {
     const weekEndStr = weekEnd.toISOString().split('T')[0];
 
     try {
+        // console.log("Fetching with parameters:", {
+        //     doctor_id: medecinId,
+        //     start_date: startDate,
+        //     end_date: endDate
+        // });
+
         const res = await fetch(`?ajax_get_slots=1&medecin_id=${medecinId}&start_date=${weekStartStr}&end_date=${weekEndStr}`);
         unavailableSlots = await res.json();
+        console.log("Slots reçus:", unavailableSlots);
         startOfWeekDate = startOfWeek; // <-- met à jour la variable globale pour le reste du script
         createWeekGrid();
         updateWeekLabel();
