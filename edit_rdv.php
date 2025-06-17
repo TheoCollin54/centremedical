@@ -66,7 +66,7 @@ if (isset($_GET['success']) && $_GET['success'] == 1) {
 <head>
     <meta charset="UTF-8">
     <title>Modifier le rendez-vous</title>
-    <link rel="stylesheet" href="styles.css" />
+     <link rel="stylesheet" href="./css/styles.css" />
     <!-- Flatpickr -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>

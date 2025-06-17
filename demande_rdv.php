@@ -50,7 +50,7 @@ if (isset($_GET['fail'])) {
 <head>
     <meta charset="UTF-8">
     <title>Ajouter rendez-vous</title>
-    <link rel="stylesheet" href="styles.css">
+     <link rel="stylesheet" href="./css/styles.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 

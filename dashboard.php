@@ -22,6 +22,7 @@ try {
     die("Erreur de connexion : " . $e->getMessage());
 }
 
+// Récupérer le nom d'utilisateur pour redirection si admin
 $sql_user = "SELECT username FROM users WHERE users_id = :user_id";
 $stmt_user = $pdo->prepare($sql_user);
 $stmt_user->execute(['user_id' => $user_id]);
@@ -32,6 +33,7 @@ if ($user && $user['username'] === 'admin') {
     exit();
 }
 
+// Récupérer les rendez-vous du médecin connecté
 $sql = "SELECT r.rdv_id, r.patient_nom, r.patient_prenom, r.patient_tel, r.num_secu, r.date
     FROM rdv2 r
     WHERE r.doctor_id = :user_id";
@@ -39,11 +41,13 @@ $stmt = $pdo->prepare($sql);
 $stmt->execute(['user_id' => $user_id]);
 $rendezvous = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+// Récupérer le nom et spécialité pour affichage
 $sql_name = "SELECT username, speciality FROM users WHERE users_id = :user_id";
 $stmt_name = $pdo->prepare($sql_name);
 $stmt_name->execute(['user_id' => $user_id]);
 $name = $stmt_name->fetch(PDO::FETCH_ASSOC);
 
+// Message de succès
 $message = '';
 if (isset($_GET['success'])) {
     switch ((int) $_GET['success']) {
@@ -64,63 +68,15 @@ if (isset($_GET['success'])) {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Mes rendez-vous</title>
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="./css/styles.css" />
+    <link rel="stylesheet" href="./css/stylesDashboard.css" />
 
-    <!-- FullCalendar CSS et JS -->
+    <!-- FullCalendar CSS -->
     <link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css' rel='stylesheet' />
-    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
-    <style>
-        /* Style simple pour la modale */
-        #rdvModal {
-            display: none;
-            position: fixed;
-            z-index: 9999;
-            padding-top: 100px;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.5);
-        }
-
-        #rdvModalContent {
-            background-color: #fff;
-            margin: auto;
-            padding: 20px;
-            border-radius: 8px;
-            max-width: 400px;
-        }
-
-        #rdvModalClose {
-            float: right;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 18px;
-        }
-
-        button.delete-btn {
-            background-color: red;
-            color: white;
-            border: none;
-            padding: 8px 12px;
-            cursor: pointer;
-            border-radius: 4px;
-        }
-
-        button.delete-btn:hover {
-            background-color: darkred;
-            color: white;
-            border: none;
-            padding: 8px 12px;
-            cursor: pointer;
-            border-radius: 4px;
-        }
-    </style>
-
     <script>
+        // Prépare les données des rendez-vous pour le JS
         const rdvData = <?php
         $events = [];
         foreach ($rendezvous as $rdv) {
@@ -139,7 +95,6 @@ if (isset($_GET['success'])) {
         echo json_encode($events);
         ?>;
     </script>
-
 </head>
 
 <body data-message="<?= htmlspecialchars($message) ?>">
@@ -157,7 +112,6 @@ if (isset($_GET['success'])) {
             Connecté en tant que : <?= htmlspecialchars($name['username']) ?>
             (<?= htmlspecialchars($name['speciality']) ?>)
         </p>
-
     </aside>
 
     <main>
@@ -168,16 +122,16 @@ if (isset($_GET['success'])) {
         <?php endif; ?>
     </main>
 
-    <!-- Modale pour afficher infos RDV et bouton supprimer -->
+    <!-- Modale pour afficher infos RDV et boutons Modifier / Supprimer -->
     <div id="rdvModal">
         <div id="rdvModalContent">
             <span id="rdvModalClose">&times;</span>
             <h3>Détails du rendez-vous</h3>
-            <p><strong>Nom :</strong> <span id="modalNom"></span></p>
-            <p><strong>Prénom :</strong> <span id="modalPrenom"></span></p>
-            <p><strong>Téléphone :</strong> <span id="modalTel"></span></p>
-            <p><strong>Numéro de sécurité sociale :</strong> <span id="modalSecu"></span></p>
-            <p><strong>Date :</strong> <span id="modalDate"></span></p>
+            <p>Nom : <span id="modalNom"></span></p>
+            <p>Prénom : <span id="modalPrenom"></span></p>
+            <p>Téléphone : <span id="modalTel"></span></p>
+            <p>Numéro de sécurité sociale : <span id="modalSecu"></span></p>
+            <p>Date : <span id="modalDate"></span></p>
 
             <form id="editForm" method="POST" action="edit_rdv.php">
                 <input type="hidden" name="rdv_id" id="modalRdvIdEdit" value="">
@@ -191,6 +145,10 @@ if (isset($_GET['success'])) {
             </form>
         </div>
     </div>
+
+    <!-- Regroupement de tous les scripts JS ici, à la fin du body -->
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
+    <script src="./js/scriptMsg.js"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -214,29 +172,28 @@ if (isset($_GET['success'])) {
                     info.el.setAttribute('title', `Téléphone: ${info.event.extendedProps.tel}\nN° Sécu: ${info.event.extendedProps.num_secu}`);
                 },
                 eventClick: function (info) {
-                    console.log('eventClick info:', info);
-                    console.log('info.event:', info.event);
-                    console.log('info.event.extendedProps:', info.event.extendedProps);
-                    console.log('info.event.title:', info.event.title);
-                    console.log('info.event.start:', info.event.start);
-                    // Affiche modale avec détails
-                    modalNom.textContent = info.event.title;
-                    modalPrenom.textContent = info.event.extendedProps.prenom;
-                    modalTel.textContent = info.event.extendedProps.tel;
-                    modalSecu.textContent = info.event.extendedProps.num_secu;
-                    modalDate.textContent = info.event.start.toLocaleString();
+                    // Remplissage de la modale avec les infos de l'événement
+                    modalNom.textContent = info.event.extendedProps.nom || info.event.title;
+                    modalPrenom.textContent = info.event.extendedProps.prenom || '';
+                    modalTel.textContent = info.event.extendedProps.tel || '';
+                    modalSecu.textContent = info.event.extendedProps.num_secu || '';
+                    modalDate.textContent = info.event.start ? info.event.start.toLocaleString() : '';
                     modalRdvIdEdit.value = info.event.id;
                     modalRdvIdDel.value = info.event.id;
+
+                    // Affiche la modale
                     modal.style.display = "block";
                 }
             });
 
             calendar.render();
 
-            // Fermeture modale
+            // Fermeture de la modale au clic sur la croix
             modalClose.onclick = function () {
                 modal.style.display = "none";
             };
+
+            // Fermeture de la modale au clic en dehors du contenu
             window.onclick = function (event) {
                 if (event.target === modal) {
                     modal.style.display = "none";
@@ -244,7 +201,6 @@ if (isset($_GET['success'])) {
             };
         });
     </script>
-    <script src="./js/scriptMsg.js"></script>
 </body>
 
 </html>

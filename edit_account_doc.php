@@ -74,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Modifier mes informations</title>
-    <link rel="stylesheet" href="styles.css" />
+     <link rel="stylesheet" href="./css/styles.css" />
 </head>
 <body>
 <aside>
