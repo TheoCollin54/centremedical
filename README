@@ -1,150 +1,243 @@
-CONTENU DE db/connection.php :
 <?php
-    $dbConn = array(
-        'user' => 'if0_39171546',
-        'pass' => 'l9tQBbp4zG',
-        'name' => 'if0_39171546_centremedical',
-        'host' => 'sql113.infinityfree.com'
-    );
-    
-    // Connexion à la base de données
-    $conn = new mysqli($dbConn['host'], $dbConn['user'], $dbConn['pass'], $dbConn['name']);
-    //Vérification de la connexion
-    if ($conn->connect_error) {
-        die('Erreur de connexion');
-    }    
+session_start();
+require_once('./db/connection.php');
+
+$host = $dbConn['host'];
+$username_db = $dbConn['user'];
+$password_db = $dbConn['pass'];
+$dbname = $dbConn['name'];
+
+// Vérifie que l'utilisateur est connecté
+if (!isset($_SESSION['users_id'])) {
+    header("Location: index_doc.php");
+    exit();
+}
+
+$user_id = $_SESSION['users_id'];
+
+try {
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username_db, $password_db);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die("Erreur de connexion : " . $e->getMessage());
+}
+
+$sql_user = "SELECT username FROM users WHERE users_id = :user_id";
+$stmt_user = $pdo->prepare($sql_user);
+$stmt_user->execute(['user_id' => $user_id]);
+$user = $stmt_user->fetch(PDO::FETCH_ASSOC);
+
+if ($user && $user['username'] === 'admin') {
+    header("Location: dashboard_admin.php");
+    exit();
+}
+
+$sql = "SELECT r.rdv_id, r.patient_nom, r.patient_prenom, r.patient_tel, r.num_secu, r.date
+    FROM rdv2 r
+    WHERE r.doctor_id = :user_id";
+$stmt = $pdo->prepare($sql);
+$stmt->execute(['user_id' => $user_id]);
+$rendezvous = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+$sql_name = "SELECT username, speciality FROM users WHERE users_id = :user_id";
+$stmt_name = $pdo->prepare($sql_name);
+$stmt_name->execute(['user_id' => $user_id]);
+$name = $stmt_name->fetch(PDO::FETCH_ASSOC);
+
+$message = '';
+if (isset($_GET['success'])) {
+    switch ((int) $_GET['success']) {
+        case 1:
+            $message = "✅ Le rendez-vous a bien été ajouté.";
+            break;
+        case 3:
+            $message = "✅ Le rendez-vous a bien été supprimé.";
+            break;
+    }
+}
 ?>
-https://centremedical.infinityfreeapp.com/index.php
 
-<script>
-        let weekOffset = 0;
-        const today = new Date();
-        let startOfWeekDate = new Date();
-        startOfWeekDate.setDate(startOfWeekDate.getDate() - startOfWeekDate.getDay() + 1);
+<!DOCTYPE html>
+<html lang="fr">
 
-        const daysOfWeek = ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'];
-        let unavailableSlots = [];
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mes rendez-vous</title>
+    <link rel="stylesheet" href="styles.css" />
 
-        async function fetchUnavailableSlots(medecinId) {
-            if (!medecinId) return;
+    <!-- FullCalendar CSS et JS -->
+    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css' rel='stylesheet' />
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
 
-            const weekStartStr = startOfWeekDate.toISOString().split('T')[0];
-            const weekEnd = new Date(startOfWeekDate);
-            weekEnd.setDate(weekEnd.getDate() + 6);
-            const weekEndStr = weekEnd.toISOString().split('T')[0];
-
-            try {
-                const res = await fetch(`?ajax_get_slots=1&medecin_id=${medecinId}&start_date=${weekStartStr}&end_date=${weekEndStr}`);
-                unavailableSlots = await res.json();
-                createWeekGrid();
-                updateWeekLabel();
-            } catch (e) {
-                console.error(e);
-            }
+    <style>
+        /* Style simple pour la modale */
+        #rdvModal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            padding-top: 100px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
         }
 
-        function getWeekDates(startDate) {
-            const dates = [];
-            for (let i = 0; i < 7; i++) {
-                const d = new Date(startDate);
-                d.setDate(d.getDate() + i);
-                dates.push(d);
-            }
-            return dates;
+        #rdvModalContent {
+            background-color: #fff;
+            margin: auto;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 400px;
         }
 
-        function generateTimeSlots() {
-            const slots = [];
-            for (let hour = 8; hour < 18; hour++) {
-                if (hour === 12) continue;
-                for (let min = 0; min < 60; min += 15) {
-                    slots.push({ hour, min });
-                }
-            }
-            return slots;
+        #rdvModalClose {
+            float: right;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 18px;
         }
 
-        function isUnavailable(dateObj, hour, min) {
-            const y = dateObj.getFullYear();
-            const mo = (dateObj.getMonth() + 1).toString().padStart(2, '0');
-            const d = dateObj.getDate().toString().padStart(2, '0');
-            const h = hour.toString().padStart(2, '0');
-            const mn = min.toString().padStart(2, '0');
-            const fullStr = `${y}-${mo}-${d} ${h}:${mn}`;
-            return unavailableSlots.includes(fullStr);
+        button.delete-btn {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            cursor: pointer;
+            border-radius: 4px;
         }
 
-        function createWeekGrid() {
-            const container = document.getElementById('week-grid');
-            container.innerHTML = '';
-            const weekDates = getWeekDates(startOfWeekDate);
-            const slots = generateTimeSlots();
-
-            weekDates.forEach((date, idx) => {
-                const dayCol = document.createElement('div');
-                dayCol.className = 'day-column';
-
-                const header = document.createElement('div');
-                header.className = 'day-header';
-                header.textContent = `${daysOfWeek[idx]} ${date.getDate()}/${date.getMonth() + 1}`;
-                dayCol.appendChild(header);
-
-                slots.forEach(slot => {
-                    const slotDiv = document.createElement('div');
-                    slotDiv.className = 'time-slot';
-                    const h = slot.hour.toString().padStart(2, '0');
-                    const m = slot.min.toString().padStart(2, '0');
-                    slotDiv.textContent = `${h}:${m}`;
-
-                    if (isUnavailable(date, slot.hour, slot.min)) {
-                        slotDiv.classList.add('unavailable');
-                    } else {
-                        slotDiv.addEventListener('click', () => {
-                            const y = date.getFullYear();
-                            const mo = (date.getMonth() + 1).toString().padStart(2, '0');
-                            const d = date.getDate().toString().padStart(2, '0');
-                            const fullStr = `${y}-${mo}-${d} ${h}:${m}`;
-                            document.getElementById('hidden-date').value = fullStr;
-                            document.getElementById('selected-info').textContent = `Créneau sélectionné : ${fullStr}`;
-                        });
-                    }
-                    dayCol.appendChild(slotDiv);
-                });
-
-                container.appendChild(dayCol);
-            });
+        button.delete-btn:hover {
+            background-color: darkred;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            cursor: pointer;
+            border-radius: 4px;
         }
+    </style>
 
-        function updateWeekLabel() {
-            const weekStart = new Date(startOfWeekDate);
-            const weekEnd = new Date(startOfWeekDate);
-            weekEnd.setDate(weekStart.getDate() + 6);
-            const options = { day: '2-digit', month: '2-digit' };
-            document.getElementById('current-week-label').textContent =
-                `Semaine du ${weekStart.toLocaleDateString('fr-FR', options)} au ${weekEnd.toLocaleDateString('fr-FR', options)}`;
-            document.getElementById('prev-week').disabled = (weekOffset === 0);
+    <script>
+        const rdvData = <?php
+        $events = [];
+        foreach ($rendezvous as $rdv) {
+            $events[] = [
+                'title' => htmlspecialchars($rdv['patient_nom']),
+                'start' => $rdv['date'],
+                'extendedProps' => [
+                    'prenom' => $rdv['patient_prenom'],
+                    'nom' => $rdv['patient_nom'],
+                    'tel' => $rdv['patient_tel'],
+                    'num_secu' => $rdv['num_secu']
+                ],
+                'id' => $rdv['rdv_id']
+            ];
         }
-
-        document.getElementById('next-week').addEventListener('click', () => {
-            weekOffset++;
-            startOfWeekDate.setDate(startOfWeekDate.getDate() + 7);
-            fetchUnavailableSlots(document.getElementById('users').value);
-        });
-
-        document.getElementById('prev-week').addEventListener('click', () => {
-            if (weekOffset > 0) {
-                weekOffset--;
-                startOfWeekDate.setDate(startOfWeekDate.getDate() - 7);
-                fetchUnavailableSlots(document.getElementById('users').value);
-            }
-        });
-
-        document.getElementById('users').addEventListener('change', function () {
-            document.getElementById('hidden-date').value = '';
-            document.getElementById('selected-info').textContent = 'Aucun créneau sélectionné';
-            fetchUnavailableSlots(this.value);
-        });
-
-        createWeekGrid();
-        updateWeekLabel();
+        echo json_encode($events);
+        ?>;
     </script>
+
+</head>
+
+<body data-message="<?= htmlspecialchars($message) ?>">
+    <aside>
+        <nav>
+            <ul>
+                <li><a href="#" class="inactive">Mes rendez-vous</a></li>
+                <li><a href="demande_rdv_doc.php">Ajouter un rendez-vous</a></li>
+                <li><a href="logout.php">Se déconnecter</a></li>
+            </ul>
+        </nav>
+        <br>
+        <p class="doctor_name">
+            Connecté en tant que : <?= htmlspecialchars($name['username']) ?>
+            (<?= htmlspecialchars($name['speciality']) ?>)
+        </p>
+
+    </aside>
+
+    <main>
+        <?php if (empty($rendezvous)): ?>
+            <p>Vous n'avez aucun rendez-vous.</p>
+        <?php else: ?>
+            <div id='calendar'></div>
+        <?php endif; ?>
+    </main>
+
+    <!-- Modale pour afficher infos RDV et bouton supprimer -->
+    <div id="rdvModal">
+        <div id="rdvModalContent">
+            <span id="rdvModalClose">&times;</span>
+            <h3>Détails du rendez-vous</h3>
+            <p><strong>Nom :</strong> <span id="modalNom"></span></p>
+            <p><strong>Prénom :</strong> <span id="modalPrenom"></span></p>
+            <p><strong>Téléphone :</strong> <span id="modalTel"></span></p>
+            <p><strong>Numéro de sécurité sociale :</strong> <span id="modalSecu"></span></p>
+            <p><strong>Date :</strong> <span id="modalDate"></span></p>
+
+            <form id="editForm" method="POST" action="edit_rdv.php">
+                <input type="hidden" name="rdv_id" id="modalRdvIdEdit" value="">
+                <button type="submit">Modifier</button>
+            </form>
+            <br>
+            <form id="deleteForm" method="POST" action="delete_rdv.php"
+                onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce rendez-vous ?');">
+                <input type="hidden" name="rdv_id" id="modalRdvIdDel" value="">
+                <button type="submit" class="delete-btn">Supprimer</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const calendarEl = document.getElementById('calendar');
+            const modal = document.getElementById('rdvModal');
+            const modalClose = document.getElementById('rdvModalClose');
+            const modalNom = document.getElementById('modalNom');
+            const modalPrenom = document.getElementById('modalPrenom');
+            const modalTel = document.getElementById('modalTel');
+            const modalSecu = document.getElementById('modalSecu');
+            const modalDate = document.getElementById('modalDate');
+            const modalRdvIdEdit = document.getElementById('modalRdvIdEdit');
+            const modalRdvIdDel = document.getElementById('modalRdvIdDel');
+
+            const calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                locale: 'fr',
+                height: 'auto',
+                events: rdvData,
+                eventDidMount: function (info) {
+                    info.el.setAttribute('title', `Téléphone: ${info.event.extendedProps.tel}\nN° Sécu: ${info.event.extendedProps.num_secu}`);
+                },
+                eventClick: function (info) {
+                    // Affiche modale avec détails
+                    modalNom.textContent = info.event.title;
+                    modalPrenom.textContent = info.event.extendedProps.prenom;
+                    modalTel.textContent = info.event.extendedProps.tel;
+                    modalSecu.textContent = info.event.extendedProps.num_secu;
+                    modalDate.textContent = info.event.startStr;
+                    modalRdvIdEdit.value = info.event.id;
+                    modalRdvIdDel.value = info.event.id;
+                    modal.style.display = "block";
+                }
+            });
+
+            calendar.render();
+
+            // Fermeture modale
+            modalClose.onclick = function () {
+                modal.style.display = "none";
+            };
+            window.onclick = function (event) {
+                if (event.target === modal) {
+                    modal.style.display = "none";
+                }
+            };
+        });
+    </script>
+    <script src="./js/scriptMsg.js"></script>
+</body>
+
+</html>
