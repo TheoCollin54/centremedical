@@ -96,7 +96,7 @@ if (isset($_GET['fail'])) {
     </aside>
     <main>
         <div class="container">
-            <form action="add_rdv_admin.php" method="POST" class="index" style="scale:0.7">
+            <form action="add_rdv_admin.php" method="POST" class="index">
                 <label for="users_id">Choisissez votre médecin :</label>
                 <select name="users_id" id="users" required>
                     <option value="">-- Sélectionner --</option>
@@ -122,13 +122,12 @@ if (isset($_GET['fail'])) {
 
                 <label for="date"><strong>DATE ET HEURE DU RENDEZ-VOUS :</strong></label>
                 <div id="calendar-container">
-                    <div>
+                    <div class = "week-controls">
                         <button type="button" id="prev-week">Semaine précédente</button>
                         <span id="current-week-label"></span>
                         <button type="button" id="next-week">Semaine suivante</button>
                     </div>
                     <div id="week-grid"></div>
-                    <div id="selected-info">Aucun créneau sélectionné</div>
                 </div>
                 <input type="hidden" name="date" id="hidden-date" required>
 
