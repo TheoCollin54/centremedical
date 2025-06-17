@@ -49,7 +49,7 @@ function generateTimeSlots() {
     const slots = [];
     for (let hour = 8; hour < 18; hour++) {
         if (hour === 12) continue;
-        for (let min = 0; min < 60; min += 15) {
+        for (let min = 0; min < 60; min += 30) {
             slots.push({ hour, min });
         }
     }
