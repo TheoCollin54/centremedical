@@ -10,11 +10,11 @@ let unavailableSlots = [];
 
 async function fetchUnavailableSlots(medecinId) {
     console.log('Fetching slots for medecinId:', medecinId);
-    if (!medecinId) return;
+    // if (!medecinId) return;
 
     // Recalcul dynamique de la date de début de semaine avec le bon offset
     const startOfWeek = new Date();
-    startOfWeek.setDate(startOfWeek.getDate() - startOfWeek.getDay() + 1 + weekOffset * 7);
+    startOfWeek.setDate(startOfWeek.getDate() + weekOffset * 7);
 
     const weekStartStr = startOfWeek.toISOString().split('T')[0];
     const weekEnd = new Date(startOfWeek);
@@ -158,7 +158,7 @@ document.getElementById('users').addEventListener('change', function () {
     document.getElementById('hidden-date').value = '';
     fetchUnavailableSlots(this.value);
 });
-
+startOfWeekDate.setDate(today.getDate() + weekOffset * 7);
 createWeekGrid();
 updateWeekLabel();
 fetchUnavailableSlots(document.getElementById('users').value);
