@@ -69,6 +69,7 @@ if (isset($_GET['success'])) {
     <!-- FullCalendar CSS et JS -->
     <link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css' rel='stylesheet' />
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
         /* Style simple pour la modale */
@@ -148,7 +149,7 @@ if (isset($_GET['success'])) {
                 <li><a href="#" class="inactive">Mes rendez-vous</a></li>
                 <li><a href="demande_rdv_doc.php">Ajouter un rendez-vous</a></li>
                 <li><a href="edit_account_doc.php">Modifier ses informations</a></li>
-                <li><a href="logout.php">Se déconnecter</a></li>
+                <li><a href="logout.php"><i class="fas fa-right-from-bracket"></i>Déconnexion</a></li>
             </ul>
         </nav>
         <br>
@@ -213,12 +214,17 @@ if (isset($_GET['success'])) {
                     info.el.setAttribute('title', `Téléphone: ${info.event.extendedProps.tel}\nN° Sécu: ${info.event.extendedProps.num_secu}`);
                 },
                 eventClick: function (info) {
+                    console.log('eventClick info:', info);
+                    console.log('info.event:', info.event);
+                    console.log('info.event.extendedProps:', info.event.extendedProps);
+                    console.log('info.event.title:', info.event.title);
+                    console.log('info.event.start:', info.event.start);
                     // Affiche modale avec détails
                     modalNom.textContent = info.event.title;
                     modalPrenom.textContent = info.event.extendedProps.prenom;
                     modalTel.textContent = info.event.extendedProps.tel;
                     modalSecu.textContent = info.event.extendedProps.num_secu;
-                    modalDate.textContent = info.event.startStr;
+                    modalDate.textContent = info.event.start.toLocaleString();
                     modalRdvIdEdit.value = info.event.id;
                     modalRdvIdDel.value = info.event.id;
                     modal.style.display = "block";
