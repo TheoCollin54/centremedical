@@ -1179,6 +1179,7 @@ main p {
         transition-duration: 0.01ms !important;
     }
 }
+
 /* 
 CALENDRIER 
 */
@@ -1233,12 +1234,12 @@ CALENDRIER
 
 .time-slot.selected {
     background-color: var(--bleu-france-light);
-    color : white;
+    color: white;
 }
 
 .time-slot.selected:hover {
     background-color: var(--bleu-france);
-    color : white;
+    color: white;
 }
 
 .pause-midi {
@@ -1246,4 +1247,35 @@ CALENDRIER
     background-color: white;
     border-top: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
+}
+
+.week-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.week-controls button {
+    background-color: var(--bleu-france);
+    color: var(--blanc);
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.week-controls button:hover {
+    background-color: var(--bleu-france-light);
+}
+
+.week-controls button:disabled {
+    background-color: var(--gris-clair);
+    color: var(--gris-moyen);
+    cursor: not-allowed;
 }

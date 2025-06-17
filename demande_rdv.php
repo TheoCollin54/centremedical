@@ -87,7 +87,7 @@ if (isset($_GET['fail'])) {
 
                 <label for="date"><strong>DATE ET HEURE DU RENDEZ-VOUS :</strong></label>
                 <div id="calendar-container">
-                    <div>
+                    <div class = "week-controls">
                         <button type="button" id="prev-week">Semaine précédente</button>
                         <span id="current-week-label"></span>
                         <button type="button" id="next-week">Semaine suivante</button>
