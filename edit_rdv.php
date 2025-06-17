@@ -163,7 +163,7 @@ if (isset($_GET['success']) && $_GET['success'] == 1) {
         </h6>
     </main>
 
-    <script src="./js/scriptCalendar.js"></script>
+    <script src="./js/scriptCalendarEv.js"></script>
     <script src="./js/scriptMsg.js"></script>
 
 </body>

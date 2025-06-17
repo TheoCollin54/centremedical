@@ -1242,6 +1242,16 @@ CALENDRIER
     color: white;
 }
 
+.time-slot.initial {
+    background-color: var(--bleu-france-light);
+    color: white;
+}
+
+.time-slot.initial:hover {
+    background-color: var(--bleu-france);
+    color: white;
+}
+
 .pause-midi {
     height: 24px;
     background-color: white;
