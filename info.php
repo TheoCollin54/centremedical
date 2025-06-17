@@ -32,7 +32,7 @@ try {
     <aside>
         <nav>
             <ul>
-                <li><a href="index.php"><i class="fas fa-home"></i> Retour à l'accueil</a></li>
+                <li><a href="index.php"><i class="fas fa-home"></i> Accueil</a></li>
             </ul>
         </nav>
     </aside>

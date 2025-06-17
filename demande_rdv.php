@@ -51,19 +51,20 @@ if (isset($_GET['fail'])) {
     <meta charset="UTF-8">
     <title>Ajouter rendez-vous</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 
 <body data-message="<?= htmlspecialchars($message) ?>">
     <aside>
         <nav>
             <ul>
-                <li><a href="index.php"><i class="fas fa-home"></i> Retour à l'accueil</a></li>
+                <li><a href="index.php"><i class="fas fa-home"></i> Accueil</a></li>
             </ul>
         </nav>
     </aside>
     <main>
         <div class="container">
-            <form action="add_rdv.php" method="POST" class="index" style="scale:0.7">
+            <form action="add_rdv.php" method="POST" class="index">
                 <label for="users_id">Choisissez votre médecin :</label>
                 <select name="users_id" id="users" required>
                     <option value="">-- Sélectionner --</option>
