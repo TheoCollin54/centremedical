@@ -17,7 +17,7 @@
                 <li><a href="dashboard_admin.php"><i class="fas fa-home"></i> Accueil</a></li>
                 <li><a href="#" class="inactive"><i class="fa-solid fa-user-doctor"></i> Ajouter un médecin</a></li>
                 <!-- <li><a href="edit_rdv_admin.php">Gérer les rendez-vous</a></li> -->
-                <li><a href="ajout_info.php" ><i class="fa-solid fa-circle-info"></i> Ajouter une information</a></li>
+                <li><a href="ajout_info.php"><i class="fa-solid fa-circle-info"></i> Ajouter une information</a></li>
                 <li><a href="logout.php"><i class="fas fa-right-from-bracket"></i>Déconnexion</a></li>
             </ul>
         </nav>
@@ -25,10 +25,8 @@
 
     <main>
 
-        <h2>Ajouter un nouvel utilisateur</h2>
         <div class="container">
-
-            <form action="add_doc.php" method="POST" class = "log">
+            <form action="add_doc.php" method="POST" class="log">
                 <label for="username"><strong>Nom d'utilisateur :</strong></label>
                 <input type="text" id="username" name="username" required>
 

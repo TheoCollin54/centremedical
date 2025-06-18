@@ -25,7 +25,6 @@
     <main>
 
         <div class="container">
-            <h2>Ajouter une information</h2>
             <form action="add_info.php" method="POST" class="log">
                 <label for="title"><strong>Titre :</strong></label>
                 <input type="text" id="title" name="title" required>
