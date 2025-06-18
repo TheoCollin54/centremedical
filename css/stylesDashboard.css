@@ -92,8 +92,8 @@ CALENDAR
 
 /* Change la couleur du jour actuel dans FullCalendar */
 .fc-day-today {
-  background-color: #ffeb3b !important; /* jaune vif */
-  color: #000 !important;               /* texte noir */
+  background-color: #1acc38 !important;
+  color: #000 !important;               
 }
 
 /* Pour que le calendrier prenne toute la largeur du bloc principal */
