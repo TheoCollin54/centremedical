@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accueil</title>
-     <link rel="stylesheet" href="./css/styles.css" />
+    <link rel="stylesheet" href="./css/styles.css" />
 </head>
 
 <body>
@@ -16,7 +16,7 @@
     <h1 class="subtitle">Connexion</h1>
     <div class="container">
         <!--Formulaire de connexion-->
-        <form action="login.php" method="POST">
+        <form action="login.php" method="POST" class="log">
             <label for="username"><strong>Nom d'utilisateur :</strong></label>
             <input type="username" id="username" name="username" required>
 
@@ -26,8 +26,8 @@
             <button class="btn" type="submit" class="login-btn">Se connecter</button>
         </form>
 
-        
-        <a href="mdp_oublie.php" style = "margin-top : 100px"> Mot de passe oublié </a>
+
+        <a href="mdp_oublie.php" style="margin-top : 100px; position : absolute;"> Mot de passe oublié </a>
     </div>
 </body>
 
