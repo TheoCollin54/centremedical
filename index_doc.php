@@ -27,7 +27,7 @@
         </form>
 
 
-        <a href="mdp_oublie.php" style="margin-top : 100px; position : absolute;"> Mot de passe oublié </a>
+        <a href="mdp_oublie.php" style="margin-top : 200px"> Mot de passe oublié </a>
     </div>
 </body>
 
