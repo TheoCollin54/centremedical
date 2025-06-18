@@ -86,14 +86,16 @@ CALENDAR
 }
 
 .fc-event:hover {
-    background-color: #3174ad !important; /* exemple de couleur au survol */
+    background-color: #3174ad !important;
+    /* exemple de couleur au survol */
     color: white !important;
 }
 
 /* Change la couleur du jour actuel dans FullCalendar */
 .fc-day-today {
-  background-color: #00A95F !important; /* vert vif */
-  color: #000 !important;               
+    background-color: #00A95F !important;
+    /* vert vif */
+    color: #000 !important;
 }
 
 /* Pour que le calendrier prenne toute la largeur du bloc principal */
@@ -107,8 +109,10 @@ CALENDAR
 
 /* Adapter la hauteur automatiquement en fonction de l'écran */
 .fc {
-    max-height: 80vh; /* 80% de la hauteur de la fenêtre */
-    overflow: auto;   /* scroll interne si nécessaire, mais rarement */
+    max-height: 80vh;
+    /* 80% de la hauteur de la fenêtre */
+    overflow: auto;
+    /* scroll interne si nécessaire, mais rarement */
 }
 
 /* Rendre le texte des événements plus gros */

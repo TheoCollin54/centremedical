@@ -16,6 +16,24 @@ document.addEventListener('DOMContentLoaded', function () {
         height: 'auto',
         firstDay: 1,
         events: rdvData,
+        buttonText: {
+            today: "Aujourd'hui"
+        },
+        dayCellDidMount: function (info) {
+            const today = new Date();
+            const cellDate = info.date;
+
+            // Supprime les heures pour une comparaison uniquement sur la date
+            today.setHours(0, 0, 0, 0);
+            cellDate.setHours(0, 0, 0, 0);
+
+            if (cellDate < today) {
+                // Appliquer un style aux jours passés
+                info.el.style.backgroundColor = "#f0f0f0"; // gris clair
+                info.el.style.opacity = "0.5"; // ou simplement réduire l'opacité
+                info.el.style.pointerEvents = "none"; // empêche l’interaction si souhaité
+            }
+        },
         eventDidMount: function (info) {
             info.el.setAttribute('title', `Téléphone: ${info.event.extendedProps.tel}\nN° Sécu: ${info.event.extendedProps.num_secu}`);
         },
