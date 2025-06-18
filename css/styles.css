@@ -564,6 +564,11 @@ form.index {
     transform: scale(1);
 }
 
+/* Formulaire de login */
+form.log {
+    transform: scale(2);
+}
+
 label {
     color: var(--gris-fonce);
     font-weight: 600;

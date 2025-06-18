@@ -16,7 +16,7 @@
     <h1 class="subtitle">Connexion</h1>
     <div class="container">
         <!--Formulaire de connexion-->
-        <form action="login.php" method="POST" class="index">
+        <form action="login.php" method="POST">
             <label for="username"><strong>Nom d'utilisateur :</strong></label>
             <input type="username" id="username" name="username" required>
 
