@@ -92,7 +92,7 @@ CALENDAR
 
 /* Change la couleur du jour actuel dans FullCalendar */
 .fc-day-today {
-  background-color: #1acc38 !important; /* vert vif */
+  background-color: #00A95F !important; /* vert vif */
   color: #000 !important;               
 }
 
