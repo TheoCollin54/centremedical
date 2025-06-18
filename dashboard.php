@@ -74,9 +74,11 @@ if (isset($_GET['success'])) {
     <title>Mes rendez-vous</title>
     <link rel="stylesheet" href="./css/styles.css" />
     <link rel="stylesheet" href="./css/stylesDashboard.css" />
+    <link rel="stylesheet" href="./css/stylesIcons.css" />
 
     <!-- FullCalendar CSS -->
     <link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css' rel='stylesheet' />
+    <!-- Logo -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <script>
@@ -105,9 +107,9 @@ if (isset($_GET['success'])) {
     <aside>
         <nav>
             <ul>
-                <li><a href="#" class="inactive">Mes rendez-vous</a></li>
-                <li><a href="demande_rdv_doc.php">Ajouter un rendez-vous</a></li>
-                <li><a href="edit_account_doc.php">Modifier mes informations</a></li>
+                <li><a href="#" class="inactive"><i class="fas fa-calendar-alt"></i> Mes rendez-vous</a></li>
+                <li><a href="demande_rdv_doc.php"><i class="fas fa-plus"></i> Ajouter un rendez-vous</a></li>
+                <li><a href="edit_account_doc.php"> <i class="fas fa-edit"></i>Modifier mes informations</a></li>
                 <li><a href="logout.php"><i class="fas fa-right-from-bracket"></i>Déconnexion</a></li>
             </ul>
         </nav>

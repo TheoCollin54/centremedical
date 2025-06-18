@@ -76,16 +76,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <title>Modifier mes informations</title>
     <link rel="stylesheet" href="./css/styles.css" />
+    <link rel="stylesheet" href="./css/stylesIcons.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
 </head>
 
 <body>
     <aside>
         <nav>
             <ul>
-                <li><a href="dashboard.php">Mes rendez-vous</a></li>
-                <li><a href="demande_rdv_doc.php" >Ajouter un rendez-vous</a></li>
-                <li><a href="#" class="inactive">Modifier mes informations</a></li>
+                <li><a href="dashboard.php"> <i class="fas fa-calendar-alt"></i> Mes rendez-vous</a></li>
+                <li><a href="demande_rdv_doc.php"><i class="fas fa-plus"></i> Ajouter un rendez-vous</a></li>
+                <li><a href="#" class="inactive"> <i class="fas fa-edit"></i>Modifier mes informations</a></li>
                 <li><a href="logout.php"><i class="fas fa-right-from-bracket"></i>Déconnexion</a></li>
             </ul>
         </nav>
