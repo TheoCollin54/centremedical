@@ -162,4 +162,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['rdv_id'], $_POST['dat
 
 </body>
 
-</html>D
+</html>

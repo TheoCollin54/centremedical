@@ -1,8 +1,32 @@
 console.log('Valeur users au chargement:', document.getElementById('users')?.value);
 
+
+const selectedDateStrRaw = document.getElementById('hidden-date').value;
+let selectedDateStr = selectedDateStrRaw ? selectedDateStrRaw.slice(0, 16) : '';
+
 let weekOffset = 0;
 const today = new Date();
 let startOfWeekDate = new Date();
+
+if (selectedDateStrRaw) {
+    const selectedDate = new Date(selectedDateStrRaw);
+
+    // Calculer le lundi de la semaine du rendez-vous initial
+    const day = selectedDate.getDay(); // 0 (dimanche) à 6 (samedi)
+    const diff = day === 0 ? -6 : 1 - day; // Si dimanche, remonte à lundi précédent
+    startOfWeekDate = new Date(selectedDate);
+    startOfWeekDate.setDate(selectedDate.getDate() + diff);
+
+    // Met à jour le weekOffset en fonction de l'écart avec la semaine actuelle
+    const todayMonday = new Date(today);
+    const todayDay = todayMonday.getDay();
+    const todayDiff = todayDay === 0 ? -6 : 1 - todayDay;
+    todayMonday.setDate(today.getDate() + todayDiff);
+
+    const diffInDays = Math.floor((startOfWeekDate - todayMonday) / (1000 * 60 * 60 * 24));
+    weekOffset = Math.floor(diffInDays / 7);
+}
+
 
 const daysOfWeek = ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'];
 let unavailableSlots = [];
@@ -69,8 +93,7 @@ function isUnavailable(dateObj, hour, min) {
     const fullStr = `${y}-${mo}-${d} ${h}:${mn}`;
     return unavailableSlots.includes(fullStr);
 }
-const selectedDateStrRaw = document.getElementById('hidden-date').value;
-let selectedDateStr = selectedDateStrRaw ? selectedDateStrRaw.slice(0, 16) : '';
+
 
 function createWeekGrid() {
     const container = document.getElementById('week-grid');
@@ -175,7 +198,11 @@ document.getElementById('users').addEventListener('change', function () {
     document.getElementById('hidden-date').value = '';
     fetchUnavailableSlots(this.value);
 });
-startOfWeekDate.setDate(today.getDate() + weekOffset * 7);
+console.log("Date du RDV initial :", selectedDateStrRaw);
+console.log("Lundi de la semaine du RDV :", startOfWeekDate.toISOString().slice(0, 10));
+console.log("Décalage de semaine (weekOffset) :", weekOffset);
+
+// startOfWeekDate.setDate(today.getDate() + weekOffset * 7);
 createWeekGrid();
 updateWeekLabel();
 fetchUnavailableSlots(document.getElementById('users').value);
