@@ -12,6 +12,7 @@ if (isset($_GET['success']) && $_GET['success'] == 1) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accueil</title>
      <link rel="stylesheet" href="./css/styles.css" />
+     <link rel="stylesheet" href="./css/stylesImg.css">
 </head>
 
 <body data-message="<?= htmlspecialchars($message) ?>">
