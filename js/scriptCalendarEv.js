@@ -35,7 +35,8 @@ async function fetchUnavailableSlots(medecinId) {
     console.log('Fetching slots for medecinId:', medecinId);
     // if (!medecinId) return;
 
-    const startOfWeek = new Date(startOfWeekDate);
+    // Recalcul dynamique de la date de début de semaine avec le bon offset
+    const startOfWeek = new Date();
     startOfWeek.setDate(startOfWeek.getDate() + weekOffset * 7);
 
     const weekStartStr = startOfWeek.toISOString().split('T')[0];
