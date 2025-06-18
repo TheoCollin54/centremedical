@@ -117,9 +117,9 @@ if (isset($_GET['success'])) {
         <nav>
             <ul>
                 <li><a href="#" class="inactive"><i class="fas fa-home"></i> Accueil</a></li>
-                <li><a href="ajout_doc.php">Ajouter un médecin</a></li>
+                <li><a href="ajout_doc.php" ><i class="fa-solid fa-user-doctor"></i> Ajouter un médecin</a></li>
                 <!-- <li><a href="edit_rdv_admin.php">Gérer les rendez-vous</a></li> -->
-                <li><a href="ajout_info.php">Ajouter une information</a></li>
+                <li><a href="ajout_info.php"><i class="fa-solid fa-circle-info"></i> Ajouter une information</a></li>
                 <li><a href="logout.php"><i class="fas fa-right-from-bracket"></i>Déconnexion</a></li>
             </ul>
         </nav>

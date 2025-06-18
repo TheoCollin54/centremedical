@@ -14,18 +14,19 @@
         <nav>
             <ul>
                 <li><a href="dashboard_admin.php"><i class="fas fa-home"></i> Accueil</a></li>
-                <li><a href="ajout_doc.php">Ajouter un médecin</a></li>
+                <li><a href="ajout_doc.php"><i class="fa-solid fa-user-doctor"></i> Ajouter un médecin</a></li>
                 <!-- <li><a href="edit_rdv_admin.php">Gérer les rendez-vous</a></li> -->
-                <li><a href="#" class="inactive">Ajouter une information</a></li>
+                <li><a href="#" class="inactive"><i class="fa-solid fa-circle-info"></i> Ajouter une information</a></li>
                 <li><a href="logout.php"><i class="fas fa-right-from-bracket"></i>Déconnexion</a></li>
             </ul>
         </nav>
     </aside>
 
     <main>
-        <h2>Ajouter une information</h2>
+
         <div class="container">
-            <form action="add_info.php" method="POST" class="index">
+            <h2>Ajouter une information</h2>
+            <form action="add_info.php" method="POST" class="log">
                 <label for="title"><strong>Titre :</strong></label>
                 <input type="text" id="title" name="title" required>
 
