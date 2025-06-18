@@ -31,10 +31,11 @@ CALENDRIER
 
 
 .day-header {
-    height: 50px; /* 🔸 hauteur fixe, à adapter selon ton design */
-    display: flex; /* 🔸 pour permettre le centrage */
-    align-items: center; /* 🔸 centre verticalement le contenu */
-    justify-content: center; /* 🔸 centre horizontalement */
+    height: 50px;
+    width: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
     font-weight: bold;
     padding: 4px;
@@ -121,4 +122,10 @@ CALENDRIER
     background-color: var(--gris-clair);
     color: var(--gris-moyen);
     cursor: not-allowed;
+}
+
+#current-year-label {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
 }

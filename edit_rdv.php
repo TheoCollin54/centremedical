@@ -119,6 +119,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['rdv_id'], $_POST['dat
             <label for="date"><strong>DATE ET HEURE DU RENDEZ-VOUS :</strong></label>
             <div id="calendar-container">
                 <div class="week-controls">
+                    <span id="current-year-label"></span>
                     <button type="button" id="prev-week">Semaine précédente</button>
                     <span id="current-week-label"></span>
                     <button type="button" id="next-week">Semaine suivante</button>

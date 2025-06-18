@@ -142,6 +142,8 @@ function updateWeekLabel() {
     const weekEnd = new Date(startOfWeekDate);
     weekEnd.setDate(weekStart.getDate() + 6);
     const options = { day: '2-digit', month: '2-digit' };
+    const year = startOfWeekDate.getFullYear();
+    document.getElementById('current-year-label').textContent = year;
     document.getElementById('current-week-label').textContent =
         ``;
     document.getElementById('prev-week').disabled = (weekOffset === 0);
