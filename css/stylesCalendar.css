@@ -31,6 +31,10 @@ CALENDRIER
 
 
 .day-header {
+    height: 50px; /* 🔸 hauteur fixe, à adapter selon ton design */
+    display: flex; /* 🔸 pour permettre le centrage */
+    align-items: center; /* 🔸 centre verticalement le contenu */
+    justify-content: center; /* 🔸 centre horizontalement */
     text-align: center;
     font-weight: bold;
     padding: 4px;
