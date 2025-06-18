@@ -171,6 +171,7 @@ if (isset($_GET['success'])) {
                 initialView: 'dayGridMonth',
                 locale: 'fr',
                 height: 'auto',
+                firstDay: 1,
                 events: rdvData,
                 eventDidMount: function (info) {
                     info.el.setAttribute('title', `Téléphone: ${info.event.extendedProps.tel}\nN° Sécu: ${info.event.extendedProps.num_secu}`);

@@ -75,3 +75,53 @@ button.delete-btn {
 button.delete-btn:hover {
     background-color: darkred;
 }
+
+/* 
+CALENDAR 
+*/
+/* Cible les événements dans le calendrier */
+.fc-event {
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.fc-event:hover {
+    background-color: #3174ad !important; /* exemple de couleur au survol */
+    color: white !important;
+}
+
+/* Change la couleur du jour actuel dans FullCalendar */
+.fc-day-today {
+  background-color: #ffeb3b !important; /* jaune vif */
+  color: #000 !important;               /* texte noir */
+}
+
+/* Pour que le calendrier prenne toute la largeur du bloc principal */
+#calendar {
+    max-width: 100%;
+    width: 100%;
+    margin: 0 auto;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+/* Adapter la hauteur automatiquement en fonction de l'écran */
+.fc {
+    max-height: 80vh; /* 80% de la hauteur de la fenêtre */
+    overflow: auto;   /* scroll interne si nécessaire, mais rarement */
+}
+
+/* Rendre le texte des événements plus gros */
+.fc-event-title {
+    font-size: 1rem;
+}
+
+/* Agrandir la taille des cases jours */
+.fc-daygrid-day-frame {
+    min-height: 6em;
+}
+
+/* Agrandir les titres de colonnes */
+.fc-col-header-cell {
+    font-size: 1rem;
+}

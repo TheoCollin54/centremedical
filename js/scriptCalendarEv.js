@@ -1,42 +1,40 @@
 console.log('Valeur users au chargement:', document.getElementById('users')?.value);
 
-
-const selectedDateStrRaw = document.getElementById('hidden-date').value;
-let selectedDateStr = selectedDateStrRaw ? selectedDateStrRaw.slice(0, 16) : '';
-
-let weekOffset = 0;
-const today = new Date();
-let startOfWeekDate = new Date();
-
-if (selectedDateStrRaw) {
-    const selectedDate = new Date(selectedDateStrRaw);
-
-    // Calculer le lundi de la semaine du rendez-vous initial
-    const day = selectedDate.getDay(); // 0 (dimanche) à 6 (samedi)
-    const diff = day === 0 ? -6 : 1 - day; // Si dimanche, remonte à lundi précédent
-    startOfWeekDate = new Date(selectedDate);
-    startOfWeekDate.setDate(selectedDate.getDate() + diff);
-
-    // Met à jour le weekOffset en fonction de l'écart avec la semaine actuelle
-    const todayMonday = new Date(today);
-    const todayDay = todayMonday.getDay();
-    const todayDiff = todayDay === 0 ? -6 : 1 - todayDay;
-    todayMonday.setDate(today.getDate() + todayDiff);
-
-    const diffInDays = Math.floor((startOfWeekDate - todayMonday) / (1000 * 60 * 60 * 24));
-    weekOffset = Math.floor(diffInDays / 7);
+function getMonday(d) {
+    const date = new Date(d);
+    const day = date.getDay();
+    const diff = day === 0 ? -6 : 1 - day;
+    date.setDate(date.getDate() + diff);
+    date.setHours(0, 0, 0, 0);
+    return date;
 }
 
+const selectedDateStrRaw = document.getElementById('hidden-date').value;
+const selectedDate = selectedDateStrRaw ? new Date(selectedDateStrRaw) : new Date();
+const today = new Date();
+
+const initialMonday = getMonday(selectedDate);
+const currentMonday = getMonday(today);
+
+const diffMs = initialMonday.getTime() - currentMonday.getTime();
+let weekOffset = Math.round(diffMs / (7 * 24 * 60 * 60 * 1000));
+
+console.log("Date sélectionnée :", selectedDate.toISOString().slice(0, 16));
+console.log("Lundi semaine sélectionnée :", initialMonday.toISOString().slice(0, 10));
+console.log("Lundi semaine actuelle :", currentMonday.toISOString().slice(0, 10));
+console.log("Décalage weekOffset calculé :", weekOffset);
+
+let startOfWeekDate = new Date(initialMonday); // lundi à afficher au départ
 
 const daysOfWeek = ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'];
 let unavailableSlots = [];
 
 async function fetchUnavailableSlots(medecinId) {
     console.log('Fetching slots for medecinId:', medecinId);
-    // if (!medecinId) return;
+    if (!medecinId) return;
 
     // Recalcul dynamique de la date de début de semaine avec le bon offset
-    const startOfWeek = new Date();
+    const startOfWeek = getMonday(new Date());
     startOfWeek.setDate(startOfWeek.getDate() + weekOffset * 7);
 
     const weekStartStr = startOfWeek.toISOString().split('T')[0];
@@ -45,12 +43,6 @@ async function fetchUnavailableSlots(medecinId) {
     const weekEndStr = weekEnd.toISOString().split('T')[0];
 
     try {
-        // console.log("Fetching with parameters:", {
-        //     doctor_id: medecinId,
-        //     start_date: startDate,
-        //     end_date: endDate
-        // });
-
         const res = await fetch(`?ajax_get_slots=1&medecin_id=${medecinId}&start_date=${weekStartStr}&end_date=${weekEndStr}`);
         unavailableSlots = await res.json();
         console.log("Slots reçus:", unavailableSlots);
@@ -61,7 +53,6 @@ async function fetchUnavailableSlots(medecinId) {
         console.error(e);
     }
 }
-
 
 function getWeekDates(startDate) {
     const dates = [];
@@ -76,7 +67,7 @@ function getWeekDates(startDate) {
 function generateTimeSlots() {
     const slots = [];
     for (let hour = 8; hour < 18; hour++) {
-        if (hour === 12) continue;
+        if (hour === 12) continue; // pause midi
         for (let min = 0; min < 60; min += 30) {
             slots.push({ hour, min });
         }
@@ -93,7 +84,6 @@ function isUnavailable(dateObj, hour, min) {
     const fullStr = `${y}-${mo}-${d} ${h}:${mn}`;
     return unavailableSlots.includes(fullStr);
 }
-
 
 function createWeekGrid() {
     const container = document.getElementById('week-grid');
@@ -120,7 +110,6 @@ function createWeekGrid() {
         dayCol.appendChild(header);
 
         slots.forEach(slot => {
-            // Ajouter la barre blanche après 11h30 (juste avant de reprendre à 13h)
             if (slot.hour === 13 && slot.min === 0) {
                 const pauseDiv = document.createElement('div');
                 pauseDiv.className = 'pause-midi';
@@ -132,51 +121,39 @@ function createWeekGrid() {
             const h = slot.hour.toString().padStart(2, '0');
             const m = slot.min.toString().padStart(2, '0');
             slotDiv.textContent = `${h}:${m}`;
-            // Format de la date/heure pour ce créneau
             const y = date.getFullYear();
             const mo = (date.getMonth() + 1).toString().padStart(2, '0');
             const d = date.getDate().toString().padStart(2, '0');
             const fullStr = `${y}-${mo}-${d} ${h}:${m}`;
 
-            // Ajout de la classe "initial" si correspondance
-            if (fullStr === selectedDateStr) {
+            if (fullStr === selectedDateStrRaw?.slice(0, 16)) {
                 slotDiv.classList.add('initial');
             }
 
-            // Gestion de l'indisponibilité
             if (isUnavailable(date, slot.hour, slot.min)) {
                 slotDiv.classList.add('unavailable');
             } else {
-                // Ajout de l'event click pour tous les créneaux disponibles, même "initial"
                 slotDiv.addEventListener('click', () => {
-                    // Retire la classe 'selected' de tous les créneaux
                     document.querySelectorAll('.time-slot.selected').forEach(el => {
                         el.classList.remove('selected');
                     });
-
-                    // Ajoute 'selected' au créneau cliqué (sans retirer 'initial')
                     slotDiv.classList.add('selected');
                     document.getElementById('hidden-date').value = fullStr;
                 });
             }
-
             dayCol.appendChild(slotDiv);
         });
-
 
         container.appendChild(dayCol);
     });
 }
-
-
 
 function updateWeekLabel() {
     const weekStart = new Date(startOfWeekDate);
     const weekEnd = new Date(startOfWeekDate);
     weekEnd.setDate(weekStart.getDate() + 6);
     const options = { day: '2-digit', month: '2-digit' };
-    document.getElementById('current-week-label').textContent =
-        ``;
+    document.getElementById('current-week-label').textContent = ``;
     document.getElementById('prev-week').disabled = (weekOffset === 0);
 }
 
@@ -198,11 +175,7 @@ document.getElementById('users').addEventListener('change', function () {
     document.getElementById('hidden-date').value = '';
     fetchUnavailableSlots(this.value);
 });
-console.log("Date du RDV initial :", selectedDateStrRaw);
-console.log("Lundi de la semaine du RDV :", startOfWeekDate.toISOString().slice(0, 10));
-console.log("Décalage de semaine (weekOffset) :", weekOffset);
 
-// startOfWeekDate.setDate(today.getDate() + weekOffset * 7);
 createWeekGrid();
 updateWeekLabel();
 fetchUnavailableSlots(document.getElementById('users').value);
