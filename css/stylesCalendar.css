@@ -1,0 +1,120 @@
+/* 
+CALENDRIER 
+*/
+#calendar-container {
+    margin-top: 1em;
+    width: 100%;
+    overflow-x: hidden;
+    box-sizing: border-box;
+}
+
+#week-grid {
+    display: flex;
+    justify-content: space-between;
+    /* <-- mieux que "center" pour forcer l'ajustement */
+    gap: 4px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
+.day-column {
+    flex: 1;
+    /* <-- rend chaque colonne flexible et égale */
+    min-width: 0;
+    /* <-- évite les débordements imprévus */
+    border: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    background-color: #f9f9f9;
+}
+
+
+.day-header {
+    text-align: center;
+    font-weight: bold;
+    padding: 4px;
+    background-color: #eee;
+    border-bottom: 1px solid #ccc;
+}
+
+.time-slot {
+    padding: 4px;
+    text-align: center;
+    background-color: #c8f7c5;
+    border-bottom: 1px solid #ccc;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.time-slot:hover {
+    background-color: #94c97b;
+}
+
+.time-slot.unavailable {
+    background-color: #f0f0f0;
+    color: #999;
+    cursor: not-allowed;
+}
+
+.time-slot.selected {
+    background-color: var(--bleu-france-light);
+    color: white;
+}
+
+.time-slot.selected:hover {
+    background-color: #6A6AF4;
+    color: white;
+}
+
+.time-slot.initial {
+    background-color: green;
+    color: white;
+    border: 2px solid black;
+    border-radius: 8px;
+}
+
+.time-slot.initial:hover {
+    background-color: darkgreen;
+    color: white;
+    border: 2px solid black;
+    border-radius: 4px;
+}
+
+.pause-midi {
+    height: 24px;
+    background-color: white;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+
+.week-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.week-controls button {
+    background-color: var(--bleu-france);
+    color: var(--blanc);
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.week-controls button:hover {
+    background-color: var(--bleu-france-light);
+}
+
+.week-controls button:disabled {
+    background-color: var(--gris-clair);
+    color: var(--gris-moyen);
+    cursor: not-allowed;
+}

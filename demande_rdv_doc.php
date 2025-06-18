@@ -102,6 +102,7 @@ if (isset($_GET['fail'])) {
     <title>Ajouter rendez-vous</title>
     <link rel="stylesheet" href="./css/styles.css" />
     <link rel="stylesheet" href="./css/stylesIcons.css" />
+    <link rel="stylesheet" href="./css/stylesCalendar.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 

@@ -50,7 +50,8 @@ if (isset($_GET['fail'])) {
 <head>
     <meta charset="UTF-8">
     <title>Ajouter rendez-vous</title>
-     <link rel="stylesheet" href="./css/styles.css" />
+    <link rel="stylesheet" href="./css/styles.css" />
+    <link rel="stylesheet" href="./css/stylesCalendar.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 
@@ -88,7 +89,7 @@ if (isset($_GET['fail'])) {
 
                 <label for="date"><strong>DATE ET HEURE DU RENDEZ-VOUS :</strong></label>
                 <div id="calendar-container">
-                    <div class = "week-controls">
+                    <div class="week-controls">
                         <button type="button" id="prev-week">Semaine précédente</button>
                         <span id="current-week-label"></span>
                         <button type="button" id="next-week">Semaine suivante</button>
