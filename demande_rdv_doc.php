@@ -120,7 +120,7 @@ if (isset($_GET['fail'])) {
         </nav>
         <br>
         <p class="doctor_name">
-            Connecté en tant que : <br> <?= htmlspecialchars($name['username']) ?>
+            Connecté en tant que : <?= htmlspecialchars($name['username']) ?>
             (<?= htmlspecialchars($name['speciality']) ?>)
         </p>
     </aside>
@@ -145,7 +145,6 @@ if (isset($_GET['fail'])) {
 
                 <div id="calendar-container">
                     <div class="week-controls">
-                        <span id="current-year-label"></span>
                         <button type="button" id="prev-week">Semaine précédente</button>
                         <span id="current-week-label"></span>
                         <button type="button" id="next-week">Semaine suivante</button>

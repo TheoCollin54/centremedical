@@ -31,11 +31,10 @@ CALENDRIER
 
 
 .day-header {
-    height: 50px;
-    width: 150px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    height: 50px; /* 🔸 hauteur fixe, à adapter selon ton design */
+    display: flex; /* 🔸 pour permettre le centrage */
+    align-items: center; /* 🔸 centre verticalement le contenu */
+    justify-content: center; /* 🔸 centre horizontalement */
     text-align: center;
     font-weight: bold;
     padding: 4px;
@@ -73,16 +72,16 @@ CALENDRIER
 }
 
 .time-slot.initial {
-    background-color: #00A95F;
+    background-color: green;
     color: white;
-    border: 2px solid #181d1b;
-    border-radius: 4x;
+    border: 2px solid black;
+    border-radius: 8px;
 }
 
 .time-slot.initial:hover {
-    background-color: #007441;
+    background-color: darkgreen;
     color: white;
-    border: 2px solid #181d1b;
+    border: 2px solid black;
     border-radius: 4px;
 }
 
@@ -122,10 +121,4 @@ CALENDRIER
     background-color: var(--gris-clair);
     color: var(--gris-moyen);
     cursor: not-allowed;
-}
-
-#current-year-label {
-    font-size: 24px;
-    font-weight: bold;
-    color: #333;
 }

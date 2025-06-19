@@ -1,9 +1,9 @@
 <?php
 $dbConn = array(
-    'user' => 'root',
-    'pass' => '',
-    'name' => 'centremedical',
-    'host' => 'localhost'
+    'user' => 'if0_39263420',
+    'pass' => 'pbpUyoaNxbH',
+    'name' => 'if0_39263420_centremedical',
+    'host' => 'sql309.infinityfree.com'
 );
 
 // Connexion à la base de données

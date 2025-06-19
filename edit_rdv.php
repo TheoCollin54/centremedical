@@ -37,11 +37,6 @@ if (!isset($_SESSION['users_id'])) {
     exit();
 }
 
-// Récupération des infos du médecin connecté
-$stmt = $pdo->prepare("SELECT username, speciality FROM users WHERE users_id = :id");
-$stmt->execute(['id' => $_SESSION['users_id']]);
-$name = $stmt->fetch(PDO::FETCH_ASSOC);
-
 // Récupération de l'ID du rdv
 if (isset($_POST['rdv_id'])) {
     $rdv_id = $_POST['rdv_id'];
@@ -107,17 +102,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['rdv_id'], $_POST['dat
     <aside>
         <nav>
             <ul>
-                <li><a href="dashboard.php"><i class="fas fa-calendar-alt"></i> Mes rendez-vous</a></li>
+                <li><a href="dashboard.php" ><i class="fas fa-calendar-alt"></i> Mes rendez-vous</a></li>
                 <li><a href="demande_rdv_doc.php"><i class="fas fa-plus"></i> Ajouter un rendez-vous</a></li>
                 <li><a href="edit_account_doc.php"> <i class="fas fa-edit"></i>Modifier mes informations</a></li>
                 <li><a href="logout.php"><i class="fas fa-right-from-bracket"></i>Déconnexion</a></li>
             </ul>
         </nav>
-        <br>
-        <p class="doctor_name">
-            Connecté en tant que : <br> <?= htmlspecialchars($name['username']) ?>
-            (<?= htmlspecialchars($name['speciality']) ?>)
-        </p>
     </aside>
 
     <main>
@@ -129,7 +119,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['rdv_id'], $_POST['dat
             <label for="date"><strong>DATE ET HEURE DU RENDEZ-VOUS :</strong></label>
             <div id="calendar-container">
                 <div class="week-controls">
-                    <span id="current-year-label"></span>
                     <button type="button" id="prev-week">Semaine précédente</button>
                     <span id="current-week-label"></span>
                     <button type="button" id="next-week">Semaine suivante</button>
