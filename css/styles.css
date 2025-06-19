@@ -178,7 +178,7 @@ body::before {
     align-items: center;
     justify-content: center;
     min-height: 70vh;
-    padding: var(--spacing-xl);
+    padding: 0px;
     max-width: 900px;
     margin: 0 auto;
     position: relative;
