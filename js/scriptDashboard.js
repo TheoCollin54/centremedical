@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         },
         eventDidMount: function (info) {
-            info.el.setAttribute('title', `Téléphone: ${info.event.extendedProps.tel}\nN° Sécu: ${info.event.extendedProps.num_secu}`);
+            info.el.setAttribute('title', `Nom : ${info.event.extendedProps.nom}\nN° Sécu: ${info.event.extendedProps.num_secu}`);
         },
         eventClick: function (info) {
             // Remplissage de la modale avec les infos de l'événement
