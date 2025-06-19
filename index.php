@@ -23,7 +23,7 @@ if (isset($_GET['success']) && $_GET['success'] == 1) {
         <div class="icon">
             <a href="demande_rdv.php">
                 <img src="./img/calendar.png" alt="calendar" class="btn">
-                <h3>Prise de rendez-vous</h3>
+                <h3>Prendre un rendez-vous</h3>
             </a>
 
         </div>
