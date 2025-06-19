@@ -32,8 +32,9 @@ CALENDRIER
 
 .day-header {
     height: 50px;
-    /* 🔸 hauteur fixe, à adapter selon ton design */
-    width: 110px;
+    /* 🔸 hauteur fixe adaptée à la borne */
+    width: 105px;
+    /* 🔸 largeur fixe adaptée à la borne */
     display: flex;
     /* 🔸 pour permettre le centrage */
     align-items: center;
