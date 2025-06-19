@@ -85,6 +85,22 @@ function isUnavailable(dateObj, hour, min) {
     return unavailableSlots.includes(fullStr);
 }
 
+function isInPast(dateObj, hour, min) {
+    const now = new Date();
+    const slotDate = new Date(
+        dateObj.getFullYear(),
+        dateObj.getMonth(),
+        dateObj.getDate(),
+        hour,
+        min,
+        0,
+        0
+    );
+    return slotDate < now;
+}
+
+
+
 function createWeekGrid() {
     const container = document.getElementById('week-grid');
     container.innerHTML = '';
@@ -130,7 +146,7 @@ function createWeekGrid() {
                 slotDiv.classList.add('initial');
             }
 
-            if (isUnavailable(date, slot.hour, slot.min)) {
+            if (isUnavailable(date, slot.hour, slot.min) || isInPast(date, slot.hour, slot.min)) {
                 slotDiv.classList.add('unavailable');
             } else {
                 slotDiv.addEventListener('click', () => {

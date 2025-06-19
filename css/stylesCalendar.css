@@ -33,7 +33,7 @@ CALENDRIER
 .day-header {
     height: 50px;
     /* 🔸 hauteur fixe adaptée à la borne */
-    width: 105px;
+    width: 110px;
     /* 🔸 largeur fixe adaptée à la borne */
     display: flex;
     /* 🔸 pour permettre le centrage */
