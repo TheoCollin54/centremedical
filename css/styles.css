@@ -172,13 +172,14 @@ body::before {
    CONTAINER PRINCIPAL
    ============================================ */
 
+
 .container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    padding: var(--spacing-xl);
+    justify-content: flex-start;
+    min-height: auto;
+    padding: 0px 20px;
     max-width: 900px;
     margin: 0 auto;
     position: relative;
@@ -721,7 +722,7 @@ body:has(aside) {
 }
 
 aside {
-    position :relative;
+    position: relative;
     background: linear-gradient(180deg, var(--bleu-france), var(--bleu-france-light));
     color: var(--blanc);
     padding: var(--spacing-lg);
@@ -1013,10 +1014,12 @@ main p {
     position: absolute;
     bottom: 20px;
     left: 20px;
-    right: 20px; /* permet au texte de se "casser" automatiquement si trop long */
+    right: 20px;
+    /* permet au texte de se "casser" automatiquement si trop long */
     color: var(--vert-emeraude-light);
-    opacity : 45%;
+    opacity: 45%;
     font-size: 0.8rem;
     line-height: 1.2;
-    word-wrap: break-word; /* très utile si le nom ou la spécialité est très longue */
+    word-wrap: break-word;
+    /* très utile si le nom ou la spécialité est très longue */
 }
