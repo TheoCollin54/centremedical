@@ -120,7 +120,7 @@ if (isset($_GET['fail'])) {
         </nav>
         <br>
         <p class="doctor_name">
-            Connecté en tant que : <?= htmlspecialchars($name['username']) ?>
+            Connecté en tant que : <br> <?= htmlspecialchars($name['username']) ?>
             (<?= htmlspecialchars($name['speciality']) ?>)
         </p>
     </aside>

@@ -93,7 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </nav>
         <br>
         <p class="doctor_name">
-            Connecté en tant que : <?= htmlspecialchars($user['username']) ?>
+            Connecté en tant que : <br> <?= htmlspecialchars($user['username']) ?>
             (<?= htmlspecialchars($user['speciality']) ?>)
         </p>
     </aside>
