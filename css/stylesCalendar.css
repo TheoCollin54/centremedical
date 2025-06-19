@@ -1,12 +1,12 @@
 /* 
 CALENDRIER 
 */
-#calendar-container {
+/* #calendar-container {
     margin-top: 1em;
     width: 100%;
     overflow-x: hidden;
     box-sizing: border-box;
-}
+} */
 
 #week-grid {
     display: flex;
@@ -26,15 +26,20 @@ CALENDRIER
     border: 1px solid #ccc;
     display: flex;
     flex-direction: column;
-    background-color: #f9f9f9;
+    background-color: #eee;
 }
 
 
 .day-header {
-    height: 50px; /* 🔸 hauteur fixe, à adapter selon ton design */
-    display: flex; /* 🔸 pour permettre le centrage */
-    align-items: center; /* 🔸 centre verticalement le contenu */
-    justify-content: center; /* 🔸 centre horizontalement */
+    height: 50px;
+    /* 🔸 hauteur fixe, à adapter selon ton design */
+    width: 110px;
+    display: flex;
+    /* 🔸 pour permettre le centrage */
+    align-items: center;
+    /* 🔸 centre verticalement le contenu */
+    justify-content: center;
+    /* 🔸 centre horizontalement */
     text-align: center;
     font-weight: bold;
     padding: 4px;
@@ -121,4 +126,27 @@ CALENDRIER
     background-color: var(--gris-clair);
     color: var(--gris-moyen);
     cursor: not-allowed;
+}
+
+#week-year {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: var(--bleu-france);
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.highlighted-date {
+    margin: 10px 0;
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #0a4f91;
+}
+
+#calendar-container {
+    margin-bottom: 20px;
+}
+
+table {
+    margin-top: 20px;
 }

@@ -87,22 +87,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['rdv_id'], $_POST['dat
     <link rel="stylesheet" href="./css/styles.css" />
     <link rel="stylesheet" href="./css/stylesCalendar.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        .highlighted-date {
-            margin: 10px 0;
-            font-size: 1.1em;
-            font-weight: bold;
-            color: #0a4f91;
-        }
-
-        #calendar-container {
-            margin-bottom: 20px;
-        }
-
-        table {
-            margin-top: 20px;
-        }
-    </style>
 </head>
 
 <body>
@@ -131,6 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['rdv_id'], $_POST['dat
             <label for="date"><strong>DATE ET HEURE DU RENDEZ-VOUS :</strong></label>
             <div id="calendar-container">
                 <div class="week-controls">
+                    <div id="week-year"></div>
                     <button type="button" id="prev-week">Semaine précédente</button>
                     <span id="current-week-label"></span>
                     <button type="button" id="next-week">Semaine suivante</button>

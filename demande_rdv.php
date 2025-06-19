@@ -90,6 +90,7 @@ if (isset($_GET['fail'])) {
                 <label for="date"><strong>DATE ET HEURE DU RENDEZ-VOUS :</strong></label>
                 <div id="calendar-container">
                     <div class="week-controls">
+                        <div id="week-year"></div>
                         <button type="button" id="prev-week">Semaine précédente</button>
                         <span id="current-week-label"></span>
                         <button type="button" id="next-week">Semaine suivante</button>
@@ -104,6 +105,6 @@ if (isset($_GET['fail'])) {
     </main>
 
     <script src="./js/scriptCalendar.js"></script>
-    <script src="./js/scriptMsg></script>
+    <script src="./js/scriptMsg"></script>
 </body>
 </html>

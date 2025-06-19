@@ -145,6 +145,7 @@ if (isset($_GET['fail'])) {
 
                 <div id="calendar-container">
                     <div class="week-controls">
+                        <div id="week-year"></div>
                         <button type="button" id="prev-week">Semaine précédente</button>
                         <span id="current-week-label"></span>
                         <button type="button" id="next-week">Semaine suivante</button>
