@@ -103,13 +103,12 @@ CALENDAR
     max-width: 100%;
     width: 100%;
     margin: 0 auto;
-    padding: 1rem;
     box-sizing: border-box;
 }
 
 /* Adapter la hauteur automatiquement en fonction de l'écran */
 .fc {
-    max-height: 80vh;
+    /* max-height: 80vh; */
     /* 80% de la hauteur de la fenêtre */
     overflow: auto;
     /* scroll interne si nécessaire, mais rarement */
@@ -117,7 +116,7 @@ CALENDAR
 
 /* Rendre le texte des événements plus gros */
 .fc-event-title {
-    font-size: 1rem;
+    font-size: 0.6rem;
 }
 
 /* Agrandir la taille des cases jours */
@@ -137,4 +136,9 @@ CALENDAR
     position: relative;
     z-index: 4;
     color: var(--bleu-france);
+}
+
+.fc-direction-ltr .fc-daygrid-event .fc-event-time {
+    margin-right: 3px;
+    font-size: 0.8em;
 }
