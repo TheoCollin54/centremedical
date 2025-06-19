@@ -55,7 +55,7 @@ if (isset($_GET['fail'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 
-<body data-message="<?= htmlspecialchars($message) ?>">
+<body class="no-scroll" data-message="<?= htmlspecialchars($message) ?>">
     <aside>
         <nav>
             <ul>
@@ -107,4 +107,5 @@ if (isset($_GET['fail'])) {
     <script src="./js/scriptCalendar.js"></script>
     <script src="./js/scriptMsg"></script>
 </body>
+
 </html>
