@@ -1,12 +1,12 @@
 /* 
 CALENDRIER 
 */
-/* #calendar-container {
+#calendar-container {
     margin-top: 1em;
     width: 100%;
     overflow-x: hidden;
     box-sizing: border-box;
-} */
+}
 
 #week-grid {
     display: flex;
@@ -143,9 +143,9 @@ CALENDRIER
     color: #0a4f91;
 }
 
-#calendar-container {
+/* #calendar-container {
     margin-bottom: 20px;
-}
+} */
 
 table {
     margin-top: 20px;
