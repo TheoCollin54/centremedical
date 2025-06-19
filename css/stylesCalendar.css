@@ -35,7 +35,7 @@ CALENDRIER
     /* 🔸 hauteur fixe adaptée à la borne */
     width: 105px;
     /* 🔸 largeur fixe adaptée à la borne */
-    /* display: flex; */
+    display: flex;
     /* 🔸 pour permettre le centrage */
     align-items: center;
     /* 🔸 centre verticalement le contenu */
