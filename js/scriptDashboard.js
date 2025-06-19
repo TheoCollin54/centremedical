@@ -43,7 +43,17 @@ document.addEventListener('DOMContentLoaded', function () {
             modalPrenom.textContent = info.event.extendedProps.prenom || '';
             modalTel.textContent = info.event.extendedProps.tel || '';
             modalSecu.textContent = info.event.extendedProps.num_secu || '';
-            modalDate.textContent = info.event.start ? info.event.start.toLocaleString() : '';
+            // Affichage de la date sous la forme 06/08/2025 à 09:00
+            if (info.event.start) {
+                const date = info.event.start;
+                const datePart = date.toLocaleDateString('fr-FR'); // "19/06/2025"
+                const options = { hour: '2-digit', minute: '2-digit' };
+                const timePart = date.toLocaleTimeString('fr-FR', options); // "09:00"
+
+                modalDate.textContent = `${datePart} à ${timePart}`;
+            } else {
+                modalDate.textContent = '';
+            }
             modalRdvIdEdit.value = info.event.id;
             modalRdvIdDel.value = info.event.id;
 
