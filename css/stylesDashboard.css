@@ -151,3 +151,8 @@ CALENDAR
     margin: 0px 4px;
     width: 0px;
 }
+
+.event-passe {
+    text-decoration: line-through !important;
+    opacity: 0.5;
+}

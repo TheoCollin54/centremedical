@@ -35,6 +35,11 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         },
         eventDidMount: function (info) {
+            const now = new Date();
+            if (info.event.start < now) {
+                // ✅ Appliquer le style barré au titre de l'événement
+                info.el.classList.add('event-passe');
+            }
             info.el.setAttribute('title', `Nom : ${info.event.extendedProps.nom}\nN° Sécu: ${info.event.extendedProps.num_secu}`);
         },
         eventClick: function (info) {
