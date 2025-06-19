@@ -75,6 +75,7 @@ if (isset($_GET['fail'])) {
                         </option>
                     <?php endforeach; ?>
                 </select>
+                <div id="qr-container" style="margin-top: 10px;"></div>
                 <label for="name"><strong>NOM :</strong></label>
                 <input type="text" id="name" name="name" required>
 
@@ -106,6 +107,18 @@ if (isset($_GET['fail'])) {
 
     <script src="./js/scriptCalendar.js"></script>
     <script src="./js/scriptMsg"></script>
+    <script>
+        document.getElementById('users').addEventListener('change', function () {
+            const medecinId = this.value;
+            const qrContainer = document.getElementById('qr-container');
+            qrContainer.innerHTML = ""; // reset
+
+            if (medecinId) {
+                const url = `https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl=${encodeURIComponent('https://centremedical.infinityfreeapp.com/medecin_info.php?id=' + medecinId)}`;
+                qrContainer.innerHTML = `<p>Scannez ce QR Code pour plus d'infos :</p><img src="${url}" alt="QR Code vers infos médecin">`;
+            }
+        });
+    </script>
 </body>
 
 </html>
