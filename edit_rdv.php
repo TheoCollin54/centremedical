@@ -125,6 +125,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['rdv_id'], $_POST['dat
             <input type="hidden" name="date" id="hidden-date" value="<?= htmlspecialchars($rdv['date']) ?>" required>
 
 
+            <div>
+                <button type="submit" onclick="return confirm('Confirmer la modification du rendez-vous ?');">
+                    Enregistrer les modifications
+                </button>
+                <a href="dashboard.php">
+                    Annuler
+                </a>
+            </div>
+
 
             <table>
                 <tr>
@@ -142,14 +151,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['rdv_id'], $_POST['dat
                 <tr>
                     <th>Numéro de sécurité sociale</th>
                     <td><?= htmlspecialchars($rdv['num_secu']) ?></td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <button type="submit"
-                            onclick="return confirm('Confirmer la modification du rendez-vous ?');">Enregistrer les
-                            modifications</button>
-                        <a href="dashboard.php" style="margin-left:10px;">Annuler</a>
-                    </td>
                 </tr>
             </table>
         </form>
