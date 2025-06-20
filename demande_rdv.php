@@ -31,7 +31,7 @@ if (isset($_GET['ajax_get_slots']) && isset($_GET['medecin_id'])) {
     exit;
 }
 
-$stmt = $pdo->query("SELECT users_id, username, speciality FROM users WHERE username != 'admin'");
+$stmt = $pdo->query("SELECT users_id, username, speciality, adress FROM users WHERE username != 'admin'");
 $medecins = $stmt->fetchAll();
 
 $message = "";
@@ -75,6 +75,12 @@ if (isset($_GET['fail'])) {
                         </option>
                     <?php endforeach; ?>
                 </select>
+
+                <!-- Zone d'affichage de l'adresse -->
+                <div id="doctor-address">
+                    <!-- Adresse du médecin sélectionné apparaîtra ici -->
+                </div>
+
                 <label for="name"><strong>NOM :</strong></label>
                 <input type="text" id="name" name="name" required>
 
@@ -106,6 +112,10 @@ if (isset($_GET['fail'])) {
 
     <script src="./js/scriptCalendar.js"></script>
     <script src="./js/scriptMsg"></script>
+    <script>
+        const medecins = <?= json_encode($medecins, JSON_UNESCAPED_UNICODE) ?>;
+    </script>
+    <script src="./js/scriptInfoDoc.js"></script>
 </body>
 
 </html>
