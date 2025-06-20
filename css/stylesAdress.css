@@ -1,0 +1,24 @@
+ul#suggestions {
+    width: 100%;
+    max-width: 400px;
+    border: 1px solid #ccc;
+    list-style: none;
+    padding: 0;
+    margin-top: 5px;
+    position: absolute;
+    background-color: white;
+    z-index: 10;
+}
+
+ul#suggestions li {
+    padding: 8px;
+    cursor: pointer;
+}
+
+ul#suggestions li:hover {
+    background-color: #eee;
+}
+
+.address-container {
+    position: relative;
+}

@@ -23,7 +23,7 @@ try {
 }
 
 // Récupération des infos actuelles
-$sql = "SELECT username, email, speciality FROM users WHERE users_id = :user_id";
+$sql = "SELECT username, email, speciality, adress FROM users WHERE users_id = :user_id";
 $stmt = $pdo->prepare($sql);
 $stmt->execute(['user_id' => $user_id]);
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -35,15 +35,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $new_email = $_POST['email'];
     $new_speciality = $_POST['speciality'];
     $new_password = $_POST['password'];
+    $new_adress = $_POST['adress'];
 
     $params = [
         'username' => $new_username,
         'email' => $new_email,
         'speciality' => $new_speciality,
+        'adress' => $new_adress,
         'user_id' => $user_id,
     ];
 
-    $sql_update = "UPDATE users SET username = :username, email = :email, speciality = :speciality";
+    $sql_update = "UPDATE users SET username = :username, email = :email, speciality = :speciality, adress = :adress";
 
     if (!empty($new_password)) {
         $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
@@ -77,6 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Modifier mes informations</title>
     <link rel="stylesheet" href="./css/styles.css" />
     <link rel="stylesheet" href="./css/stylesIcons.css" />
+    <link rel="stylesheet" href="./css/stylesAdress.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
 </head>
@@ -113,17 +116,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <label for="email">Email :</label>
             <input type="email" name="email" id="email" value="<?= htmlspecialchars($user['email']) ?>" required>
 
+            <label for="password">Nouveau mot de passe : <small>(Laisser vide pour ne pas changer)</small></label>
+            <input type="password" name="password" id="password">
+
             <label for="speciality">Spécialité :</label>
             <input type="text" name="speciality" id="speciality" value="<?= htmlspecialchars($user['speciality']) ?>"
                 required>
 
-            <label for="password">Nouveau mot de passe :</label>
-            <input type="password" name="password" id="password">
-            <small>Laisser vide pour ne pas changer</small>
+            <label for="adress">Adresse :</label>
+            <div class="address-container">
+                <input type="text" name="adress" id="adress" value="<?= htmlspecialchars($user['adress']) ?>" required
+                    autocomplete="off" />
+                <ul id="suggestions"></ul>
+            </div>
 
             <button type="submit">Enregistrer</button>
         </form>
     </main>
+    <script src="./js/scriptAdress.js"></script>
 </body>
 
 </html>

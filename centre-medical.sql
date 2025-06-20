@@ -81,6 +81,7 @@ CREATE TABLE users (
   email varchar(100) NOT NULL,
   password varchar(255) NOT NULL,
   speciality varchar(255),
+  adress varchar(255),
   PRIMARY KEY (users_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -88,10 +89,10 @@ CREATE TABLE users (
 -- Déchargement des données de la table 'users'
 --
 
-INSERT INTO users (users_id, username, email, password, speciality) VALUES
-(1, 'adminThéo', 'theo.collin054@gmail.com', '$2y$10$3KiZ0sd1hx/pmHbO.9oe/ewommL/zliA.AKmDkmp50WrUPkL1.IB.','dentiste'),
-(2, 'admin', 'admin@gmail.com', '$2y$10$E3PukcsjOtwWHaiS1a4Ggu2GUsgqDvtCXZqQCrs6hj/QnL2gjn3qy', NULL),
-(3, 'Dr Maboul', 'maboul@gmail.com', '$2y$10$Ug7PnAD18P.InNNGx1TVLOVmp6xqptk6DHUAp7e1b8lbI1Bo1dBu.','dermatologue');
+INSERT INTO users (users_id, username, email, password, speciality,adress) VALUES
+(1, 'adminThéo', 'theo.collin054@gmail.com', '$2y$10$3KiZ0sd1hx/pmHbO.9oe/ewommL/zliA.AKmDkmp50WrUPkL1.IB.','dentiste','10 Rue de Rivoli, 75001 Paris'),
+(2, 'admin', 'admin@gmail.com', '$2y$10$E3PukcsjOtwWHaiS1a4Ggu2GUsgqDvtCXZqQCrs6hj/QnL2gjn3qy', NULL, NULL),
+(3, 'Dr Maboul', 'maboul@gmail.com', '$2y$10$Ug7PnAD18P.InNNGx1TVLOVmp6xqptk6DHUAp7e1b8lbI1Bo1dBu.','dermatologue','5 Avenue Victor Hugo, 75016 Paris');
 
 --
 -- AUTO_INCREMENT pour la table `infos`
