@@ -19,7 +19,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         const medecin = medecins.find(m => m.users_id == selectedId);
         if (medecin && medecin.adress) {
-            addressDiv.innerHTML = `Votre rendez-vous aura lieu au <span class="adresse-medecin">${medecin.adress}</span>`;
+            addressDiv.innerHTML = `<i class="fas fa-map-marker-alt" style="color: red;"></i>
+Votre rendez-vous aura lieu au <span class="adresse-medecin">${medecin.adress}</span>`;
         } else {
             addressDiv.textContent = 'Adresse non disponible.';
         }
