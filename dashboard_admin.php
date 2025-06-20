@@ -69,13 +69,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['delete_user'])) {
     $username = $_POST['username'];
     $email = $_POST['email'];
     $speciality = $_POST['speciality'];
+    $adress = $_POST['adress'];
 
     // Sécurisation basique
     $users_id = intval($users_id);
 
     // Mise à jour en base de données
-    $stmt = $pdo->prepare('UPDATE users SET username = ?, email = ?, speciality = ? WHERE users_id = ?');
-    $stmt->execute([$username, $email, $speciality, $users_id]);
+    $stmt = $pdo->prepare('UPDATE users SET username = ?, email = ?, speciality = ?, adress = ? WHERE users_id = ?');
+    $stmt->execute([$username, $email, $speciality, $adress, $users_id]);
 
     $stmt = $pdo->query('SELECT * FROM users');
     $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -109,6 +110,7 @@ if (isset($_GET['success'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard administrateur</title>
     <link rel="stylesheet" href="./css/styles.css" />
+    <link rel="stylesheet" href="./css/stylesAdress.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 
@@ -117,7 +119,7 @@ if (isset($_GET['success'])) {
         <nav>
             <ul>
                 <li><a href="#" class="inactive"><i class="fas fa-home"></i> Accueil</a></li>
-                <li><a href="ajout_doc.php" ><i class="fa-solid fa-user-doctor"></i> Ajouter un médecin</a></li>
+                <li><a href="ajout_doc.php"><i class="fa-solid fa-user-doctor"></i> Ajouter un médecin</a></li>
                 <!-- <li><a href="edit_rdv_admin.php">Gérer les rendez-vous</a></li> -->
                 <li><a href="ajout_info.php"><i class="fa-solid fa-circle-info"></i> Ajouter une information</a></li>
                 <li><a href="logout.php"><i class="fas fa-right-from-bracket"></i>Déconnexion</a></li>
@@ -145,6 +147,17 @@ if (isset($_GET['success'])) {
                     </tr>
 
                     <tr>
+                        <th>Adresse</th>
+                        <td>
+                            <div class="address-container">
+                                <input type="text" name="adress" id="adress"
+                                    value="<?= htmlspecialchars($user['adress']) ?>" required autocomplete="off" />
+                                <ul id="suggestions"></ul>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
                         <td colspan="2">
                             <button type="submit" onclick="return confirm('Modifier cet utilisateur ?');">Mettre à
                                 jour</button>
@@ -158,6 +171,7 @@ if (isset($_GET['success'])) {
         <?php endforeach; ?>
     </main>
     <script src="./js/scriptMsg.js"></script>
+    <script src="./js/scriptAdress.js"></script>
 </body>
 
 </html>
