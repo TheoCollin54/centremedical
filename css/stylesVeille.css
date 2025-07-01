@@ -17,28 +17,26 @@ body {
     display: flex;
     flex-direction: column;
     height: 100vh;
-    /* s'assurer que body prend toute la hauteur */
+    /* prendre toute la hauteur de la fenêtre */
 }
 
 .slideshow-container {
-    flex: 1 1 auto;
+    flex: 1;
+    /* prendre toute la hauteur restante */
     position: relative;
     overflow: hidden;
-    max-height: calc(100vh - 270px);
-    /* pour ne pas dépasser sous le bandeau */
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .slide-image {
-    position: relative;
-    width: auto;
-    max-width: 100%;
-    height: auto;
-    max-height: 100%;
-    /* ne dépasse pas la hauteur du conteneur */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    /* pleine largeur */
+    height: 100%;
+    /* pleine hauteur du conteneur */
     object-fit: contain;
+    /* contenu entier visible, ratio conservé */
     opacity: 0;
     transition: opacity 1s ease-in-out;
     display: none;
@@ -50,7 +48,6 @@ body {
 }
 
 .start-banner {
-    position: relative;
     height: 270px;
     background-color: #000091;
     color: white;
@@ -63,6 +60,7 @@ body {
     text-decoration: none;
     cursor: pointer;
     padding: 0 20px;
+    position: relative;
 }
 
 .start-banner:hover {
