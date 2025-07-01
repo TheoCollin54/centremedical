@@ -26,8 +26,9 @@
             <button class="btn" type="submit" class="login-btn">Se connecter</button>
         </form>
 
-
-        <a href="mdp_oublie.php" style="margin-top : 200px"> Mot de passe oublié </a>
+        
+        <a href="#" style="margin-top : 200px"> Mot de passe oublié </a>
+        <!-- href devrait être mdp_oublie.php mais besoin d'un nom de domaine pour pouvoir envoyer des mails -->
     </div>
 </body>
 
