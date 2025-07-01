@@ -16,32 +16,38 @@ body {
 body {
     display: flex;
     flex-direction: column;
+    height: 100vh;
+    /* s'assurer que body prend toute la hauteur */
 }
 
 .slideshow-container {
-    flex: 1;
+    flex: 1 1 auto;
     position: relative;
     overflow: hidden;
+    max-height: calc(100vh - 270px);
+    /* pour ne pas dépasser sous le bandeau */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .slide-image {
     position: relative;
-    width: 100%;
+    width: auto;
+    max-width: 100%;
     height: auto;
-    /* ou hauteur fixe si besoin */
+    max-height: 100%;
+    /* ne dépasse pas la hauteur du conteneur */
     object-fit: contain;
-    /* ou cover selon le besoin */
     opacity: 0;
     transition: opacity 1s ease-in-out;
     display: none;
-    /* cacher par défaut */
 }
 
 .slide-image.active {
     opacity: 1;
     display: block;
 }
-
 
 .start-banner {
     position: relative;
@@ -66,15 +72,11 @@ body {
 .hand-icon {
     position: absolute;
     right: 20px;
-    /* place la main à 20px du bord droit */
     bottom: 15px;
-    /* place la main en bas, avec un petit décalage */
     width: 200px;
-    /* plus grosse */
     height: auto;
     animation: float 3s ease-in-out infinite;
     pointer-events: none;
-    /* pour que le clic se fasse sur le lien, pas l'image */
 }
 
 /* Animation de flottement verticale */
