@@ -25,19 +25,23 @@ body {
 }
 
 .slide-image {
-    position: absolute;
-    top: 0;
-    left: 0;
+    position: relative;
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
+    /* ou hauteur fixe si besoin */
+    object-fit: contain;
+    /* ou cover selon le besoin */
     opacity: 0;
     transition: opacity 1s ease-in-out;
+    display: none;
+    /* cacher par défaut */
 }
 
 .slide-image.active {
     opacity: 1;
+    display: block;
 }
+
 
 .start-banner {
     position: relative;
