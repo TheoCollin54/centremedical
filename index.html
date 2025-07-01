@@ -5,62 +5,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Écran de veille</title>
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-
-        html,
-        body {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            font-family: sans-serif;
-            background-color: black;
-        }
-
-        body {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .slideshow-container {
-            flex: 1;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .slide-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0;
-            transition: opacity 1s ease-in-out;
-        }
-
-        .slide-image.active {
-            opacity: 1;
-        }
-
-        .start-banner {
-            height: 270px;
-            background-color: #000091;
-            color: white;
-            text-align: center;
-            line-height: 70px;
-            font-size: 20px;
-            font-weight: bold;
-            cursor: pointer;
-            text-decoration: none;
-        }
-
-        .start-banner:hover {
-            background-color: #02028896;
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/stylesVeille.css">
 </head>
 
 <body>
@@ -73,31 +19,10 @@
 
     <a href="index.php" class="start-banner">
         Cliquez ici pour prendre rendez-vous
+        <img src="./img/tap.png" alt="Main cliquable" class="hand-icon" />
     </a>
 
-    <script>
-        let current = 0;
-        const images = document.querySelectorAll(".slide-image");
-
-        function showSlide(index) {
-            images.forEach((img, i) => {
-                img.classList.remove("active");
-                if (i === index) {
-                    img.classList.add("active");
-                }
-            });
-        }
-
-        function startSlideshow() {
-            showSlide(current);
-            setInterval(() => {
-                current = (current + 1) % images.length;
-                showSlide(current);
-            }, 10000); // toutes les 10 secondes
-        }
-
-        window.onload = startSlideshow;
-    </script>
+    <script src="./js/scriptVeille.js"></script>
 </body>
 
 </html>

@@ -37,7 +37,7 @@ if (isset($_GET['success']) && $_GET['success'] == 1) {
         </div>
     </div>
     <script src="./js/scriptMsg.js"></script>
-    <script src="./js/scriptVeille.js"></script>
+    <script src="./js/scriptVeilleDecl.js"></script>
 </body>
 
 </html>
