@@ -21,22 +21,21 @@ body {
 }
 
 .slideshow-container {
-    flex: 1;
+    flex: 1 1 auto;
     /* prendre toute la hauteur restante */
     position: relative;
     overflow: hidden;
+    display:flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .slide-image {
-    position: absolute;
-    top: 0;
-    left: 0;
+    position: relative;
+    width : auto;
     width: 100%;
-    /* pleine largeur */
     height: 100%;
-    /* pleine hauteur du conteneur */
     object-fit: contain;
-    /* contenu entier visible, ratio conservé */
     opacity: 0;
     transition: opacity 1s ease-in-out;
     display: none;
