@@ -2,32 +2,38 @@
 <html lang="fr">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Écran de veille</title>
-    <link rel="stylesheet" href="./css/styles.css">
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
         body {
             margin: 0;
             padding: 0;
-            overflow: hidden;
-            position: relative;
+            height: 100%;
             font-family: sans-serif;
             background-color: black;
         }
 
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+
         .slideshow-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
+            flex: 1;
+            position: relative;
             overflow: hidden;
         }
 
         .slide-image {
             position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -39,47 +45,34 @@
             opacity: 1;
         }
 
-        .start-link {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background-color: rgba(0, 0, 0, 0.6);
+        .start-banner {
+            height: 70px;
+            background-color: #000091;
             color: white;
-            padding: 15px 20px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 18px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            z-index: 10;
+            text-align: center;
+            line-height: 70px;
+            font-size: 20px;
+            font-weight: bold;
             cursor: pointer;
-            transition: background 0.3s;
+            text-decoration: none;
         }
 
-        .start-link:hover {
-            background-color: rgba(0, 0, 0, 0.8);
-        }
-
-        .hand-icon {
-            width: 24px;
-            height: 24px;
+        .start-banner:hover {
+            background-color: #000091cc;
         }
     </style>
 </head>
 
 <body>
-
     <div class="slideshow-container">
-        <img class="slide-image active" src="img/portfolio_annonces/affiche_canciule_transport_2020.jpg" alt="Image 1">
-        <img class="slide-image" src="img/portfolio_annonces/covid.jpg" alt="Image 2">
-        <img class="slide-image" src="img/portfolio_annonces/covidd.jpg" alt="Image 3">
-        <!-- Tu peux en ajouter d'autres ici -->
+        <img class="slide-image active" src="img/portfolio_annonces/affiche_canciule_transport_2020.jpg"
+            alt="Image 1" />
+        <img class="slide-image" src="img/portfolio_annonces/covid.jpg" alt="Image 2" />
+        <img class="slide-image" src="img/portfolio_annonces/covidd.jpg" alt="Image 3" />
     </div>
 
-    <a href="index.php" class="start-link">
-        <img src="./img/hand-click.png" alt="main cliquable" class="hand-icon">
-        <span>Prendre un RDV</span>
+    <a href="index.php" class="start-banner">
+        Cliquez ici pour prendre rendez-vous
     </a>
 
     <script>
@@ -105,7 +98,6 @@
 
         window.onload = startSlideshow;
     </script>
-
 </body>
 
 </html>
