@@ -65,7 +65,7 @@ body {
     /* place la main à 20px du bord droit */
     bottom: 15px;
     /* place la main en bas, avec un petit décalage */
-    width: 120px;
+    width: 200px;
     /* plus grosse */
     height: auto;
     animation: float 3s ease-in-out infinite;
