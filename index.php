@@ -11,8 +11,8 @@ if (isset($_GET['success']) && $_GET['success'] == 1) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accueil</title>
-     <link rel="stylesheet" href="./css/styles.css" />
-     <link rel="stylesheet" href="./css/stylesImg.css">
+    <link rel="stylesheet" href="./css/styles.css" />
+    <link rel="stylesheet" href="./css/stylesImg.css">
 </head>
 
 <body data-message="<?= htmlspecialchars($message) ?>">
@@ -37,6 +37,7 @@ if (isset($_GET['success']) && $_GET['success'] == 1) {
         </div>
     </div>
     <script src="./js/scriptMsg.js"></script>
+    <script src="./js/scriptVeille.js"></script>
 </body>
 
 </html>
