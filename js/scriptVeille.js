@@ -15,7 +15,7 @@ function startSlideshow() {
     setInterval(() => {
         current = (current + 1) % images.length;
         showSlide(current);
-    }, 10000); // toutes les 10 secondes
+    }, 15000); // toutes les 15 secondes
 }
 
 window.onload = () => {

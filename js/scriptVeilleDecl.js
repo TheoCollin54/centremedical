@@ -5,7 +5,7 @@ let inactivityTime = function () {
         clearTimeout(timer);
         timer = setTimeout(() => {
             window.location.href = "index.html";
-        }, 3000); // 5 minutes = 300000 ms
+        }, 30000); // 30 secondes = 30000 ms
     }
 
     // Événements détectés comme activité
