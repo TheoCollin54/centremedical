@@ -75,7 +75,7 @@ $message = "";
 
 // Message de succès
 if (isset($_GET['success'])) {
-    $message = "La modification est faite ✅";
+    $message = "La modification a été effectuée avec succès ✅";
 }
 // Message d'erreur
 if (isset($_GET['fail'])) {
