@@ -57,17 +57,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $stmt_update = $pdo->prepare($sql_update);
     if ($stmt_update->execute($params)) {
-        $message = "Mise à jour réussie.";
+        header("Location: edit_account_doc.php?success");
         // Met à jour la session si le pseudo change
         $_SESSION['username'] = $new_username;
     } else {
-        $message = "Erreur lors de la mise à jour.";
+        header("Location: edit_account_doc.php?fail");
     }
 
     // Recharger les données modifiées
     $stmt = $pdo->prepare($sql);
     $stmt->execute(['user_id' => $user_id]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
+
+$message = "";
+
+// Message de succès
+if (isset($_GET['success'])) {
+    $message = "La modification est faite ✅";
+}
+// Message d'erreur
+if (isset($_GET['fail'])) {
+    $message = "La modification a échoué ❌";
 }
 ?>
 
@@ -85,6 +97,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 
 <body>
+
+    <body data-message="<?= htmlspecialchars($message) ?>"></body>
     <aside>
         <nav>
             <ul>
@@ -103,10 +117,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <main>
         <h2>Modifier mes informations</h2>
-
-        <?php if ($message): ?>
-            <p><?= htmlspecialchars($message) ?></p>
-        <?php endif; ?>
 
         <form method="post">
             <label for="username">Nom d'utilisateur :</label>
@@ -134,6 +144,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </form>
     </main>
     <script src="./js/scriptAdress.js"></script>
+    <script src="./js/scriptMsg.js"></script>
 </body>
 
 </html>
